@@ -1,16 +1,30 @@
 # Projet Java - Porte / Monstre / Trésor
 
-## Getting Started
+## Convention de code
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Les conventions adoptées sont les suivantes :
 
-## Folder Structure
+- noms des variables membre : `mVariable`
+- noms des paramètres de fonction : `tParameter`
 
-The workspace contains two folders by default, where:
+## Structure hiérarchique
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+Le dossier de travail contient deux dossiers :
 
-## Dependency Management
+- `src`: contient l'ensemble des sources du projet
+- `lib`: où sont stockées les .class
 
-The `JAVA DEPENDENCIES` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-pack/blob/master/release-notes/v0.9.0.md#work-with-jar-files-directly).
+## Fichiers ignorés
+
+Les fichiers ignorées par Git sont les suivants :
+
+- `*.class`
+- `*.jar`
+- `*.war`
+- `*.nar`
+- `*.ear`
+- `*.zip`
+- `*.tar.gz`
+- `*.rar`
+- `*.log`
+- `*.ctxt`
