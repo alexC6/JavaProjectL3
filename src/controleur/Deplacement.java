@@ -1,5 +1,7 @@
 package controleur;
 
+import environnement.Piece;
+
 public class Deplacement {
 
     private Orientation mOrientation;
@@ -9,7 +11,7 @@ public class Deplacement {
     }
 
     public String choisirPorte( Piece tPiece){
-        char choixPorte;
+        int choixPorte;
         String texte = "";
         if ( tPiece.getNbPortes()>1){
             texte += "Vous avez maintenant le choix entre plusieurs portes. Le choix est rude. Quelle porte décidez-vous de pousser ? Derrière elle, le mystère reste entier ...";
@@ -59,6 +61,9 @@ public class Deplacement {
         String texte ="";
         texte += "Cher combattant, " + tPiece.getNbPortes() +" porte(s) s'offre(nt) à vous .\n";
         texte += "Voici: \n";
+
+        // Faire une boucle qui récupère tous les éléments de la liste et qui les affiche
+        // getPortes() retournant une liste des orientations de portes disponibles
         texte += tPiece.getPortes();
         return texte;
     }
