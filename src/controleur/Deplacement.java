@@ -13,8 +13,15 @@ public class Deplacement {
     public String choisirPorte( Piece tPiece){
         int choixPorte;
         String texte = "";
+
+        texte += afficherPortes(tPiece);
+        //Personnalisation du script en fonction du nb de portes accessibles dans la pièce où se trouve le joueur 
+        
         if ( tPiece.getNbPortes()>1){
+            
             texte += "Vous avez maintenant le choix entre plusieurs portes. Le choix est rude. Quelle porte décidez-vous de pousser ? Derrière elle, le mystère reste entier ...";
+            // Test sur la saisie Utilisateur restreinte aux chars proposés
+            
             do{
 		
                 System.out.println("Tapez N pour NORD, E pour EST, S pour SUD et O pour OUEST : ");
@@ -38,7 +45,7 @@ public class Deplacement {
                     break;	
 
                 case 'O' :
-                this.mOrientation = Orientation.OUEST;
+                    this.mOrientation = Orientation.OUEST;
                  break;	
 
                  default :
@@ -47,11 +54,15 @@ public class Deplacement {
             }// Fin switch
             
 
-        }
+        }// Fin If
+
         else{
-            texte += "Cette fois-ci, vous n'avez pas le choix. Vous devez pousser cette porte...\n";
-            texte += tPiece.getPortes().afficherPorte();
-        }
+            texte += "Cette fois-ci, vous n'avez pas le choix. Vous devez pousser cette porte....\n";
+            for(int i = 0 ; i < tPiece.getPortes().size(); i++){
+                this.mOrientation = tPiece.getPortes().get(i);
+            }
+        }//Fin Else
+        
         return texte;
 
         
@@ -64,7 +75,12 @@ public class Deplacement {
 
         // Faire une boucle qui récupère tous les éléments de la liste et qui les affiche
         // getPortes() retournant une liste des orientations de portes disponibles
-        texte += tPiece.getPortes();
+        
+       
+        for(int i = 0 ; i < tPiece.getPortes().size(); i++){
+            texte += tPiece.getPortes().get(i) +"\n" ;
+        }
+    
         return texte;
     }
     
