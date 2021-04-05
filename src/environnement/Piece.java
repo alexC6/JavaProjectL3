@@ -17,7 +17,11 @@ public class Piece {
 
     public Piece() {}
 
-    public List<Orientation> getNbPortes() {
+    public int getNbPortes() {
+        return this.mNbPortes;
+    }
+
+    public List<Orientation> getPortes() {
         return this.mPortes;
     }
 
