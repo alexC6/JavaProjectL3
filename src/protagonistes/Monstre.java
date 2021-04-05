@@ -1,8 +1,8 @@
 package protagonistes;
 
 public class Monstre extends EtreVivant {
-    public Monstre(String tName) {
-        super(tName, 5);
+    public Monstre() {
+        super(5);
     }
 
     public String attaquer(Personnage tPersonnage) {
