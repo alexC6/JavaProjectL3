@@ -3,22 +3,16 @@ package protagonistes;
 import controleur.Combat;
 
 public abstract class EtreVivant {
-    private String mName;
     private int mPointsDeVie;
     private Combat mCombat;
 
-    protected EtreVivant(String tName, int tPointsDeVie) {
-        this.mName = tName;
+    protected EtreVivant(int tPointsDeVie) {
         this.mPointsDeVie = tPointsDeVie;
         this.mCombat = null;
     }
 
     public int getPointDeVie() {
         return this.mPointsDeVie;
-    }
-
-    public String getName() {
-        return this.mName;
     }
 
     public boolean isVivant() {
