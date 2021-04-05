@@ -10,6 +10,7 @@ public class Porte {
         this.mOrientationP = tOrientationP;   
     }
 
+    //@Role : retourne une chaine de caractères sous la forme " La porte + ORIENTATION" 
     public String afficherPorte(){
         String texte ="";
         texte += "La porte " + this.mOrientationP + " " ;
