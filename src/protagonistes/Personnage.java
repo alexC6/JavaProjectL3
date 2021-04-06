@@ -30,4 +30,8 @@ public class Personnage extends EtreVivant {
         String texte = "";
         return texte;
     }
+
+    public String mourir() {
+        return "Hélas, le monstre vous a terrassé ...\n";
+    }
 }
