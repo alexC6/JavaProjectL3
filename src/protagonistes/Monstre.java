@@ -9,4 +9,8 @@ public class Monstre extends EtreVivant {
         String texte = "";
         return texte;
     }
+
+    public String mourir() {
+        return "Bravo, vous avez terrassé le terrible monstre !\n";
+    }
 }
