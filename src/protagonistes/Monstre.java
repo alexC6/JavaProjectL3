@@ -1,4 +1,4 @@
-package protagonistes;
+ package protagonistes;
 
 public class Monstre extends EtreVivant {
     public Monstre() {
