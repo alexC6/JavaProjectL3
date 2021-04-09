@@ -6,7 +6,6 @@ import equipement.Potion;
 
 public class Personnage extends EtreVivant {
     private String mName;
-
     public Personnage(String tName) {
         super(10);
         this.mName = tName;
@@ -21,7 +20,7 @@ public class Personnage extends EtreVivant {
         return texte;
     }
 
-    String boirePotion(Potion tPotion) {
+    public String boirePotion(Potion tPotion) {
         String texte = "";
         return texte;
     }
