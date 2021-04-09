@@ -64,4 +64,10 @@ public abstract class EtreVivant {
 
         return texte;
     }
+
+    public String rejointCombat(Combat tCombat) {
+        this.mCombat = tCombat;
+
+        return "Vous vous lancez dans un combat contre le monstre !\n";
+    }
 }
