@@ -20,7 +20,7 @@ public class Potion {
     }
 
 
-    public int getmRecuperation() {
+    public int getRecuperation() {
         return mRecuperation;
     }
 
