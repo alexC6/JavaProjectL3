@@ -1,8 +1,16 @@
+/**
+ * File : Combat.java
+ * Code source de la classe Combat
+ * 
+ * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier
+ * @version 2021-4-9
+ */
 package controleur;
 
 import protagonistes.EtreVivant;
 import protagonistes.Monstre;
 import protagonistes.Personnage;
+import protagonistes.TypeEtreVivant;
 
 public class Combat {
     private int mNbTours;
@@ -15,13 +23,41 @@ public class Combat {
         this.mMonstre = tMonstre;
     }
 
+    public Personnage getPersonnage() {
+        return this.mPersonnage;
+    }
+
+    public Monstre getMonstre() {
+        return this.mMonstre;
+    }
+
     public String rejointCombat(EtreVivant tEtreVivant) {
         String texte = "";
+
+        switch (tEtreVivant.getType()) {
+            case TypeEtreVivant.PERSONNAGE:
+                this.mPersonnage = (Personnage) tEtreVivant;
+                break;
+            case TypeEtreVivant.MONSTRE:
+                this.mMonstre = (Monstre) tEtreVivant;
+                break;
+        }
+
         return texte;
     }
 
     public EtreVivant vainqueur() {
-        return this.mPersonnage.isVivant() ? (EtreVivant) this.mPersonnage : (EtreVivant) this.mMonstre;
+        EtreVivant vainqueur;
+
+        if (mPersonnage.isVivant()) {
+            vainqueur = this.mPersonnage;
+            this.mMonstre = null;
+        } else {
+            vainqueur = this.mMonstre;
+            this.mPersonnage = null;
+        }
+
+        return vainqueur;
     }
 
     public String itererTour() {
