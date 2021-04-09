@@ -19,6 +19,10 @@ public class Personnage extends EtreVivant {
         this.mName = tName;
     }
 
+    public String attaquer(){
+        //mcombat de etre vivant +combat methode get monstre 
+    
+    }
     public String getName() {
         return this.mName;
     }

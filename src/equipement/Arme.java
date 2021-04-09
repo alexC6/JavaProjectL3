@@ -10,6 +10,7 @@ public class Arme {
 
     public Arme(Personnage mProprietaire) {
         this.mProprietaire = mProprietaire; 
+        //calcul du nombre de point de dommage (entre 1 et 5)
         this.mPointDommage = (int) (Math.random() * ( DOMMAGES_MAX - DOMMAGES_MIN ));
     }
 
