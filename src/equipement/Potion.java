@@ -10,26 +10,18 @@ public class Potion {
 
     public Potion(Personnage mProprietaire) {
         this.mProprietaire = mProprietaire;
-        //calcul du nombre de point de vie récuperés
+        //calcul du nombre de point de vie récuperés (entre 1 et 10)
         this.mRecuperation =(int) (Math.random() * ( FORCE_POTION_MAX - FORCE_POTION_MIN ));
     }
 
-
-    public void lacher() {
+    
+    public void viderPotion(){
         this.mProprietaire = null;
     }
-  
-    public String viderPotion(){
-        this.mProprietaire.boirePotion(this);
-        //recuperation des points de vie
-        this.mProprietaire.recupererVie(this.mRecuperation);
-        String texte= "Votre personnage a récupérer"+this.mRecuperation;
-       //permet de retirer la potion apres utilisation
-        this.lacher();
-        return texte;
+
+
+    public int getmRecuperation() {
+        return mRecuperation;
     }
 
-   
-    
-    
 }

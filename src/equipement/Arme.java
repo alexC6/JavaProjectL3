@@ -8,6 +8,11 @@ public class Arme {
     private int DOMMAGES_MAX =5;
     private Personnage mProprietaire;
 
+    public Arme(Personnage mProprietaire) {
+        this.mProprietaire = mProprietaire; 
+        this.mPointDommage = (int) (Math.random() * ( DOMMAGES_MAX - DOMMAGES_MIN ));
+    }
+
     public Personnage getmProprietaire() {
         return mProprietaire;
     }
@@ -22,11 +27,8 @@ public class Arme {
 
     public String attaquer(Monstre tMonstre)
     { 
-       int degat = (int) (Math.random() * ( DOMMAGES_MAX - DOMMAGES_MIN ));
-        tMonstre.subirAttaque(degat);
-        String texte="Le monstre subit" + degat;
-        return texte;
-        
+        return tMonstre.subirAttaque(this.mPointDommage);
     }
 
+    
 }
