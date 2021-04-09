@@ -6,6 +6,12 @@ public class Armure {
     private int PROTECT_MAX=5;
     private Personnage mProprietaire;
 
+    public Armure(Personnage mProprietaire) {
+        this.mProprietaire = mProprietaire;
+          //calcul du nombre de point d'armure (entre 1 et 5)
+          this.mProtection =(int) (Math.random() * ( PROTECT_MAX - PROTECT_MIN ));
+    }
+
     public Personnage getmProprietaire() {
         return mProprietaire;
     }
@@ -31,6 +37,7 @@ public class Armure {
 
         
     }
+
 
 
 }
