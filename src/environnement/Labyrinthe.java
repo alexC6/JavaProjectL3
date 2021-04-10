@@ -1,11 +1,9 @@
-package environnement;
-package protagonistes;
+import protagonistes.Personnage;
 
 public class Labyrinthe {
 
     // Voir avec Alex codage vecteur en java + vérifier l attribut personnage
    
-    private Vector <Piece> mVect = new Vector <Piece>();
     private int mNbPieces;
     private int mNbBoutiques;
     private Piece mSortie;
