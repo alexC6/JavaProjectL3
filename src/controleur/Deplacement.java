@@ -11,7 +11,7 @@ public class Deplacement {
     }
 
     public String choisirPorte( Piece tPiece){
-        int choixPorte;
+        String choixPorte;
         String texte = "";
 
         texte += afficherPortes(tPiece);
@@ -26,27 +26,27 @@ public class Deplacement {
 		
                 System.out.println("Tapez N pour NORD, E pour EST, S pour SUD et O pour OUEST : ");
             
-                choixPorte = Clavier.entrerClavierInt() ;
+                choixPorte = Clavier.entrerClavierString() ;
             
-            }while ( (choixPorte != 'N')  ||  (choixPorte != 'E') ||  (choixPorte != 'S') ||  (choixPorte != 'O'));
+            }while ( (choixPorte != "N")  ||  (choixPorte != "E") ||  (choixPorte != "S") ||  (choixPorte != "O"));
             
             switch (choixPorte){
                 
-                case 'N' :
+                case "N" :
                     this.mOrientation = Orientation.NORD;
                     break;
                     
-                case 'E' : 
+                case "E" : 
                     this.mOrientation = Orientation.EST;
                     break;
                 
-                case 'S' :
+                case "S" :
                     this.mOrientation = Orientation.SUD;
                     break;	
 
-                case 'O' :
+                case "O" :
                     this.mOrientation = Orientation.OUEST;
-                 break;	
+                    break;	
 
                  default :
                     System.out.println("Merci de faire un choix réaliste ... Ouvrez les yeux ! \n");
