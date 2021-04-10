@@ -7,6 +7,8 @@
  */
 package controleur;
 
+import java.util.Random;
+
 import protagonistes.EtreVivant;
 import protagonistes.Monstre;
 import protagonistes.Personnage;
@@ -30,6 +32,8 @@ public class Combat {
     public Monstre getMonstre() {
         return this.mMonstre;
     }
+
+    public boolean choixContinuer() {}
 
     public String rejointCombat(EtreVivant tEtreVivant) {
         String texte = "";
@@ -61,7 +65,25 @@ public class Combat {
     }
 
     public String itererTour() {
+        int victime;
+        Random rand = new Random();
         String texte = "";
+
+        if (!this.choixContinuer()) {
+            return "Vous avez décidé de fuir !\n";
+        }
+
+        victime = rand.nextInt(2);
+
+        switch (victime) {
+            case 0:
+                texte += this.mPersonnage.attaquer();
+                break;
+            case 1:
+                texte += this.mMonstre.attaquer();
+                break;
+        }
+
         return texte;
     }
 }
