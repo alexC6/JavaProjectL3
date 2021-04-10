@@ -12,11 +12,11 @@ public class Armure {
           this.mProtection =(int) (Math.random() * ( PROTECT_MAX - PROTECT_MIN ));
     }
 
-    public Personnage getmProprietaire() {
+    public Personnage getProprietaire() {
         return mProprietaire;
     }
 
-    public void setmProprietaire(Personnage mProprietaire) {
+    public void setProprietaire(Personnage mProprietaire) {
         this.mProprietaire = mProprietaire;
     }
    //voir pourquoi ici encaissser, pourquoi pas dans personnage
