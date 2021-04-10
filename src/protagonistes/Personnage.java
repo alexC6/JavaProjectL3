@@ -56,10 +56,12 @@ public class Personnage extends EtreVivant {
                 texte += this.equiperArmure((Armure) tTresor.getContenu());
                 break;
             case PIECE_OR:
-                this.mBourse += (int) tTresor.getContenu();
+                int piecesOr = (int) tTresor.getContenu();
+                texte += "Vous avez obtenu " + piecesOr + " pièce(s) d'or !\n";
+                this.mBourse += piecesOr;
                 break;
         }
-        
+
         tTresor.viderTresor();
 
         return texte;
