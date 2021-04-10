@@ -26,6 +26,4 @@ public class Clavier {
     public static String entrerClavierString() {
         return scanner.next();
     }
-
-
 }
