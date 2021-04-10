@@ -30,6 +30,10 @@ public abstract class EtreVivant {
         return this.mPointsDeVie;
     }
 
+    public TypeEtreVivant getType() {
+        return this.mType;
+    }
+
     public boolean isVivant() {
         return this.mPointsDeVie > 0;
     }
