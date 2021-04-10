@@ -35,10 +35,10 @@ public class Combat {
         String texte = "";
 
         switch (tEtreVivant.getType()) {
-            case TypeEtreVivant.PERSONNAGE:
+            case PERSONNAGE:
                 this.mPersonnage = (Personnage) tEtreVivant;
                 break;
-            case TypeEtreVivant.MONSTRE:
+            case MONSTRE:
                 this.mMonstre = (Monstre) tEtreVivant;
                 break;
         }
