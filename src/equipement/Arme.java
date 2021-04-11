@@ -8,8 +8,8 @@ public class Arme {
     private int DOMMAGES_MAX =5;
     private Personnage mProprietaire;
 
-    public Arme(Personnage mProprietaire) {
-        this.mProprietaire = mProprietaire; 
+    public Arme(Personnage tProprietaire) {
+        this.mProprietaire = tProprietaire; 
         //calcul du nombre de point de dommage (entre 1 et 5)
         this.mPointDommage = (int) (Math.random() * ( DOMMAGES_MAX - DOMMAGES_MIN ));
     }
@@ -18,8 +18,8 @@ public class Arme {
         return mProprietaire;
     }
 
-    public void setmProprietaire(Personnage mProprietaire) {
-        this.mProprietaire = mProprietaire;
+    public void setmProprietaire(Personnage tProprietaire) {
+        this.mProprietaire = tProprietaire;
     }
 
     public void lacher () {
