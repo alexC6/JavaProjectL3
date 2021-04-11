@@ -1,3 +1,5 @@
+package environnement;
+
 import protagonistes.Personnage;
 
 public class Labyrinthe {
@@ -36,12 +38,12 @@ public class Labyrinthe {
     }
 
     public boolean isEntree(){
-        return();
+        return true;
     }
 
     public boolean isSortie(){
         // Retourne vraie quand 
-        return ( );
+        return true;
     }
 
     public int getNbPieces(){
