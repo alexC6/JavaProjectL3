@@ -17,31 +17,40 @@ public class Armure {
     }
 
     public void setProprietaire(Personnage tProprietaire) {
+        if(tProprietaire){
+
+
+        }
         this.mProprietaire = tProprietaire;
+
     }
    //voir pourquoi ici encaissser, pourquoi pas dans personnage
     public String encaisserDegat(int tDegat){
-        
+
+        String texte1="Votre armure est cassé";
+        String texte2="Votre armure a subit"+tDegat;
+
        if(tDegat<this.mProtection){
-        
+        this.mProtection= this.mProtection-tDegat;
+        return texte2;
        }else if(tDegat>this.mProtection){
+
         this.casser();
+        return texte1;
        }
-
+       return null;
     }
 
-    public String casser(){
-        
+    public void casser(){
         this.mProprietaire = null;
-        return "armure casser";
     }
-/*je sais pas encore comment m'y prendre
+
     public String reparer(){
 
 
         
     }
-*/
+
 
 
 }

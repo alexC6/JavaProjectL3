@@ -74,6 +74,9 @@ public class Personnage extends EtreVivant {
     }
 
     public String equiperArmure(Armure tArmure) {
+        if(){
+            
+        }
         String texte = "";
         // TODO
         return texte;

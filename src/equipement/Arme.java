@@ -14,12 +14,19 @@ public class Arme {
         this.mPointDommage = (int) (Math.random() * ( DOMMAGES_MAX - DOMMAGES_MIN ));
     }
 
-    public Personnage getmProprietaire() {
+    public Arme() {
+        this.mProprietaire = null; 
+        //calcul du nombre de point de dommage (entre 1 et 5)
+        this.mPointDommage = (int) (Math.random() * ( DOMMAGES_MAX - DOMMAGES_MIN ));
+    }
+
+    public Personnage getProprietaire() {
         return mProprietaire;
     }
 
-    public void setmProprietaire(Personnage tProprietaire) {
+    public void setProprietaire(Personnage tProprietaire) {
         this.mProprietaire = tProprietaire;
+
     }
 
     public void lacher () {
