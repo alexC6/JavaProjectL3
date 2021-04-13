@@ -1,17 +1,5 @@
 package environnement;
 
-<<<<<<< HEAD
-import test.test;
-import environnement.Piece;
-public class Tresor<T> {
-    private T mType;
-    private TypeTresor mContenue;
-    private Piece mPiece;
-    
-
-=======
-import java.util.Random;
-
 /**
  * <p> File : Tresor.java
  * <br>Code source de la classe Tresor </p>
@@ -51,5 +39,4 @@ public class Tresor<T> {
 
         return texte;
     }
->>>>>>> fc6ce33665d6d22cf9c64780481dc56e5992ad28
 }
