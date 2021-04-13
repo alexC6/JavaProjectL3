@@ -19,6 +19,12 @@ public class Combat {
     private Personnage mPersonnage;
     private Monstre mMonstre;
 
+    public Combat() {
+        this.mNbTours = 0;
+        this.mPersonnage = null;
+        this.mMonstre = null;
+    }
+
     public Combat(Personnage tPersonnage, Monstre tMonstre) {
         this.mNbTours = 0;
         this.mPersonnage = tPersonnage;
@@ -51,12 +57,12 @@ public class Combat {
     }
 
     public EtreVivant vainqueur() {
-        EtreVivant vainqueur;
+        EtreVivant vainqueur = null;
 
-        if (mPersonnage.isVivant()) {
+        if (mPersonnage.isVivant() && !(mMonstre.isVivant())) {
             vainqueur = this.mPersonnage;
             this.mMonstre = null;
-        } else {
+        } else if (!(mPersonnage.isVivant()) && mMonstre.isVivant()) {
             vainqueur = this.mMonstre;
             this.mPersonnage = null;
         }
