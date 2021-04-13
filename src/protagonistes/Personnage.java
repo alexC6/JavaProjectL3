@@ -1,29 +1,73 @@
-/**
- * <p> File : Personnage.java
- * <br>Code source de la classe Personnage </p>
- * 
- * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier
- * @version 2021-4-13
- */
 package protagonistes;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import controleur.Clavier;
 import environnement.Labyrinthe;
 import environnement.Porte;
 import environnement.Tresor;
+import environnement.TypeObjetVendu;
 import environnement.TypeTresor;
 import equipement.Arme;
 import equipement.Armure;
 import equipement.Potion;
 
+/**
+ * <p>File : Personnage.java
+ * <br>Code source de la classe Personnage</p>
+ * 
+ * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier
+ * @version 2021-4-13
+ */
+
 public class Personnage extends EtreVivant {
+    /**
+     * La quantité de pièces d'or possédées par le personnage
+     * 
+     * @see Personnage#getPiecesOr()
+     */
     private int mBourse;
+
+    /**
+     * Nom du personnage
+     * 
+     * @see Personnage#getNom()
+     */
     private String mNom;
+
+    /**
+     * Arme possédée par le personnage
+     * 
+     * @see Personnage#prendreArme(Arme)
+     * @see Personnage#lacherArme()
+     * @see Personnage#acheter(TypeObjetVendu)
+     */
     private Arme mArme;
+
+    /**
+     * Armure possédée par le personnage
+     * 
+     * @see Personnage#equiperArmure(Armure)
+     * @see Personnage#perdreArmure()
+     * @see Personnage#acheter(TypeObjetVendu)
+     * @see Personnage#reparerArmure()
+     */
     private Armure mArmure;
+
+    /**
+     * Les potions possédées par le personnage
+     * 
+     * @see Personnage#boirePotion()
+     * @see Personnage#acheter(TypeObjetVendu)
+     */
     private List<Potion> mPotions = new ArrayList<Potion>();
+
+    /**
+     * La labyrinthe dans lequel se déplace le personnage
+     * 
+     * @see Personnage#ajouterLabyrinthe(Labyrinthe)
+     */
     private Labyrinthe mLabyrinthe;
 
     /**
@@ -41,12 +85,6 @@ public class Personnage extends EtreVivant {
         this.mLabyrinthe = null;
     }
 
-    public String attaquer(){
-        //mcombat de etre vivant +combat methode get monstre 
-    
-        // TODO
-    }
-
     /**
      * <p>Getter du nom du personnage</p>
      * @author Alexandre Coulais
@@ -55,6 +93,22 @@ public class Personnage extends EtreVivant {
      */
     public String getNom() {
         return this.mNom;
+    }
+
+    /**
+     * Getter de la bourse du personnage
+     * @author Alexandre Coulais
+     * 
+     * @return int  Nombre de pièces d'or possédées par le personnage
+     */
+    public int getPiecesOr() {
+        return this.mBourse;
+    }
+
+    public String ajouterLabyrinthe(Labyrinthe tLabyrinthe) {
+        String texte = "";
+        //TODO
+        return texte;
     }
 
     /**
@@ -88,6 +142,33 @@ public class Personnage extends EtreVivant {
         return texte;
     }
 
+    /**
+     * <p>Affiche la liste des potions, demande au joueur quelle potion doit boire son personnage
+     * <br>et lui fait récupérer des points de vie </p>
+     * @author Alexandre Coulais
+     * 
+     * @return String   Le texte à afficher
+     */
+    public String boirePotion() {
+        int pointsRecup;
+        Potion potionChoisie;
+        String texte = "";
+
+        System.out.println("Quelle potion souhaitez-vous boire ?");
+
+        for (int i = 0; i < mPotions.size(); i++) {
+            Potion potion = this.mPotions.get(i);
+
+            System.out.println(i+1 + ") " + potion.afficherRecuperation() + "\n");
+        }
+
+        potionChoisie = this.mPotions.get(Clavier.entrerClavierInt()-1);
+        pointsRecup = potionChoisie.getRecuperation();
+        texte += this.recupererVie(pointsRecup);
+
+        return texte;
+    }
+
     public String prendreArme(Arme tArme) {
         String texte = "";
         // TODO
@@ -100,27 +181,41 @@ public class Personnage extends EtreVivant {
         return texte;
     }
 
-    /**
-     * <p> Fonction permettant au personnage de boire une potion
-     * <br>afin de récupérer des points de vie </p>
-     * @author Alexandre Coulais
-     * 
-     * @param tPotion   La potion à boire
-     * 
-     * @return String   Le texte à afficher
-     */
-    public String boirePotion(Potion tPotion) {
-        int pointsRecup = tPotion.getRecuperation();
+    public String lacherArme() {
         String texte = "";
+        //TODO
+        return texte;
+    }
 
-        texte += this.recupererVie(pointsRecup);
+    public String perdreArmure() {
+        String texte = "";
+        //TODO
+        return texte;
+    }
 
+    public String acheter(TypeObjetVendu tType) {
+        String texte = "";
+        //TODO
+        return texte;
+    }
+
+    public String attaquer() {
+        //mcombat de etre vivant +combat methode get monstre 
+    
+        String texte = "";
+        //TODO
         return texte;
     }
 
     public String ouvrirPorte(Porte tPorte) {
         String texte = "";
         // TODO
+        return texte;
+    }
+
+    public String reparerArmure() {
+        String texte = "";
+        //TODO
         return texte;
     }
 
