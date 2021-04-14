@@ -6,12 +6,12 @@ import equipement.*;
 import environnement.TypeObjetVendu;
 public class Boutique<T> {
     private int mPiece, mNbObjets;
-    private Type mType;
+    private TypeObjetVendu mType;
     private List<T> mArticles = new ArrayList<T>();
 
-    public Boutique(T tType){
+    public Boutique(T tArticle, TypeObjetVendu tType){
+        mArticles.add(tArticle);
        this.mType= tType;
-
     }
 
     public String acheterArticle(){
