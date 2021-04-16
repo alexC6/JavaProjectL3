@@ -9,17 +9,86 @@ import controleur.Orientation;
 import equipement.Arme;
 import equipement.Armure;
 import protagonistes.Monstre;
+import protagonistes.Personnage;
+
+/**
+ * <p> File : Piece.java
+ * <br>Code source de la classe Piece </p>
+ * 
+ * @author Alexandre Coulais
+ * @version 2021-4-16
+ */
 
 public class Piece {
-    private int mNbPortes, mLigne, mColonne;
+    /**
+     * Indique le nombre de portes disponibles dans la salle
+     * 
+     * @see Piece#getNbPortes()
+     */
+    private int mNbPortes;
+
+    /**
+     * Numero de ligne et de colonne dans le damier de la piece
+     * 
+     * @see Piece#getLigne()
+     * @see Piece#getColonne()
+     */
+    private int mLigne, mColonne;
+
+    /**
+     * Liste des orientations de portes disponibles dans la salle
+     * 
+     * @see Piece#getPortes()
+     */
     private List<Orientation> mPortes = new ArrayList<Orientation>();
+
+    /**
+     * Le labyrinthe auquel appartient la piece
+     * 
+     * @see Piece#getLabyrinthe()
+     */
     private Labyrinthe mLabyrinthe;
+
+    /**
+     * Le monstre de la salle
+     */
     private Monstre mMonstre;
-    private Tresor mTresor;
+
+    /**
+     * Le type du contenu du trésor de la salle
+     */
+    private TypeTresor mTypeTresor;
+
+    /**
+     * <p>Les différents trésors possibles.
+     * <br>Afin d'éviter les types sans paramètre de généricité, il a été décidé
+     * de créer un membre par contenu possible, et d'effectuer des switch sur les
+     * TypeTresor pour connaitre les actions a effectuer.</p>
+     * 
+     * @see Piece#genererTresor(int...)
+     * @see Piece#recupererTresor()
+     */
+    private Tresor<Arme> mTresorArme;
+    private Tresor<Armure> mTresorArmure;
+    private Tresor<Integer> mTresorOr;
+
+    /**
+     * Le combat de la salle associant le monstre de la salle et le personnage
+     */
     private Combat mCombat;
 
-    private final int NB_MAX_PORTES = 1, NB_MIN_PORTES = 4;
-
+    /**
+     * <p>Constructeur d'une pièce
+     * <br>La génération de la liste des portes est laissée à la classe labyrinthe,
+     * puisqu'elle peut plus facilement contrôler les portes alentours</p>
+     * 
+     * @see Labyrinthe#genererPiece()
+     * 
+     * @param tPortes       La liste des orientations de portes possibles
+     * @param tLigne        Le numéro de la ligne de la pièce générée
+     * @param tColonne      Le numéro de la colonne de la pièce générée
+     * @param tLabyrinthe   Le labyrinthe qui contient la pièce
+     */
     public Piece(List<Orientation> tPortes, int tLigne, int tColonne, Labyrinthe tLabyrinthe) {
         Random rand = new Random();
         int tresorType = rand.nextInt(3);
@@ -34,26 +103,114 @@ public class Piece {
 
         switch (tresorType) {
             case 0:
-                this.mTresor = new Tresor<Arme>(new Arme(), TypeTresor.ARME, this);
+                this.mTypeTresor = TypeTresor.ARME;
+                genererTresor();
                 break;
             case 1:
-                this.mTresor = new Tresor<Armure>(new Armure(), TypeTresor.ARMURE, this);
+                this.mTypeTresor = TypeTresor.ARMURE;
+                genererTresor();
                 break;
             case 2:
                 int piecesOr = rand.nextInt(100) + 1;
-                this.mTresor = new Tresor<Integer>(piecesOr, TypeTresor.PIECE_OR, this);
+                this.mTypeTresor = TypeTresor.PIECE_OR;
+                genererTresor(piecesOr);
         }
     }
 
+    /**
+     * Fonction de génération d'un trésor dont le contenu dépend du type fixé précédemment
+     * 
+     * @param tPieces Paramètre optionnel dans le cas d'un trésor contenant des pièces d'or
+     */
+    private void genererTresor(final int... tPieces) {
+        switch (this.mTypeTresor) {
+            case ARME:
+                this.mTresorArme = new Tresor<Arme>(new Arme(), this.mTypeTresor, this);
+                this.mTresorArmure = null;
+                this.mTresorOr = null;
+            case ARMURE:
+                this.mTresorArmure = new Tresor<Armure>(new Armure(), this.mTypeTresor, this);
+                this.mTresorArme = null;
+                this.mTresorOr = null;
+            case PIECE_OR:
+                this.mTresorOr = new Tresor<Integer>(tPieces[0], this.mTypeTresor, this);
+                this.mTresorArme = null;
+                this.mTresorArmure = null;
+        }
+    }
+
+    /**
+     * Getter du nombre de portes
+     * 
+     * @return int  Nombre de portes de la pièce
+     */
     public int getNbPortes() {
         return this.mNbPortes;
     }
 
+    /**
+     * Getter sur la liste des orientations des portes disponibles
+     * 
+     * @return List<Orientation>    Liste des orientations disponibles
+     */
     public List<Orientation> getPortes() {
         return this.mPortes;
     }
 
-    public void supprimerTresor() {
-        this.mTresor = null;
+    /**
+     * Getter du numéro de ligne de la pièce
+     * 
+     * @return int  Numéro de ligne
+     */
+    public int getLigne() {
+        return this.mLigne;
+    }
+
+    /**
+     * Getter du numéro de colonne de la pièce
+     * 
+     * @return int  Numéro de colonne
+     */
+    public int getColonne() {
+        return this.mColonne;
+    }
+
+    /**
+     * Getter du labyrinthe de la pièce
+     * 
+     * @return Labyrinthe   Le labyrinthe de la pièce
+     */
+    public Labyrinthe getLabyrinthe() {
+        return this.mLabyrinthe;
+    }
+
+    /**
+     * <p>Fonction de récupération du trésor de la pièce
+     * <br>En fonction du type du contenu du trésor, on passe en paramètre
+     * de la fonction obtenirTresor() le bon trésor</p>
+     * 
+     * @see Personnage#obtenirTresor(Tresor)
+     * 
+     * @return String   Le texte à afficher
+     */
+    public String recupererTresor() {
+        String texte = "";
+        Personnage personnage = this.mLabyrinthe.getPersonnage();
+
+        switch (this.mTypeTresor) {
+            case ARME:
+                texte += personnage.obtenirTresor(this.mTresorArme);
+                this.mTresorArme = null;
+                break;
+            case ARMURE:
+                texte += personnage.obtenirTresor(this.mTresorArmure);
+                this.mTresorArmure = null;
+                break;
+            case PIECE_OR:
+                texte += personnage.obtenirTresor(this.mTresorOr);
+                this.mTresorOr = null;
+        }
+
+        return texte;
     }
 }
