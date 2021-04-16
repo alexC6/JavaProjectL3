@@ -18,7 +18,7 @@ import equipement.Potion;
  * <br>Code source de la classe Personnage</p>
  * 
  * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier
- * @version 2021-4-13
+ * @version 2021-4-16
  */
 
 public class Personnage extends EtreVivant {
@@ -115,11 +115,15 @@ public class Personnage extends EtreVivant {
      * <p>Fonction permettant au personnage de récupérer le contenu d'un coffre</p>
      * @author Alexandre Coulais
      * 
-     * @param tTresor Le trésor à ouvrir
+     * @param tTresor
+     *          <p>Le trésor dont on va récupérer le contenu.
+     *          <br>Ici, le paramètre de généricité est laissé vide, cela ne présentant pas
+     *          pas de problème apparent, l'action effectuée par la suite dépendant d'un autre
+     *          paramètre</p>
      * 
      * @return String   Le texte à afficher
      */
-    public String obtenirTresor(Tresor tTresor) {
+    public String obtenirTresor(Tresor<?> tTresor) {
         String texte = "";
         TypeTresor type = tTresor.getType();
 
