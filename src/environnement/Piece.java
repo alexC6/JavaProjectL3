@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 import controleur.Combat;
-import controleur.Orientation;
 import equipement.Arme;
 import equipement.Armure;
 import protagonistes.Monstre;
@@ -36,11 +35,11 @@ public class Piece {
     private int mLigne, mColonne;
 
     /**
-     * Liste des orientations de portes disponibles dans la salle
+     * Liste des portes disponibles dans la salle
      * 
      * @see Piece#getPortes()
      */
-    private List<Orientation> mPortes = new ArrayList<Orientation>();
+    private List<Porte> mPortes = new ArrayList<Porte>();
 
     /**
      * Le labyrinthe auquel appartient la piece
@@ -84,12 +83,12 @@ public class Piece {
      * 
      * @see Labyrinthe#genererPiece()
      * 
-     * @param tPortes       La liste des orientations de portes possibles
+     * @param tPortes       La liste des portes possibles
      * @param tLigne        Le numéro de la ligne de la pièce générée
      * @param tColonne      Le numéro de la colonne de la pièce générée
      * @param tLabyrinthe   Le labyrinthe qui contient la pièce
      */
-    public Piece(List<Orientation> tPortes, int tLigne, int tColonne, Labyrinthe tLabyrinthe) {
+    public Piece(List<Porte> tPortes, int tLigne, int tColonne, Labyrinthe tLabyrinthe) {
         Random rand = new Random();
         int tresorType = rand.nextInt(3);
         
@@ -149,11 +148,11 @@ public class Piece {
     }
 
     /**
-     * Getter sur la liste des orientations des portes disponibles
+     * Getter sur la liste des portes disponibles
      * 
-     * @return List<Orientation>    Liste des orientations disponibles
+     * @return List<Porte>  Liste des portes disponibles
      */
-    public List<Orientation> getPortes() {
+    public List<Porte> getPortes() {
         return this.mPortes;
     }
 
