@@ -6,25 +6,30 @@ public class Armure {
     private int PROTECT_MAX=5;
     private Personnage mProprietaire;
 
-    public Armure(Personnage tProprietaire) {
-        this.mProprietaire = tProprietaire;
-          //calcul du nombre de point d'armure (entre 1 et 5)
+   
+    public Armure() {
+           //calcul du nombre de point d'armure (entre 1 et 5)
           this.mProtection =(int) (Math.random() * ( PROTECT_MAX - PROTECT_MIN ));
     }
+
+    public Armure(Personnage tProprietaire) {
+        this.mProprietaire = tProprietaire;
+
+    }
+     
 
     public Personnage getProprietaire() {
         return mProprietaire;
     }
 
     public void setProprietaire(Personnage tProprietaire) {
-        if(tProprietaire){
-
-
-        }
+        if(/*Si le personnage est deja proprietaire d'une arme alors: ne rien faire */){
+       
+        }else{
         this.mProprietaire = tProprietaire;
-
+        }
     }
-   //voir pourquoi ici encaissser, pourquoi pas dans personnage
+   
     public String encaisserDegat(int tDegat){
 
         String texte1="Votre armure est cassé";

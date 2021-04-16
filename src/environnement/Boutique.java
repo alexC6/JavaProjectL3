@@ -14,12 +14,23 @@ public class Boutique<T> {
        this.mType= tType;
     }
 
-    public String acheterArticle(){
+    public boolean acheterArticle(T tArticle){
+        if(mArticles.size()>0){
+            mArticles.remove(tArticle);
+            return true;
+        }else{
+            return false;
+        }
 
     }
 
     public String reparerArmure(){
-
+        if(/*personnage ne possède pas d'armure*/){ 
+        /*return "on ne peu pas reparer"
+        }
+        else{
+        reparer armure + enlever argent (250 po) return" votre armure est reparer "}
+         */
 
     }
 
