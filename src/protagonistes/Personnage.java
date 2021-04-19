@@ -65,8 +65,6 @@ public class Personnage extends EtreVivant {
 
     /**
      * La labyrinthe dans lequel se déplace le personnage
-     * 
-     * @see Personnage#ajouterLabyrinthe(Labyrinthe)
      */
     private Labyrinthe mLabyrinthe;
 
@@ -76,13 +74,13 @@ public class Personnage extends EtreVivant {
      * 
      * @param tNom Le nom du personnage
      */
-    public Personnage(String tNom) {
+    public Personnage(String tNom, Labyrinthe tLabyrinthe) {
         super(10);
         this.mBourse = 0;
         this.mNom = tNom;
         this.mArme = null;
         this.mArmure = null;
-        this.mLabyrinthe = null;
+        this.mLabyrinthe = tLabyrinthe;
     }
 
     /**
@@ -103,12 +101,6 @@ public class Personnage extends EtreVivant {
      */
     public int getPiecesOr() {
         return this.mBourse;
-    }
-
-    public String ajouterLabyrinthe(Labyrinthe tLabyrinthe) {
-        String texte = "";
-        //TODO
-        return texte;
     }
 
     /**
