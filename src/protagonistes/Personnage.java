@@ -12,6 +12,7 @@ import environnement.TypeTresor;
 import equipement.Arme;
 import equipement.Armure;
 import equipement.Potion;
+import environnement.Boutique;
 
 /**
  * <p>File : Personnage.java
@@ -195,6 +196,14 @@ public class Personnage extends EtreVivant {
     public String acheter(TypeObjetVendu tType) {
         String texte = "";
         //TODO
+        if(Boutique.acheterArticle()!=true){
+            return"Vous ne pouvez pas acheter cet objet";
+
+        }else{ 
+                 
+            return"Vous avez acheté "+tType+" et vous payez "/*+this.prix de l'article*/;
+           // this.mBourse-=prix de l'article
+        }
         return texte;
     }
 
@@ -214,6 +223,12 @@ public class Personnage extends EtreVivant {
 
     public String reparerArmure() {
         String texte = "";
+        if(mArmure!=null){ 
+           mBoutique.reparerArmure(mArmure);/* +enlever argent (250 po)*/
+            return" votre armure est reparer " 
+        }else{
+           
+        }
         //TODO
         return texte;
     }
