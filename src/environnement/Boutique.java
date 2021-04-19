@@ -25,12 +25,7 @@ public class Boutique<T> {
     }
 
     public String reparerArmure(){
-        if(/*personnage ne possède pas d'armure*/){ 
-        /*return "on ne peu pas reparer"
-        }
-        else{
-        reparer armure + enlever argent (250 po) return" votre armure est reparer "}
-         */
+       
 
     }
 

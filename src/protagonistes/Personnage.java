@@ -231,6 +231,12 @@ public class Personnage extends EtreVivant {
 
     public String reparerArmure() {
         String texte = "";
+        if(mArmure!=null){ 
+           mBoutique.reparerArmure(mArmure);/* +enlever argent (250 po)*/
+            return" votre armure est reparer " 
+        }else{
+           
+        }
         //TODO
         return texte;
     }
