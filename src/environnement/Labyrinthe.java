@@ -41,13 +41,12 @@ public class Labyrinthe {
         return texte;
     }
 
-    public boolean isEntree(){
-        return true;
+    public boolean isEntree(Piece tPiece){
+        return( tPiece == this.mEntree);
     }
 
-    public boolean isSortie(){
-        // Retourne vraie quand 
-        return true;
+    public boolean isSortie(Piece tPiece){
+       return ( tPiece == this.mSortie);
     }
 
     public int getNbPieces(){
