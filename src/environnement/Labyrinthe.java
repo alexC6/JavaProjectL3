@@ -2,19 +2,25 @@ package environnement;
 
 import protagonistes.Personnage;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import environnement.*;
+
 public class Labyrinthe {
 
     // Voir avec Alex codage vecteur en java + vérifier l attribut personnage
    
+    private List<Piece> mPieces = new ArrayList<Piece>();
     private int mNbPieces;
     private int mNbBoutiques;
     private Piece mSortie;
     private Piece mEntree;
     private Personnage mPersonnage;
 
-    public Labyrinthe(int tNbpieces, int tNbBoutiques,Piece tEntree , Piece tSortie){
-        // Ajouter le vecteur voir avec Alex
-        this.mNbPieces = tNbpieces;
+    public Labyrinthe(int tNbPieces, List<Piece> tPieces,int tNbBoutiques,Piece tEntree , Piece tSortie){
+        this.mNbPieces = tNbPieces;
+        this.mPieces = tPieces;
         this.mNbBoutiques = tNbBoutiques;
         this.mEntree = tEntree;
         this.mSortie = tSortie;
@@ -22,6 +28,7 @@ public class Labyrinthe {
 
     }
 
+    // A VOIR AVEC ALEX : selon moi, c'est le personnage qui change de pièce donc pourquoi cette methode ds class Labyrinthe ?
     public String changerDePiece(){
         String texte ="";
         return texte;
@@ -37,7 +44,9 @@ public class Labyrinthe {
     }
 
     String genererPiece(){
+        
         String texte ="";
+        
         return texte;
     }
 
