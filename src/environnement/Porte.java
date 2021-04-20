@@ -17,4 +17,8 @@ public class Porte {
         return texte;
     }
 
+    public Orientation getOrientationPorte(){
+        return this.mOrientationP;
+    }
+
 }
