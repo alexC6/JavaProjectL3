@@ -15,6 +15,7 @@ public class Jeu {
     private int mNbSauvegarde;
 
     public Jeu(Labyrinthe tLabyrinthe, String tPartie, int tSauveGarde){
+        
         this.mLabyrinthe = tLabyrinthe;
         this.mPartie = tPartie;
         this.mNbSauvegarde = tSauveGarde;
