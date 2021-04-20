@@ -1,6 +1,7 @@
 package controleur;
 
 import environnement.Piece;
+import environnement.Porte;
 
 public class Deplacement {
 
@@ -11,7 +12,10 @@ public class Deplacement {
     }
 
     public String choisirPorte( Piece tPiece){
+
         String choixPorte;
+        Porte porteDisponible;
+        Orientation orientationPorteDisponible;
         String texte = "";
 
         texte += afficherPortes(tPiece);
@@ -53,19 +57,43 @@ public class Deplacement {
                     break;
             }// Fin switch
             
-
         }// Fin If
 
         else{
             texte += "Cette fois-ci, vous n'avez pas le choix. Vous devez pousser cette porte....\n";
-            for(int i = 0 ; i < tPiece.getPortes().size(); i++){
-                this.mOrientation = tPiece.getPortes().get(i);
-            }
-        }//Fin Else
-        
-        return texte;
 
-        
+            for(int i = 0 ; i < tPiece.getPortes().size(); i++){
+
+                orientationPorteDisponible =  tPiece.getPortes().get(i).getOrientationPorte();
+                porteDisponible = tPiece.getPortes().get(i);
+
+                texte += porteDisponible.getOrientationPorte() + " souvre...";
+
+                switch (orientationPorteDisponible){
+
+                    case NORD :
+                        this.mOrientation = Orientation.NORD;
+                        break;
+                    
+                    case SUD :
+                        this.mOrientation = Orientation.SUD;
+                        break;
+                    
+                    case EST :
+                        this.mOrientation = Orientation.EST;
+                        break;
+
+                    case OUEST :
+                        this.mOrientation = Orientation.OUEST;
+                        break;
+                }// Fin switch
+
+            }   
+        }//Fin Else  
+
+
+        return texte; 
+
     }
 
     public String afficherPortes(Piece tPiece){
