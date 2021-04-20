@@ -29,6 +29,10 @@ public class Labyrinthe {
 
     public String chargerLabyrinthe(int tLigne, int tCol){
         String texte ="";
+        texte += "Le labyrinthe est en cours de création. Veuillez patienter, noble combattant ! \n";
+        // VOIR AVEC ALEX COMMENT INTEGRER UN DELAI D ATTENTE
+        this.mNbPieces = tLigne * tCol;
+        texte += "Vous allez voyager au sein d'un labyrinthe composé de " + this.getNbPieces() + ".\n";       
         return texte;
     }
 
