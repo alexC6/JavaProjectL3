@@ -7,16 +7,16 @@ public enum Orientation {
     EST("EST"),
     OUEST("OUEST");
 
-    private String nomOrientation;
+    private String mNomOrientation;
 
-    Orientation(String nomOrientation){
+    Orientation(String tNomOrientation){
 
-        this.nomOrientation = nomOrientation;
+        this.mNomOrientation = tNomOrientation;
     }
 
     public String toString(){
         
-        return nomOrientation;
+        return this.mNomOrientation;
     }
 
     
