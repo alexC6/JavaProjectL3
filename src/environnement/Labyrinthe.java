@@ -4,6 +4,7 @@ import protagonistes.Personnage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import environnement.*;
 
@@ -11,29 +12,51 @@ public class Labyrinthe {
 
     // Voir avec Alex codage vecteur en java + vérifier l attribut personnage
    
-    private List<Piece> mPieces = new ArrayList<Piece>();
+    private Piece mMatricePieces [][] ;
     private int mNbPieces;
     private int mNbBoutiques;
     private Piece mSortie;
     private Piece mEntree;
     private Personnage mPersonnage;
 
-    public Labyrinthe(int tNbPieces, List<Piece> tPieces,int tNbBoutiques,Piece tEntree , Piece tSortie){
-        this.mNbPieces = tNbPieces;
-        this.mPieces = tPieces;
-        this.mNbBoutiques = tNbBoutiques;
-        this.mEntree = tEntree;
-        this.mSortie = tSortie;
+    private static final NB_LIGNES_MIN  = 3;
+    private static final NB_LIGNES_MAX = 6 ;
+
+    public Labyrinthe() {
+
+        // Etape 1 : Generer nb aleatoire entre 3 et 6 bornes incluses
+
+        Random rand = new Random();
+        
+        int nbAleatoire = rand.nextInt(NB_LIGNES_MAX - NB_LIGNES_MIN + 1) + NB_LIGNES_MIN;
+
+        //Etape 2 : generer un tableau à 2 dimensions  avec comme param le nb aleatoire précédemment généré
+
+        this.mMatricePieces = new Piece [nbAleatoire] [nbAleatoire];
+
+        // Etape 3 : paramétrer le nb de boutiques soit 4 au total :  arme, armure, potions, reparation 
+        
+        this.mNbBoutiques = 4;
+
+        // Etape 4 : paramétrer les coordonnees des pièces particulières : Entrée & Sortie
+        
+        this.mEntree = this.mMatricePieces[0] [0];
+
+        this.mSortie = this.mMatricePieces[nbAleatoire - 1] [nbAleatoire - 1];
+
+        // Etape 5 : config player avatar 
+
         this.mPersonnage = null;
 
     }
 
     // A VOIR AVEC ALEX : selon moi, c'est le personnage qui change de pièce donc pourquoi cette methode ds class Labyrinthe ?
+    // C'est au labyrinthe de faire appel a la crea piece en fonction de la position du perso a ce moment là
     public String changerDePiece(){
         String texte ="";
         return texte;
     }
-
+    // Pas de traitement de cette méthode pr le moment 
     public String chargerLabyrinthe(int tLigne, int tCol){
         String texte ="";
         texte += "Le labyrinthe est en cours de création. Veuillez patienter, noble combattant ! \n";
@@ -43,6 +66,9 @@ public class Labyrinthe {
         return texte;
     }
 
+    // Trad : faire appel à new piece ds un emplacement du tableau
+    // Generer une liste de portes que la piece va contenir 
+    // Attention : aux bords du labyrinthe 
     String genererPiece(){
         
         String texte ="";
