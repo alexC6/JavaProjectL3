@@ -19,7 +19,7 @@ import environnement.Boutique;
  * <br>Code source de la classe Personnage</p>
  * 
  * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier
- * @version 2021-4-16
+ * @version 2021-4-23
  */
 
 public class Personnage extends EtreVivant {
@@ -98,6 +98,15 @@ public class Personnage extends EtreVivant {
      */
     public String getNom() {
         return this.mNom;
+    }
+
+    /**
+     * Retourne la pièce dans laquelle se trouve le personnage
+     * 
+     * @return Piece actuelle du personnage
+     */
+    public Piece getPiece() {
+        return this.mPiece;
     }
 
     /**
