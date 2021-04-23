@@ -65,9 +65,14 @@ public class Personnage extends EtreVivant {
     private List<Potion> mPotions = new ArrayList<Potion>();
 
     /**
-     * La labyrinthe dans lequel se déplace le personnage
+     * Le labyrinthe dans lequel se déplace le personnage
      */
     private Labyrinthe mLabyrinthe;
+
+    /**
+     * La pièce actuelle où se trouve le personnage
+     */
+    private Piece mPiece;
 
     /**
      * <p>Constructeur de la classe Personnage</p>
@@ -82,6 +87,7 @@ public class Personnage extends EtreVivant {
         this.mArme = null;
         this.mArmure = null;
         this.mLabyrinthe = tLabyrinthe;
+        this.mPiece = null;
     }
 
     /**
@@ -191,6 +197,15 @@ public class Personnage extends EtreVivant {
         String texte = "";
         //TODO
         return texte;
+    }
+
+    /**
+     * Changement de la pièce actuelle où se trouve le personnage
+     * 
+     * @param tPiece Nouvelle pièce
+     */
+    public void seDeplacer(Piece tPiece) {
+        this.mPiece = tPiece;
     }
 
     public String acheter(TypeObjetVendu tType) {
