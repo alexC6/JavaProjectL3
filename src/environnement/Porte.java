@@ -21,4 +21,10 @@ public class Porte {
         return this.mOrientationP;
     }
 
+    public String toString(){
+        String txt = "";
+        txt += this.mOrientationP;
+        return txt;
+    }
+
 }
