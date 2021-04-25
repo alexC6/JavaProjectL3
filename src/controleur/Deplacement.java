@@ -18,7 +18,7 @@ public class Deplacement {
         Orientation orientationPorteDisponible;
         String texte = "";
 
-        texte += afficherPortes(tPiece);
+        texte += this.afficherPortes(tPiece);
         //Personnalisation du script en fonction du nb de portes accessibles dans la pièce où se trouve le joueur 
         
         if ( tPiece.getNbPortes()>1){
