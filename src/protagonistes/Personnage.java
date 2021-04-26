@@ -188,7 +188,7 @@ public class Personnage extends EtreVivant {
     }
 
     public String equiperArmure(Armure tArmure) {
-        if(){
+        if(true){
             
         }
         String texte = "";
@@ -239,9 +239,11 @@ public class Personnage extends EtreVivant {
         return texte;
     }
 
-    public String ouvrirPorte(Porte tPorte) {
+    public String ouvrirPorte(Piece tPiece) {
         String texte = "";
-        // TODO
+
+        this.mPiece = tPiece;
+
         return texte;
     }
 
@@ -249,7 +251,7 @@ public class Personnage extends EtreVivant {
         String texte = "";
         if(mArmure!=null){ 
            mBoutique.reparerArmure(mArmure);/* +enlever argent (250 po)*/
-            return" votre armure est reparer " 
+            return" votre armure est réparée ";
         }else{
            
         }
