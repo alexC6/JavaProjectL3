@@ -12,9 +12,13 @@ public class Armure {
           this.mProtection =(int) (Math.random() * ( PROTECT_MAX - PROTECT_MIN ));
     }
 
-    public Armure(Personnage tProprietaire) {
+    public Armure(Personnage tProprietaire, final int ... args) {
         this.mProprietaire = tProprietaire;
-
+        if(args.length>0){
+           mProtection=args[0];
+        }else{
+            this.mProtection =(int) (Math.random() * ( PROTECT_MAX - PROTECT_MIN ));
+        }
     }
      
 

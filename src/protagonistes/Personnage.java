@@ -226,7 +226,7 @@ public class Personnage extends EtreVivant {
         }else{ 
                  
             return"Vous avez acheté "+tType+" et vous payez "/*+this.prix de l'article*/;
-           // this.mBourse-=prix de l'article
+           /*this.mBourse-=prix de l'article*/;
         }
         return texte;
     }
@@ -248,15 +248,22 @@ public class Personnage extends EtreVivant {
     }
 
     public String reparerArmure() {
-        String texte = "";
-        if(mArmure!=null){ 
-           mBoutique.reparerArmure(mArmure);/* +enlever argent (250 po)*/
-            return" votre armure est réparée ";
+    String texte = "";
+        if(this.mBourse < 250 ){
+            texte=" Votre personnage n'as pas assez d'argent pour faire cela.";
+            return texte;
         }else{
-           
+            if(mArmure!=null){ 
+                mBoutiqueArmure.reparerArmure(mArmure);
+                this.mBourse-=250;
+                texte=" Votre armure est réparée.";
+                return texte;
+            }else{
+                texte=" Vous ne possédez pas d'armure.";
+            }
+            //TODO
+            return texte;
         }
-        //TODO
-        return texte;
     }
 
     /**
