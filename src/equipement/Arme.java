@@ -26,7 +26,7 @@ public class Arme {
         if(args.length>0){
            mProtection=args[0];
         }else{
-            this.mProtection = (int) (Math.random() * ( DOMMAGES_MAX - DOMMAGES_MIN ));
+            this.mPointDommage = (int) (Math.random() * ( DOMMAGES_MAX - DOMMAGES_MIN ));
         }
     }
     
