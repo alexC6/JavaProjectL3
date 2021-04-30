@@ -57,7 +57,7 @@ public class Armure {
     public String reparer(){
 
 
-        
+        //TODO        
     }
 
 
