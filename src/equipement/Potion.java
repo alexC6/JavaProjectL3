@@ -24,4 +24,11 @@ public class Potion {
         return mRecuperation;
     }
 
+    public String afficherRecuperation(){
+        text="";
+
+        return texte;
+        //TODO
+    }
+
 }

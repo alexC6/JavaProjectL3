@@ -192,7 +192,7 @@ public class Personnage extends EtreVivant {
             
         }
         String texte = "";
-        // TODO
+        // TODO mais je sais ce que je vais faire 
         return texte;
     }
 
@@ -261,7 +261,7 @@ public class Personnage extends EtreVivant {
             }else{
                 texte=" Vous ne possédez pas d'armure.";
             }
-            //TODO
+            
             return texte;
         }
     }

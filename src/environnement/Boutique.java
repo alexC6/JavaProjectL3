@@ -49,8 +49,9 @@ public class Boutique<T> {
 
   
     public String reparerArmure(){
-       
-
+        texte="";
+       //TODO
+        return texte;
     }
 
 
