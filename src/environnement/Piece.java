@@ -70,6 +70,7 @@ public class Piece {
     private Tresor<Arme> mTresorArme;
     private Tresor<Armure> mTresorArmure;
     private Tresor<Integer> mTresorOr;
+    private Tresor<Potion> mTresorPotion;
 
     /**
      * Le combat de la salle associant le monstre de la salle et le personnage
@@ -90,7 +91,7 @@ public class Piece {
      */
     public Piece(List<Porte> tPortes, int tLigne, int tColonne, Labyrinthe tLabyrinthe) {
         Random rand = new Random();
-        int tresorType = rand.nextInt(3);
+        int tresorType = rand.nextInt(4);
         
         this.mNbPortes = tPortes.size();
         this.mLigne = tLigne;
@@ -99,6 +100,10 @@ public class Piece {
         this.mLabyrinthe = tLabyrinthe;
         this.mMonstre = new Monstre();
         this.mCombat = new Combat(mLabyrinthe.getPersonnage(), this.mMonstre);
+        this.mTresorArme = null;
+        this.mTresorArmure = null;
+        this.mTresorOr = null;
+        this.mTresorPotion = null;
 
         switch (tresorType) {
             case 0:
@@ -113,6 +118,9 @@ public class Piece {
                 int piecesOr = rand.nextInt(100) + 1;
                 this.mTypeTresor = TypeTresor.PIECE_OR;
                 genererTresor(piecesOr);
+            case 3:
+                this.mTypeTresor = TypeTresor.POTION;
+                genererTresor();
         }
     }
 
@@ -125,16 +133,15 @@ public class Piece {
         switch (this.mTypeTresor) {
             case ARME:
                 this.mTresorArme = new Tresor<Arme>(new Arme(), this.mTypeTresor, this);
-                this.mTresorArmure = null;
-                this.mTresorOr = null;
+                break;
             case ARMURE:
                 this.mTresorArmure = new Tresor<Armure>(new Armure(), this.mTypeTresor, this);
-                this.mTresorArme = null;
-                this.mTresorOr = null;
+                break;
             case PIECE_OR:
                 this.mTresorOr = new Tresor<Integer>(tPieces[0], this.mTypeTresor, this);
-                this.mTresorArme = null;
-                this.mTresorArmure = null;
+                break;
+            case POTION:
+                this.mTresorPotion = new Tresor<Potion>(new Potion(), this.mTypeTresor, this);
         }
     }
 
