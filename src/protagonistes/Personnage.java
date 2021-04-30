@@ -188,11 +188,16 @@ public class Personnage extends EtreVivant {
     }
 
     public String equiperArmure(Armure tArmure) {
-        if(true){
-            
+       String texte = "";
+       if(!this.mArmure){
+           this.mArmure=tArmure;
+           tArmure.setProprietaire(this);
+            texte="Vous équipé votre armure";
+        else{
+            texte"Vous possédé deja une armure";
         }
-        String texte = "";
-        // TODO mais je sais ce que je vais faire 
+        
+       
         return texte;
     }
 
@@ -219,7 +224,7 @@ public class Personnage extends EtreVivant {
 
     public String acheter(TypeObjetVendu tType) {
         String texte = "";
-        //TODO
+       
         if(Boutique.acheterArticle()!=true){
             return"Vous ne pouvez pas acheter cet objet";
 
