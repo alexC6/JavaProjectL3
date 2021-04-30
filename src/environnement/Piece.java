@@ -182,6 +182,34 @@ public class Piece {
     }
 
     /**
+     * Getter des orientations de portes disponibles sous forme de lettres
+     * 
+     * @return Liste de caractères des orientations
+     */
+    public List<String> getOrientation() {
+        List<String> listOrientation = new ArrayList<String>();
+
+        for (Porte porte : mPortes) {
+            switch (porte.getOrientationPorte()) {
+                case NORD:
+                    listOrientation.add("N");
+                    break;
+                case SUD:
+                    listOrientation.add("S");
+                    break;
+                case EST:
+                    listOrientation.add("E");
+                    break;
+                case OUEST:
+                    listOrientation.add("O");
+                    break;
+            }
+        }
+
+        return listOrientation;
+    }
+
+    /**
      * Getter du labyrinthe de la pièce
      * 
      * @return Labyrinthe   Le labyrinthe de la pièce
