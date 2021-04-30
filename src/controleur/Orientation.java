@@ -1,5 +1,10 @@
 package controleur;
 
+/**
+@author Perrine Mortier
+@version 01/04/29
+ * énumération des 4 points cardinaux accessibles également en type String
+ */
 public enum Orientation {
 
     NORD ("NORD"),
@@ -15,9 +20,9 @@ public enum Orientation {
     }
 
     public String toString(){
-        
+
         return this.mNomOrientation;
     }
 
-    
+
 }// FIN CLASS ENUM ORIENTATION
