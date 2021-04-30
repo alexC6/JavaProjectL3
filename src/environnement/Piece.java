@@ -115,7 +115,7 @@ public class Piece {
                 genererTresor();
                 break;
             case 2:
-                int piecesOr = rand.nextInt(100) + 1;
+                int piecesOr = rand.nextInt(151) + 50;
                 this.mTypeTresor = TypeTresor.PIECE_OR;
                 genererTresor(piecesOr);
             case 3:
