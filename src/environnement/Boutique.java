@@ -25,6 +25,7 @@ public class Boutique<T> {
     mPrix.add(1000);
     mPrix.add(2000);
     mPrix.add(5000);
+   
     /**
      *
      * @param tArticle
@@ -61,37 +62,26 @@ public class Boutique<T> {
     }
 
 
-
     private void genererArticle(){
 
+           switch(mType){
+
+            case POTION: 
+                for(int i=0; i<5; i++ ) {
+                    this.mArticles.add(new Potion());
+                }
+            case ARME: 
+                for(int i=0; i<5; i++ ) {
+                    this.mArticles.add(new Arme());
+                }
+            case ARMURE: 
+                for(int i=0; i<5; i++ ) {
+                    this.mArticles.add(new Armure());
+                }           
         
-
-
-
-    }
-
-
-
-/*
-    private void genererTresor(final int... tPieces) {
-        switch (this.mTypeTresor) {
-            case ARME:
-                this.mTresorArme = new Tresor<Arme>(new Arme(), this.mTypeTresor, this);
-                this.mTresorArmure = null;
-                this.mTresorOr = null;
-            case ARMURE:
-                this.mTresorArmure = new Tresor<Armure>(new Armure(), this.mTypeTresor, this);
-                this.mTresorArme = null;
-                this.mTresorOr = null;
-            case PIECE_OR:
-                this.mTresorOr = new Tresor<Integer>(tPieces[0], this.mTypeTresor, this);
-                this.mTresorArme = null;
-                this.mTresorArmure = null;
+        
         }
     }
-*/
-
-
 
 
 

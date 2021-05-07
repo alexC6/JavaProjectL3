@@ -259,10 +259,8 @@ public class Personnage extends EtreVivant {
             return texte;
         }else{
             if(mArmure!=null){ 
-                mBoutiqueArmure.reparerArmure(mArmure);
+                this.mArmure.reparer();
                 this.mBourse-=250;
-                texte=" Votre armure est réparée.";
-                return texte;
             }else{
                 texte=" Vous ne possédez pas d'armure.";
             }
