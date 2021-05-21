@@ -71,9 +71,9 @@ public class SystemeSauvegarde {
             oos.flush();
         } catch (final java.io.IOException e) { // Si erreur de flux
             e.printStackTrace();
-        } finally { // Si une exception est levée, nettoyage et fermeture des flux
+        } finally {
             try {
-                if (oos != null) {
+                if (oos != null) { // Nettoyage et fermeture des flux s'ils ont pu être ouverts
                     oos.flush();
                     oos.close();
                 }
@@ -108,13 +108,13 @@ public class SystemeSauvegarde {
                 e.printStackTrace();
             } catch (final ClassNotFoundException e) { // Si erreur de classe
                 e.printStackTrace();
-            } finally { // Si une exception a été levée, on ferme les flux et on remet labyrinthe à null
+            } finally {
                 try {
-                    if (ois != null) {
+                    if (ois != null) { // Fermeture du flux s'il a pu être ouvert
                         ois.close();
+                    } else { // Si une exception a été levée, on ferme les flux et on remet labyrinthe à null
+                        labyrinthe = null;
                     }
-
-                    labyrinthe = null;
                 } catch (final IOException ex) {
                     ex.printStackTrace();
                 }
