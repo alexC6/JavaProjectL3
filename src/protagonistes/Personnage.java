@@ -337,6 +337,7 @@ public class Personnage extends EtreVivant {
         listOfSentences.add("En toi la Force grandit. Avec courage, tes ennemis tu combats.\n");
         listOfSentences.add("Sois assez fort pour être quelqu'un que même les démons craindraient. \n");
         listOfSentences.add( "Si j'y vais ce n'est pas pour mourir, mais pour me prouver à moi-même que je suis encore vivant.Alors j'y vais ,et BIM !\n");
+        listOfSentences.add( "Montjoie st denis, que je trépasse si je faiblis!\n");
 
         // Step : Generate random Number
         Random rand = new Random();
