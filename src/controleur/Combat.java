@@ -13,7 +13,7 @@ import protagonistes.Personnage;
  * Code source de la classe Combat
  * 
  * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier
- * @version 2021-5-13
+ * @version 2021-5-21
  */
 
 public class Combat implements Serializable {
@@ -110,12 +110,6 @@ public class Combat implements Serializable {
         }
         return texte;
     }
-
-    /**
-     * 
-     * @return
-     */
-    public String abandonner() { return "";}
 
     /**
      * Quitter le combat
