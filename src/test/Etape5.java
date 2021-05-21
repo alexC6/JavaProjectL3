@@ -9,14 +9,13 @@ import environnement.Labyrinthe;
 import environnement.PieceCombat;
 import protagonistes.Personnage;
 import vue.BoundaryCombat;
+import vue.BoundaryLancement;
 import vue.Clavier;
 
-public class Etape4  {
-    public static void main(String args[]){
-        Labyrinthe labyrinthe = new Labyrinthe();
-        Personnage personnage = new Personnage("Alice", labyrinthe);
-
-        System.out.println(labyrinthe.ajouterPersonnage(personnage));
+public class Etape5  {
+    public static void main(String args[]) {
+        Labyrinthe labyrinthe = BoundaryLancement.lancerPartie();
+        Personnage personnage = labyrinthe.getPersonnage();
 
         for (int i = 0 ; i < 5 && personnage.isVivant(); i++){
             System.out.println(Deplacement.deplacerVers(personnage, labyrinthe));
@@ -29,7 +28,7 @@ public class Etape4  {
                 // On ne doit pas non plus avoir d'interaction avec le contrôleur, seul le boundary interagit avec lui
                 Combat combat = piecette.getCombat();
 
-                ControleurCombat crtlCmb = new ControleurCombat(personnage, combat.getMonstre(), combat);
+                ControleurCombat crtlCmb = new ControleurCombat(personnage);
                 BoundaryCombat bndCmb = new BoundaryCombat(crtlCmb);
 
                 bndCmb.scenar();
@@ -66,5 +65,7 @@ public class Etape4  {
                 System.out.println(boutique.acheterArticle(boutique.choisirArticle()));
             }
         }
+
+        BoundaryLancement.sauvegarderPartie(labyrinthe);
     }
 }
