@@ -12,7 +12,7 @@ import equipement.Potion;
  * <br>Code source de la classe Entree héritée de Piece</p>
  * 
  * @author Alexandre Coulais
- * @version 2021-5-14
+ * @version 2021-5-21
  */
 
 public class Entree extends Piece {

@@ -13,7 +13,7 @@ import vue.Clavier;
 /**
  *
  * @author Noëmie Suere
- * @version 2021-4-28
+ * @version 2021-5-21
  */
 
 public class Boutique<T> implements Serializable {

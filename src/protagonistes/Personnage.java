@@ -19,7 +19,7 @@ import vue.Clavier;
  * <br>Code source de la classe Personnage</p>
  *
  * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier
- * @version 2021-13-5
+ * @version 2021-5-21
  */
 
 public class Personnage extends EtreVivant {
