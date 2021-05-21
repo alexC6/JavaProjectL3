@@ -1,6 +1,7 @@
 package vue;
 
 import controleur.ControleurLancement;
+import controleur.SystemeSauvegarde;
 import environnement.Labyrinthe;
 
 /**
@@ -66,5 +67,15 @@ public class BoundaryLancement {
         String nom = Clavier.entrerClavierString(questionNom);
 
         return ControleurLancement.nouvellePartie(nom);
+    }
+
+    public static void sauvegarderPartie(Labyrinthe tLabyrinthe) {
+        String question = "Voulez-vous sauvegarder votre partie (O/N) ?";
+
+        if (Clavier.demanderChoix(question, "O", "N")) {
+            if (!(SystemeSauvegarde.sauvegarderPartie(tLabyrinthe))) {
+                System.err.println("Oups ! Une erreur s'est produite pendant la sauvegarde ...");
+            }
+        }
     }
 }
