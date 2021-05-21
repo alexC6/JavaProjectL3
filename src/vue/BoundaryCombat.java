@@ -15,13 +15,13 @@ import java.util.Random;
 public class BoundaryCombat {
     
     private ControleurCombat mCrtl;
+    public boolean checkVanic;
     
     public BoundaryCombat(ControleurCombat tCtrl) {
         this.mCrtl = tCtrl;
     }
 
-    public void scenar() {
-        
+    public void scenar() { 
         Random rand = new Random();
         int randNumber = rand.nextInt(1);
 
@@ -36,6 +36,9 @@ public class BoundaryCombat {
         } 
     }
 
+    public boolean choixCombatreFuir () {
+        return Clavier.demanderChoix("Combattre ou fuir ? (C/F)", "C", "F");
+    }
 
     public void donnerSante() {
         int pv = this.mCrtl.donnerPVperso();
@@ -45,11 +48,19 @@ public class BoundaryCombat {
         }
     }
 
-    public void monstreAttaque() {
-        System.out.println(this.mCrtl.monstreAttaque());
+    public boolean checkVanic() {
+        return this.mCrtl.checkVainc();
+    }
+
+    public void demarrerCombat() {
+        if()
+        this.scenar();
+        System.out.println(this.mCrtl.demarrerCombat());
     }
 
     public void lancerTour() {
+        this.donnerSante();
+        boolean choixCF = this.choixCombatreFuir();
         System.out.println(this.mCrtl.lancerTour());
     }
 
