@@ -12,8 +12,8 @@ public class BoundaryDeplacer {
         
     public void deplacer(){
 
-        private String choixPorte;
-        private String listePortesDisponibles;
+        String choixPorte;
+        String listePortesDisponibles;
 
         listePortesDisponibles = this.mControleur.afficherPortes();
 

@@ -37,7 +37,9 @@ public class ControleurCombat {
         return texte;
     }
 
+    // A finir
     public String demarrerCombat() {
-        if(this.mCombat.vainqueur() == null)
+        if(this.mCombat.vainqueur() == null) {}
+        return null;
     }
 }

@@ -52,8 +52,9 @@ public class BoundaryCombat {
         return this.mCrtl.checkVainc();
     }
 
+    // A finir
     public void demarrerCombat() {
-        if()
+        if (true) {}
         this.scenar();
         System.out.println(this.mCrtl.demarrerCombat());
     }

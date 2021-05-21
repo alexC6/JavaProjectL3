@@ -1,7 +1,7 @@
 package controleur;
-import javax.print.attribute.standard.QueuedJobCount;
-
 import environnement.Boutique;
+import environnement.Entree;
+import vue.BoundaryBoutique;
 
 public class ControleurBoutique {
   
