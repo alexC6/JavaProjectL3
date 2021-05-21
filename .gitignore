@@ -21,3 +21,4 @@
 *.rar
 src/test/test.java
 .vscode
+*.ser
