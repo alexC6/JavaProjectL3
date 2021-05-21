@@ -1,8 +1,6 @@
 package equipement;
 import java.io.Serializable;
 
-import org.w3c.dom.css.RGBColor;
-
 import protagonistes.Monstre;
 import protagonistes.Personnage;
 
@@ -58,5 +56,9 @@ public class Arme implements Serializable {
 
     public int getDommageArme(){
         return this.mPointDommage;
+    }
+
+    public String toString() {
+        return "arme de dommage " + this.mPointDommage;
     }
 }

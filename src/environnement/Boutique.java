@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import equipement.Arme;
+import equipement.Armure;
+import equipement.Potion;
 import protagonistes.Personnage;
 import vue.Clavier;
 
@@ -17,8 +20,7 @@ public class Boutique<T> implements Serializable {
     /**
      * Constructeur de Boutique
      */
-    private int mNbObjets, mArticle;
-    private Piece mPiece;
+    private int mNbObjets;
     private TypeObjetVendu mType;
     private Personnage mVisiteur;
     private List<T> mArticles = new ArrayList<T>();
@@ -43,20 +45,35 @@ public class Boutique<T> implements Serializable {
        this.mNbObjets = tArticles.size();
     }
 
-    /**
-     *
-     * @param tArticle
-     * @return un boolean qui indique si l'article existe ou non
-     */
-    public boolean acheterArticle(T tArticle){
-        if(mArticles.size()>0){
-            mArticles.remove(tArticle);
-            return true;
-        }else{
-            return false;
-        }
+    public void visiter(Personnage tPersonnage) {
+        this.mVisiteur = tPersonnage;
     }
 
+    /**
+     * Fonction d'achat faisant appel aux fonctions du personnage
+     *
+     * @param tArticle L'index de l'article à acheter
+     * @return Le texte à afficher
+     */
+    public String acheterArticle(int tArticle) {
+        String texte = "";
+        if (this.mVisiteur.acheter(this.mPrix.get(tArticle-1))) {
+            switch (this.mType) {
+                case ARME:
+                    texte += this.mVisiteur.prendreArme((Arme) this.mArticles.get(tArticle-1));
+                    break;
+                case ARMURE:
+                    texte += this.mVisiteur.equiperArmure((Armure) this.mArticles.get(tArticle-1));
+                    break;
+                case POTION:
+                    texte += this.mVisiteur.stockerPotion((Potion) this.mArticles.get(tArticle-1));
+            }
+        } else {
+            texte += "Vous n'avez pas assez d'argent pour cet article !";
+        }
+
+        return texte;
+    }
 
     public String reparerArmure(){
        String question="Voulez-vous réparer votre armure? (O pour réparer et N si vous êtes trop radin";
@@ -74,11 +91,18 @@ public class Boutique<T> implements Serializable {
         return txt;
     }
 
-    public String articleAAcheter(){
-        //choix de l'article a acheter
-        //appeler en fonction de ce qu'il achete equiperarme ou armure ou potion
-        
+    public int choisirArticle() {
+        int i = 0, choix = 0;
 
+        for (T article : this.mArticles) {
+            i++;
+            System.out.println(i + ") " + article + "\n");
+        }
+
+        do {
+            choix = Clavier.entrerClavierInt("Choisir l'article (entier entre 1 et " + this.mNbObjets + ")");
+        } while (choix < 1 || choix > this.mNbObjets);
+
+        return choix;
     }
-
 }

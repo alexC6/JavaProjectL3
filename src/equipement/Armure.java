@@ -84,4 +84,7 @@ public class Armure implements Serializable {
         return texte;
     }
 
+    public String toString() {
+        return "armure de protection " + this.mProtection;
+    }
 }

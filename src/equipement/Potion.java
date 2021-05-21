@@ -44,4 +44,7 @@ public class Potion implements Serializable {
         return "Vous avez récupéré "+this.mRecuperation+" point(s) de vie.\n";
     }
 
+    public String toString() {
+        return "potion de force " + this.mRecuperation;
+    }
 }

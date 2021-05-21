@@ -3,6 +3,8 @@ package test;
 import controleur.Combat;
 import controleur.ControleurCombat;
 import controleur.Deplacement;
+import environnement.Boutique;
+import environnement.Entree;
 import environnement.Labyrinthe;
 import environnement.PieceCombat;
 import protagonistes.Personnage;
@@ -32,12 +34,36 @@ public class Etape4  {
 
                 bndCmb.scenar();
 
-                while (combat.vainqueur() == null && Clavier.demanderChoix(question, "C", "F")) {
-                    bndCmb.donnerSante();
+                if (Clavier.demanderChoix(question, "C", "F")) {
+                    System.out.println("Vous avez décidé de combattre !");
+
+                    if (personnage.possedePotions()) {
+                        String questionPotion = "Mais avant, voulez-vous boire une potion (O/N) ?";
+
+                        if (Clavier.demanderChoix(questionPotion, "O", "N")) {
+                            System.out.println(personnage.boirePotion());
+                        }
+                    }
+
                     System.out.println(combat.itererTour());
+
+                    while (combat.vainqueur() == null && Clavier.demanderChoix(question, "C", "F")) {
+                        bndCmb.donnerSante();
+                        System.out.println(combat.itererTour());
+                    }
                 }
             } else {
-                // Code pour acheter quelque chose dans une boutique que l'utilisateur va choisir
+                int choixBoutique;
+
+                do {
+                    choixBoutique = Clavier.entrerClavierInt("Choisir une boutique (entier entre 1 et 3)");
+                } while (choixBoutique < 1 || choixBoutique > 3);
+
+                Entree entree = (Entree) labyrinthe.getPiece(0, 0);
+                Boutique<?> boutique = entree.getBoutique(choixBoutique);
+
+                boutique.visiter(personnage);
+                System.out.println(boutique.acheterArticle(boutique.choisirArticle()));
             }
         }
     }

@@ -83,8 +83,6 @@ public class Labyrinthe implements Serializable {
         Orientation orientationPO = Orientation.OUEST;
         Porte porteO = new Porte(orientationPO);
 
-        String texte ="";
-
         for ( i = 0; i<sizeOfTab; i++){
 
             for ( j = 0; j< sizeOfTab; j++){

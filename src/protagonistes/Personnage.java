@@ -8,7 +8,6 @@ import environnement.Labyrinthe;
 import environnement.Piece;
 import environnement.PieceCombat;
 import environnement.Tresor;
-import environnement.TypeObjetVendu;
 import environnement.TypeTresor;
 import equipement.Arme;
 import equipement.Armure;
@@ -43,7 +42,6 @@ public class Personnage extends EtreVivant {
      *
      * @see Personnage#prendreArme(Arme)
      * @see Personnage#lacherArme()
-     * @see Personnage#acheter(TypeObjetVendu)
      */
     private Arme mArme;
 
@@ -52,7 +50,6 @@ public class Personnage extends EtreVivant {
      *
      * @see Personnage#equiperArmure(Armure)
      * @see Personnage#perdreArmure()
-     * @see Personnage#acheter(TypeObjetVendu)
      * @see Personnage#reparerArmure()
      */
     private Armure mArmure;
@@ -61,7 +58,6 @@ public class Personnage extends EtreVivant {
      * Les potions possédées par le personnage
      *
      * @see Personnage#boirePotion()
-     * @see Personnage#acheter(TypeObjetVendu)
      */
     private List<Potion> mPotions = new ArrayList<Potion>();
 
@@ -85,6 +81,7 @@ public class Personnage extends EtreVivant {
         super(10);
         this.mNom = tNom;
         this.mLabyrinthe = tLabyrinthe;
+        this.mBourse = 0;
     }
 
     /**
@@ -114,6 +111,10 @@ public class Personnage extends EtreVivant {
      */
     public int getPiecesOr() {
         return this.mBourse;
+    }
+
+    public boolean possedePotions() {
+        return this.mPotions.size() != 0;
     }
 
     /**
@@ -154,6 +155,16 @@ public class Personnage extends EtreVivant {
         return texte;
     }
 
+    public boolean acheter(int tPrix) {
+        boolean achat = this.mBourse >= tPrix;
+
+        if (achat) {
+            this.mBourse -= tPrix;
+        }
+
+        return achat;
+    }
+
     /**
      * <p>Affiche la liste des potions, demande au joueur quelle potion doit boire son personnage
      * <br>et lui fait récupérer des points de vie </p>
@@ -162,19 +173,16 @@ public class Personnage extends EtreVivant {
      * @return String   Le texte à afficher
      */
     public String boirePotion() {
-        int pointsRecup;
+        int i = 0, pointsRecup;
         Potion potionChoisie;
         String texte = "";
 
-        System.out.println("Quelle potion souhaitez-vous boire ?");
-
-        for (int i = 0; i < mPotions.size(); i++) {
-            Potion potion = this.mPotions.get(i);
-
-            System.out.println(i+1 + ") " + potion.afficherRecuperation() + "\n");
+        for (Potion potion: this.mPotions) {
+            i++;
+            System.out.println(i + ") " + potion + "\n");
         }
 
-        potionChoisie = this.mPotions.get(Clavier.entrerClavierInt()-1);
+        potionChoisie = this.mPotions.get(Clavier.entrerClavierInt("Quelle potion souhaitez-vous boire ?")-1);
         pointsRecup = potionChoisie.getRecuperation();
         texte += this.recupererVie(pointsRecup);
 
@@ -337,6 +345,7 @@ public class Personnage extends EtreVivant {
         listOfSentences.add("En toi la Force grandit. Avec courage, tes ennemis tu combats.\n");
         listOfSentences.add("Sois assez fort pour être quelqu'un que même les démons craindraient. \n");
         listOfSentences.add( "Si j'y vais ce n'est pas pour mourir, mais pour me prouver à moi-même que je suis encore vivant.Alors j'y vais ,et BIM !\n");
+        listOfSentences.add( "Montjoie st denis, que je trépasse si je faiblis!\n");
 
         // Step : Generate random Number
         Random rand = new Random();

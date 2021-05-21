@@ -56,7 +56,7 @@ public class Entree extends Piece {
                 List<Arme> listeArmes = new ArrayList<Arme>();
 
                 for (int i = 0; i < 5; i++) {
-                    listeArmes.add(new Arme());
+                    listeArmes.add(new Arme(i+1));
                 }
 
                 this.mBoutiqueArme = (Boutique<Arme>) tBoutique;
@@ -66,7 +66,7 @@ public class Entree extends Piece {
                 List<Armure> listeArmures = new ArrayList<Armure>();
 
                 for (int i = 0; i < 5; i++) {
-                    listeArmures.add(new Armure());
+                    listeArmures.add(new Armure(i+1));
                 }
 
                 this.mBoutiqueArmure = (Boutique<Armure>) tBoutique;
@@ -76,7 +76,7 @@ public class Entree extends Piece {
                 List<Potion> listePotions = new ArrayList<Potion>();
 
                 for (int i = 0; i < 5; i++) {
-                    listePotions.add(new Potion());
+                    listePotions.add(new Potion((i+1)*2));
                 }
 
                 this.mBoutiquePotion = (Boutique<Potion>) tBoutique;
