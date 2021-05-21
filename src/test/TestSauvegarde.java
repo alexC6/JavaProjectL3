@@ -12,9 +12,18 @@ import vue.Clavier;
 
 public class TestSauvegarde {
     public static void main(String args[]){
-        Labyrinthe labyrinthe = SystemeSauvegarde.recupererPartie();
-        Personnage personnage = labyrinthe.getPersonnage();
-
+        Labyrinthe labyrinthe = null;
+        Personnage personnage = null;
+        
+        if (SystemeSauvegarde.exists()) {
+            labyrinthe = SystemeSauvegarde.recupererPartie();
+            personnage = labyrinthe.getPersonnage();
+        } else {
+            labyrinthe = new Labyrinthe();
+            personnage = new Personnage("Alexandre", labyrinthe);
+            System.out.println(labyrinthe.ajouterPersonnage(personnage));
+        }
+        
         System.out.println(Deplacement.deplacerVers(personnage, labyrinthe));
 
         if (!labyrinthe.isEntree(personnage.getPiece())) {
@@ -25,7 +34,7 @@ public class TestSauvegarde {
             // On ne doit pas non plus avoir d'interaction avec le contrôleur, seul le boundary interagit avec lui
             Combat combat = piecette.getCombat();
 
-            ControleurCombat crtlCmb = new ControleurCombat(personnage, combat.getMonstre(), combat);
+            ControleurCombat crtlCmb = new ControleurCombat(personnage);
             BoundaryCombat bndCmb = new BoundaryCombat(crtlCmb);
 
             bndCmb.scenar();
@@ -36,6 +45,6 @@ public class TestSauvegarde {
             }
         }
 
-        SystemeSauvegarde.supprimerPartie();
+        SystemeSauvegarde.sauvegarderPartie(labyrinthe);
     }
 }
