@@ -2,44 +2,45 @@ package protagonistes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-import controleur.Clavier;
 import environnement.Labyrinthe;
-import environnement.Porte;
+import environnement.Piece;
+import environnement.PieceCombat;
 import environnement.Tresor;
 import environnement.TypeObjetVendu;
 import environnement.TypeTresor;
 import equipement.Arme;
 import equipement.Armure;
 import equipement.Potion;
-import environnement.Boutique;
+import vue.Clavier;
 
 /**
  * <p>File : Personnage.java
  * <br>Code source de la classe Personnage</p>
- * 
+ *
  * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier
- * @version 2021-4-23
+ * @version 2021-13-5
  */
 
 public class Personnage extends EtreVivant {
     /**
      * La quantité de pièces d'or possédées par le personnage
-     * 
+     *
      * @see Personnage#getPiecesOr()
      */
     private int mBourse;
 
     /**
      * Nom du personnage
-     * 
+     *
      * @see Personnage#getNom()
      */
     private String mNom;
 
     /**
      * Arme possédée par le personnage
-     * 
+     *
      * @see Personnage#prendreArme(Arme)
      * @see Personnage#lacherArme()
      * @see Personnage#acheter(TypeObjetVendu)
@@ -48,7 +49,7 @@ public class Personnage extends EtreVivant {
 
     /**
      * Armure possédée par le personnage
-     * 
+     *
      * @see Personnage#equiperArmure(Armure)
      * @see Personnage#perdreArmure()
      * @see Personnage#acheter(TypeObjetVendu)
@@ -58,14 +59,14 @@ public class Personnage extends EtreVivant {
 
     /**
      * Les potions possédées par le personnage
-     * 
+     *
      * @see Personnage#boirePotion()
      * @see Personnage#acheter(TypeObjetVendu)
      */
     private List<Potion> mPotions = new ArrayList<Potion>();
 
     /**
-     * Le labyrinthe dans lequel se déplace le personnage
+     * La labyrinthe dans lequel se déplace le personnage
      */
     private Labyrinthe mLabyrinthe;
 
@@ -77,23 +78,19 @@ public class Personnage extends EtreVivant {
     /**
      * <p>Constructeur de la classe Personnage</p>
      * @author Alexandre Coulais
-     * 
+     *
      * @param tNom Le nom du personnage
      */
     public Personnage(String tNom, Labyrinthe tLabyrinthe) {
         super(10);
-        this.mBourse = 0;
         this.mNom = tNom;
-        this.mArme = null;
-        this.mArmure = null;
         this.mLabyrinthe = tLabyrinthe;
-        this.mPiece = null;
     }
 
     /**
      * <p>Getter du nom du personnage</p>
      * @author Alexandre Coulais
-     * 
+     *
      * @return String   Le nom du personnage
      */
     public String getNom() {
@@ -102,7 +99,7 @@ public class Personnage extends EtreVivant {
 
     /**
      * Retourne la pièce dans laquelle se trouve le personnage
-     * 
+     *
      * @return Piece actuelle du personnage
      */
     public Piece getPiece() {
@@ -112,7 +109,7 @@ public class Personnage extends EtreVivant {
     /**
      * Getter de la bourse du personnage
      * @author Alexandre Coulais
-     * 
+     *
      * @return int  Nombre de pièces d'or possédées par le personnage
      */
     public int getPiecesOr() {
@@ -122,13 +119,13 @@ public class Personnage extends EtreVivant {
     /**
      * <p>Fonction permettant au personnage de récupérer le contenu d'un coffre</p>
      * @author Alexandre Coulais
-     * 
+     *
      * @param tTresor
      *          <p>Le trésor dont on va récupérer le contenu.
      *          <br>Ici, le paramètre de généricité est laissé vide, cela ne présentant pas
      *          pas de problème apparent, l'action effectuée par la suite dépendant d'un autre
      *          paramètre</p>
-     * 
+     *
      * @return String   Le texte à afficher
      */
     public String obtenirTresor(Tresor<?> tTresor) {
@@ -147,6 +144,9 @@ public class Personnage extends EtreVivant {
                 texte += "Vous avez obtenu " + piecesOr + " pièce(s) d'or !\n";
                 this.mBourse += piecesOr;
                 break;
+            case POTION:
+                texte += this.stockerPotion((Potion) tTresor.getContenu());
+
         }
 
         tTresor.viderTresor();
@@ -158,7 +158,7 @@ public class Personnage extends EtreVivant {
      * <p>Affiche la liste des potions, demande au joueur quelle potion doit boire son personnage
      * <br>et lui fait récupérer des points de vie </p>
      * @author Alexandre Coulais
-     * 
+     *
      * @return String   Le texte à afficher
      */
     public String boirePotion() {
@@ -181,108 +181,197 @@ public class Personnage extends EtreVivant {
         return texte;
     }
 
-    public String prendreArme(Arme tArme) {
+    /**
+     * Fonction d'ajout d'une potion à la liste de celles que possède le personnage
+     * @author Alexandre Coulais
+     *
+     * @param tPotion La potion à ajouter
+     * @return Le texte à afficher
+     */
+    public String stockerPotion(Potion tPotion) {
         String texte = "";
-        // TODO
-        return texte;
-    }
 
-    public String equiperArmure(Armure tArmure) {
-       String texte = "";
-       if(!this.mArmure){
-           this.mArmure=tArmure;
-           tArmure.setProprietaire(this);
-            texte="Vous équipé votre armure";
-        else{
-            texte"Vous possédé deja une armure";
+        if (tPotion != null) {
+            this.mPotions.add(tPotion);
+            texte += "Vous avez récupéré une potion de force " + tPotion.getRecuperation() + " !\n";
         }
-        
-       
-        return texte;
-    }
 
-    public String lacherArme() {
-        String texte = "";
-        //TODO
-        return texte;
-    }
-
-    public String perdreArmure() {
-        String texte = "";
-        //TODO
         return texte;
     }
 
     /**
-     * Changement de la pièce actuelle où se trouve le personnage
      * 
-     * @param tPiece Nouvelle pièce
+     * @author
+     * 
+     * @param tArme
+     * @return
      */
-    public void seDeplacer(Piece tPiece) {
-        this.mPiece = tPiece;
-    }
-
-    public String acheter(TypeObjetVendu tType) {
+    public String prendreArme(Arme tArme) {
         String texte = "";
-       
-        if(Boutique.acheterArticle()!=true){
-            return"Vous ne pouvez pas acheter cet objet";
 
-        }else{ 
-                 
-            return"Vous avez acheté "+tType+" et vous payez "/*+this.prix de l'article*/;
-           /*this.mBourse-=prix de l'article*/;
+        if (this.mArme == null) {
+            texte += "Vous avez obtenu et équipé une arme de " + tArme.getDommageArme() + " points de dommage !\n";
+            tArme.setProprietaire(this);
+        } else {
+            String question = "Vous possédez déjà une arme, souhaitez-vous la garder (G) ou la remplacer (R) ?";
+            if (Clavier.demanderChoix(question, "G", "R")) {
+                texte += "Vous conservez votre arme actuelle.\n";
+            } else {
+                texte += this.lacherArme();
+                tArme.setProprietaire(this);
+                texte += "Vous équipez l'arme que vous venez d'obtenir !\n";
+                this.mArme = tArme;
+            }
         }
+
         return texte;
     }
 
-    public String attaquer() {
-        //mcombat de etre vivant +combat methode get monstre 
-    
+    /**
+     * 
+     * @author
+     * 
+     * @param tArmure
+     * @return
+     */
+    public String equiperArmure(Armure tArmure) {
         String texte = "";
-        //TODO
+
+        if(this.mArmure == null){
+            this.mArmure=tArmure;
+            tArmure.setProprietaire(this);
+            texte="Vous équipez votre armure.\n";
+        }else{
+            String question = "Vous possédez déjà une armure, souhaitez-vous la garder (G) ou la remplacer (R) ?";
+            if (Clavier.demanderChoix(question, "G", "R")) {
+                texte += "Vous conservez votre armure actuelle.\n";
+            } else {
+                texte += this.perdreArmure();
+                tArmure.setProprietaire(this);
+                texte += "Vous équipez l'armure que vous venez d'obtenir !\n";
+                this.mArmure = tArmure;
+            }
+        }
+
         return texte;
     }
 
+    /**
+     * 
+     * @author
+     * 
+     * @return
+     */
+    public String lacherArme() {
+        if(this.mArme!=null){
+            this.mArme = null;
+        }
+        return "Vous avez décidé de lâcher votre arme.\n";
+    }
+
+    /**
+     * 
+     * @author
+     */
+    public String perdreArmure() {
+        if(this.mArmure!=null) {
+            this.mArmure = null;
+        }
+
+        return "Vous retirez votre armue.\n";
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public String reparerArmure() {
+        String texte = "";
+            if(this.mBourse < 250 ){
+                texte=" Votre personnage n'as pas assez d'argent pour faire cela.";
+                return texte;
+            }else{
+                if(mArmure!=null){ 
+                    this.mArmure.reparer();
+                    this.mBourse-=250;
+                }else{
+                    texte=" Vous ne possédez pas d'armure.";
+                }
+                
+                return texte;
+            }
+        }    
+
+    /**
+     * Fonction de changement de pièce du personnage
+     * @author Alexandre Coulais
+     *
+     * @param tPiece La nouvelle pièce
+     * @return Le texte à afficher
+     */
     public String ouvrirPorte(Piece tPiece) {
         String texte = "";
+        int ligne = tPiece.getLigne();
+        int colonne = tPiece.getColonne();
+
+        if (tPiece instanceof PieceCombat) {
+            PieceCombat piece = (PieceCombat) tPiece;
+            texte += piece.getCombat().rejointCombat(this);
+            texte += this.rejointCombat(piece.getCombat());
+        }
+
+        texte += "Vous changez de pièce, vous êtes désormais en position (" + ligne + " ; " + colonne + ").\n";
 
         this.mPiece = tPiece;
 
         return texte;
     }
 
-    public String reparerArmure() {
-    String texte = "";
-        if(this.mBourse < 250 ){
-            texte=" Votre personnage n'as pas assez d'argent pour faire cela.";
-            return texte;
-        }else{
-            if(mArmure!=null){ 
-                this.mArmure.reparer();
-                this.mBourse-=250;
-            }else{
-                texte=" Vous ne possédez pas d'armure.";
-            }
-            
-            return texte;
+    public String attaquer(){
+        String txt="";
+        int healthDamage = 1;
+       
+        // Step : create & init sentences List
+        List<String> listOfSentences = new ArrayList<String>();
+        listOfSentences.add("Vous lancez une attaque super saiyan divin !\n");
+        listOfSentences.add("En toi la Force grandit. Avec courage, tes ennemis tu combats.\n");
+        listOfSentences.add("Sois assez fort pour être quelqu'un que même les démons craindraient. \n");
+        listOfSentences.add( "Si j'y vais ce n'est pas pour mourir, mais pour me prouver à moi-même que je suis encore vivant.Alors j'y vais ,et BIM !\n");
+
+        // Step : Generate random Number
+        Random rand = new Random();
+        int listOfSentencesSize = listOfSentences.size();
+
+        int randNumber = rand.nextInt(listOfSentencesSize);
+
+        if (this.mArme != null){
+             healthDamage = this.mArme.getDommageArme();       
         }
+
+    
+        // Display one of List's sentences
+        txt += listOfSentences.get((randNumber));
+
+        EtreVivant monstreCombat = this.mCombat.getMonstre();
+        txt += monstreCombat.subirAttaque(healthDamage);
+
+        return txt;
     }
 
     /**
      * <p> Définition de la fonction mourir d'EtreVivant
      * <br>Fait quitter le combat au personnage </p>
      * @author Alexandre Coulais
-     * 
+     *
      * @see EtreVivant#mourir()
-     * 
+     *
      * @return String   Le texte à afficher
      */
     @Override
     public String mourir() {
         String texte = "";
 
-        texte += this.quitteCombat();
+        this.quitteCombat();
         texte += "Hélas, le monstre vous a terrassé ...\n";
 
         return texte;
@@ -293,23 +382,28 @@ public class Personnage extends EtreVivant {
      * <br>Calcul les degats réellement subits par le personnage
      * <br>et ceux à soustraire à son armure </p>
      * @author Alexandre Coulais
-     * 
+     *
      * @see EtreVivant#subirAttaque(int)
-     * 
+     *
      * @param tDegats   Les degats de l'attaque par le monstre
-     * 
+     *
      * @return String   Le texte à afficher
      */
     @Override
     public String subirAttaque(int tDegats) {
         String texte = "";
-        int pointsArmure = this.mArmure.getPointsProtection();
-        int degatsRestants = tDegats - pointsArmure;
+        
+        if (this.mArmure != null) {
+            int pointsArmure = this.mArmure.getPointsProtection();
+            int degatsRestants = tDegats - pointsArmure;
 
-        texte += this.mArmure.encaisserDegat(tDegats);
+            texte += this.mArmure.encaisserDegat(tDegats);
 
-        if (degatsRestants > 0) {
-            texte += super.subirAttaque(degatsRestants);
+            if (degatsRestants > 0) {
+                texte += super.subirAttaque(degatsRestants);
+            }
+        } else {
+            texte += super.subirAttaque(tDegats);
         }
 
         return texte;

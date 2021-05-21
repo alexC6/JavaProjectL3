@@ -47,7 +47,7 @@ public class Monstre extends EtreVivant {
     public String mourir() {
         String texte = "";
         
-        texte += this.quitteCombat();
+        this.quitteCombat();
         texte += "Bravo, vous avez terrassé le terrible monstre !\n";
 
         return texte;

@@ -1,43 +1,47 @@
 package environnement;
-import java.lang.ProcessBuilder.Redirect.Type;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import equipement.*;
-import environnement.TypeObjetVendu;
+
+import protagonistes.Personnage;
+import vue.Clavier;
+
 /**
  *
  * @author Noëmie Suere
  * @version 2021-4-28
  */
 
-
-
-public class Boutique<T> {
+public class Boutique<T> implements Serializable {
     /**
      * Constructeur de Boutique
      */
-    private int mPiece, mNbObjets;
+    private int mNbObjets, mArticle;
+    private Piece mPiece;
     private TypeObjetVendu mType;
+    private Personnage mVisiteur;
     private List<T> mArticles = new ArrayList<T>();
     private List<Integer> mPrix = new ArrayList<Integer>();
-    mPrix.add(250);
-    mPrix.add(500);
-    mPrix.add(1000);
-    mPrix.add(2000);
-    mPrix.add(5000);
-   
+
     /**
      *
      * @param tArticle
      * @param tType
      */
-    public Boutique(List<T> tArticle, TypeObjetVendu tType){
-        mArticles=tArticle;
+    public Boutique(TypeObjetVendu tType){
         this.mType= tType;
-
+        mPrix.add(250);
+        mPrix.add(500);
+        mPrix.add(1000);
+        mPrix.add(2000);
+        mPrix.add(5000);
     }
 
-
+    public void ajouterArticle(List<T> tArticles){
+       this.mArticles = tArticles;
+       this.mNbObjets = tArticles.size();
+    }
 
     /**
      *
@@ -51,39 +55,30 @@ public class Boutique<T> {
         }else{
             return false;
         }
-
     }
 
 
     public String reparerArmure(){
-        texte="";
-       //TODO
-        return texte;
-    }
-
-
-    private void genererArticle(){
-
-           switch(mType){
-
-            case POTION: 
-                for(int i=0; i<5; i++ ) {
-                    this.mArticles.add(new Potion());
-                }
-            case ARME: 
-                for(int i=0; i<5; i++ ) {
-                    this.mArticles.add(new Arme());
-                }
-            case ARMURE: 
-                for(int i=0; i<5; i++ ) {
-                    this.mArticles.add(new Armure());
-                }           
-        
-        
+       String question="Voulez-vous réparer votre armure? (O pour réparer et N si vous êtes trop radin";
+       String txt ="";
+    
+        // Si le perso choisit de réparer 
+        if(Clavier.demanderChoix(question, "O", "N")){
+            this.mVisiteur.reparerArmure();
+            txt+="Votre armure est réparée. Retournez au combat valeureux guerrier!";
         }
+        else{
+          
+            txt+="Merci d'être passé, revenez nous voir quand vous aurez de l'argent à dépenser ! On ne fait pas crédit Combattant !";
+        }
+        return txt;
     }
 
+    public String articleAAcheter(){
+        //choix de l'article a acheter
+        //appeler en fonction de ce qu'il achete equiperarme ou armure ou potion
+        
 
-
+    }
 
 }

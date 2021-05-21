@@ -1,5 +1,7 @@
 package environnement;
 
+import java.io.Serializable;
+
 /**
  * <p> File : Tresor.java
  * <br>Code source de la classe Tresor </p>
@@ -8,7 +10,7 @@ package environnement;
  * @version 2021-4-13
  */
 
-public class Tresor<T> {
+public class Tresor<T> implements Serializable {
     private T mContenu;
     private TypeTresor mType;
     private Piece mPiece;

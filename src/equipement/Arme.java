@@ -1,30 +1,38 @@
 package equipement;
+import java.io.Serializable;
+
+import org.w3c.dom.css.RGBColor;
+
 import protagonistes.Monstre;
 import protagonistes.Personnage;
 
 /**
  * 
  * @author Noëmie Suere
- * @version 2021-4-30
+ * @version 2021-5-12
  */
 
-public class Arme {
+public class Arme implements Serializable {
 	private int mPointDommage; 
     private int DOMMAGES_MIN =1;
     private int DOMMAGES_MAX =5;
     private Personnage mProprietaire;
 
-    public Arme() {
+    public Arme(final int ... args) {
         this.mProprietaire = null; 
         //calcul du nombre de point de dommage (entre 1 et 5)
+        if(args.length>0){
+            this.mPointDommage=args[0];
+        }else{
         this.mPointDommage = (int) (Math.random() * ( DOMMAGES_MAX - DOMMAGES_MIN ));
+        }
     }
 
     public Arme(Personnage tProprietaire, final int ... args) {
         this.mProprietaire = tProprietaire; 
-       
+        this.mProprietaire.prendreArme(this);
         if(args.length>0){
-           mProtection=args[0];
+           this.mPointDommage=args[0];
         }else{
             this.mPointDommage = (int) (Math.random() * ( DOMMAGES_MAX - DOMMAGES_MIN ));
         }
@@ -48,5 +56,7 @@ public class Arme {
         return tMonstre.subirAttaque(this.mPointDommage);
     }
 
-    
+    public int getDommageArme(){
+        return this.mPointDommage;
+    }
 }

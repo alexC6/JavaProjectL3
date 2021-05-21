@@ -6,6 +6,7 @@ import environnement.Labyrinthe;
 import environnement.Piece;
 import environnement.Porte;
 import protagonistes.Personnage;
+import vue.Clavier;
 
 /**
  * @author Perrine MORTIER
@@ -35,13 +36,15 @@ public class Deplacement {
 
         System.out.println(afficherPortes(tPiece));
         //Personnalisation du script en fonction du nb de portes accessibles depuis la pièce où se trouve le joueur
+        
         if ( tPiece.getNbPortes()>1){
 
-            System.out.println("Vous avez maintenant le choix entre plusieurs portes. Le choix est rude. Quelle porte décidez-vous de pousser ? Derrière elle, le mystère reste entier ...\n");
+            System.out.println("Vous avez maintenant le choix entre plusieurs portes. Le choix est rude. Quelle porte décidez-vous de pousser ? Derrière elle, le mystère reste entier ...");
             // Test sur la saisie Utilisateur restreinte aux options proposées
+
             do{
 
-                System.out.println("Tapez N pour NORD, E pour EST, S pour SUD et O pour OUEST : \n");
+                System.out.println("Tapez N pour NORD, E pour EST, S pour SUD et O pour OUEST : ");
 
                 choixPorte = Clavier.entrerClavierString() ;
 
@@ -112,7 +115,7 @@ public class Deplacement {
      * 
      * @param tPersonnage
      * @param tLabyrinthe
-     * @return chaine de caractères décrivant portes dispo + choix personnage & ouverture de la porte choisie
+     * @return
      * 
      */
     public static String deplacerVers(Personnage tPersonnage, Labyrinthe tLabyrinthe) {
@@ -151,12 +154,6 @@ public class Deplacement {
         return texte;
     }
 
-
-    /**
-     * 
-     * @param tPiece
-     * @return chaine de caractères décrivant les postes disponibles en fonction de la pièce renseignée en paramètre
-     */
     public static String afficherPortes(Piece tPiece){
         String texte ="";
         int nbPortes = tPiece.getNbPortes();

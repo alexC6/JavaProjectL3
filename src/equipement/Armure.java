@@ -1,6 +1,8 @@
 package equipement;
+import java.io.Serializable;
+
 import protagonistes.Personnage;
-public class Armure {
+public class Armure implements Serializable {
     private int mProtection;
     private int PROTECT_MIN=1;
     private int PROTECT_MAX=5;
@@ -8,14 +10,20 @@ public class Armure {
     private int mEtatInitial;
 
    
-    public Armure() {
+    public Armure(final int ... args) {
+        if(args.length>0){
+            mProtection =args[0];
+            this.mEtatInitial = mProtection;
+         }else{
            //calcul du nombre de point d'armure (entre 1 et 5)
           this.mProtection =(int) (Math.random() * ( PROTECT_MAX - PROTECT_MIN ));
           this.mEtatInitial = this.mProtection;
+         }
     }
 
     public Armure(Personnage tProprietaire, final int ... args) {
         this.mProprietaire = tProprietaire;
+        this.mProprietaire.equiperArmure(this);
         if(args.length>0){
            mProtection =args[0];
            this.mEtatInitial = mProtection;
@@ -26,24 +34,21 @@ public class Armure {
         }
     }
      
-
     public int getEtatInitial(){
-
         return this.mEtatInitial;
-
     }
 
-
+    public int getPointsProtection(){
+        return this.mProtection;
+    }
 
     public Personnage getProprietaire() {
         return mProprietaire;
     }
 
     public void setProprietaire(Personnage tProprietaire) {
-        if(/*Si le personnage est deja proprietaire d'une arme alors: ne rien faire */){
-       
-        }else{
-        this.mProprietaire = tProprietaire;
+        if(this.mProprietaire==null){
+            this.mProprietaire = tProprietaire;
         }
     }
    
@@ -78,4 +83,5 @@ public class Armure {
         }       
         return texte;
     }
+
 }

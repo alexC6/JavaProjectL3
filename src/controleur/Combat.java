@@ -1,7 +1,9 @@
 package controleur;
 
+import java.io.Serializable;
 import java.util.Random;
 
+import environnement.PieceCombat;
 import protagonistes.EtreVivant;
 import protagonistes.Monstre;
 import protagonistes.Personnage;
@@ -11,10 +13,10 @@ import protagonistes.Personnage;
  * Code source de la classe Combat
  * 
  * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier
- * @version 2021-4-16
+ * @version 2021-5-13
  */
 
-public class Combat {
+public class Combat implements Serializable {
     /**
      * Nombre de tours joués du combat
      * 
@@ -62,6 +64,7 @@ public class Combat {
         this.mNbTours = 0;
         this.mPersonnage = tPersonnage;
         this.mMonstre = tMonstre;
+        this.mMonstre.rejointCombat(this);
     }
 
     /**
@@ -84,7 +87,46 @@ public class Combat {
         return this.mMonstre;
     }
 
-    public boolean choixContinuer() {}
+    /**
+     * Getter sur l'attribut mNbTours
+     * 
+     * @return Integer  Nombre de tours écoulés depuis le début du combat
+     */
+    public int getNbTours(){
+        return this.mNbTours;
+    }
+
+    /**
+     * Affiche le nième tour en cours
+     * @return String  Le texte à afficher
+     */
+    public String afficherTour(){
+        String texte = "";
+        switch(this.mNbTours){
+            case 1:
+                texte = "premier tour\n";
+                break;
+            default: texte = this.mNbTours + "ème tour\n";
+        }
+        return texte;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public String abandonner() { return "";}
+
+    /**
+     * Quitter le combat
+     * @return String  Le texte à afficher
+     */
+    public String eliminer() {
+        String texte = "";
+        this.mMonstre = null;
+        this.mPersonnage = null;
+        return texte;
+    }
 
     /**
      * Permet à un être vivant de rejoindre le combat
@@ -119,8 +161,13 @@ public class Combat {
     public EtreVivant vainqueur() {
         EtreVivant vainqueur = null;
 
-        if (mPersonnage.isVivant() && !(mMonstre.isVivant())) {
+        if (this.mMonstre == null) {
+            System.out.println("Vous êtes déjà passé par là, il n'y a plus rien à voir !");
             vainqueur = this.mPersonnage;
+        } else if (mPersonnage.isVivant() && !(mMonstre.isVivant())) {
+            vainqueur = this.mPersonnage;
+            PieceCombat piece = (PieceCombat) this.mPersonnage.getPiece();
+            System.out.println(piece.recupererTresor());
             this.mMonstre = null;
         } else if (!(mPersonnage.isVivant()) && mMonstre.isVivant()) {
             vainqueur = this.mMonstre;
@@ -141,10 +188,9 @@ public class Combat {
         Random rand = new Random();
         String texte = "";
 
-        if (!this.choixContinuer()) {
-            return "Vous avez décidé de fuir !\n";
-        }
+        this.mNbTours++;
 
+        texte += this.afficherTour();
         victime = rand.nextInt(2);
 
         switch (victime) {
@@ -155,8 +201,6 @@ public class Combat {
                 texte += this.mMonstre.attaquer();
                 break;
         }
-
-        this.mNbTours++;
 
         return texte;
     }

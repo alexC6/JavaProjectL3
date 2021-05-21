@@ -1,5 +1,19 @@
 package equipement;
 
 public enum TypeEquipement {
-    ARME,ARMURE;
+
+    ARME ("ARME"),
+    ARMURE ("ARMURE");
+
+    private String mTypeEquipement;
+
+    TypeEquipement(String tTypeEquipement){
+        this.mTypeEquipement =tTypeEquipement;
+    }
+
+    public String toString(){
+
+        return this.mTypeEquipement;
+    }
 }
+
