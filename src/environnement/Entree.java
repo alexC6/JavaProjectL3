@@ -50,6 +50,7 @@ public class Entree extends Piece {
         return this.mNbBoutique;
     }
 
+    @SuppressWarnings("unchecked")
     public void ajouterBoutique(Boutique<?> tBoutique, TypeObjetVendu tType) {
         switch (tType) {
             case ARME:
