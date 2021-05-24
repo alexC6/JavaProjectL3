@@ -17,6 +17,12 @@ public class BoundaryDeplacer {
     }
 
     public void deplacer() {
+        String question = "Vous êtes actuellement " + this.mControleur.getPosition() + ".\n"
+                + "Souhaitez-vous rester (R) dans cette salle ou en changer (C) ?";
+
+        if (Clavier.demanderChoix(question, "R", "C")) {
+            return;
+        }
 
         String choixPorte;
         int nbPortes = this.mControleur.getNbPortes();
@@ -25,22 +31,22 @@ public class BoundaryDeplacer {
         this.afficherPortes();
 
         System.out.println("Vous avez maintenant le choix entre " + nbPortes + " portes. Le choix est rude."
-                + " Quelle porte décidez-vous de pousser ? Derrière elles, le mystère reste entier ...");
+                + " Quelle porte décidez-vous de pousser ? Derrière elles, le mystère reste entier ...\n");
 
         do {
-            String question = "\nTapez ";
+            String questionPortes = "Tapez ";
 
             for (int i = 0; i < nbPortes; i++) {
-                question += listePortesDispo.get(i).toSelect();
+                questionPortes += listePortesDispo.get(i).toSelect();
 
                 if (i < nbPortes - 2) {
-                    question += ", ";
+                    questionPortes += ", ";
                 } else if (i == nbPortes - 2) {
-                    question += " ou ";
+                    questionPortes += " ou ";
                 }
             }
 
-            choixPorte = Clavier.entrerClavierString(question).toUpperCase();
+            choixPorte = Clavier.entrerClavierString(questionPortes).toUpperCase();
 
         } while (((!choixPorte.equals("N")) && (!choixPorte.equals("E")) && (!choixPorte.equals("S"))
                 && (!choixPorte.equals("O"))) || (!this.mControleur.getPortesChaines().contains(choixPorte)));
@@ -65,5 +71,11 @@ public class BoundaryDeplacer {
         }
 
         System.out.println();
+    }
+
+    public boolean faireBoutique() {
+        String question = "Vous êtes devant le centre commercial, souhaitez-vous y rentrer (O/N) ?";
+
+        return Clavier.demanderChoix(question, "O", "N");
     }
 }
