@@ -117,12 +117,9 @@ public abstract class EtreVivant implements Serializable {
      * Fonction permettant de joindre un combat à un EtreVivant
      *
      * @param tCombat Le combat que doit rejoindre l'EtreVivant
-     *
-     * @return Le texte à afficher
      */
-    public String rejointCombat(Combat tCombat) {
+    public void rejointCombat(Combat tCombat) {
         this.mCombat = tCombat;
-        return "Vous vous lancez dans un combat contre le monstre !\n";
     }
 
     /**
