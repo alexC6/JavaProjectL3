@@ -128,12 +128,8 @@ public class Combat implements Serializable {
      * @author Alexandre Coulais
      * 
      * @param tEtreVivant L'être vivant rejoignant le combat
-     * 
-     * @return String   Le texte à afficher
      */
-    public String rejointCombat(EtreVivant tEtreVivant) {
-        String texte = "";
-
+    public void rejointCombat(EtreVivant tEtreVivant) {
         switch (tEtreVivant.getType()) {
             case PERSONNAGE:
                 this.mPersonnage = (Personnage) tEtreVivant;
@@ -142,8 +138,6 @@ public class Combat implements Serializable {
                 this.mMonstre = (Monstre) tEtreVivant;
                 break;
         }
-
-        return texte;
     }
 
     /**
