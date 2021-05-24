@@ -96,7 +96,7 @@ public class BoundaryLancement {
      * @return Vrai si le joueur veut quitter, faux sinon
      */
     public static boolean demanderQuitter() {
-        String question = "Voulez-vous quitter la partie ?";
+        String question = "Voulez-vous quitter la partie (O/N) ?";
 
         return Clavier.demanderChoix(question, "O", "N");
     }
