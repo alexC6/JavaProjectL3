@@ -1,11 +1,9 @@
 package test;
 
-import controleur.Combat;
 import controleur.ControleurCombat;
 import controleur.ControleurDeplacer;
 import environnement.Entree;
 import environnement.Labyrinthe;
-import environnement.PieceCombat;
 import protagonistes.Personnage;
 import vue.BoundaryBoutique;
 import vue.BoundaryCombat;
@@ -18,47 +16,41 @@ public class Etape5 {
         Labyrinthe labyrinthe = BoundaryLancement.lancerPartie();
         Personnage personnage = labyrinthe.getPersonnage();
         BoundaryBoutique.setEntree((Entree) labyrinthe.getPiece(0, 0));
-        ControleurDeplacer controleurDeplacement = new ControleurDeplacer(labyrinthe);
-        BoundaryDeplacer deplacement = new BoundaryDeplacer(controleurDeplacement);
+        ControleurDeplacer ctrlDeplacement = new ControleurDeplacer(labyrinthe);
+        BoundaryDeplacer bdyDeplacement = new BoundaryDeplacer(ctrlDeplacement);
         boolean quitter = false;
 
         while (!quitter) {
-            deplacement.deplacer();
+            bdyDeplacement.deplacer();
 
             if (!labyrinthe.isEntree(personnage.getPiece())) {
-                String question = "Combattre ou fuir ? (C/F)";
-                PieceCombat piece = (PieceCombat) personnage.getPiece();
+                ControleurCombat ctrlCombat = new ControleurCombat(personnage);
+                BoundaryCombat bdyCombat = new BoundaryCombat(ctrlCombat);
 
-                ControleurCombat crtlCmb = new ControleurCombat(personnage);
-                BoundaryCombat bndCmb = new BoundaryCombat(crtlCmb);
+                if (bdyCombat.checkVanic() == false) {
+                    bdyCombat.scenar();
 
-                if(bndCmb.checkVanic() == false) {
-                    bndCmb.scenar();
-                    if (bndCmb.choixCombatreFuir()) {
-                        bndCmb.demarrerCombat();
+                    if (bdyCombat.choixCombatreFuir()) {
+                        bdyCombat.demarrerCombat();
 
                         if (personnage.possedePotions()) {
                             String questionPotion = "Mais avant, voulez-vous boire une potion (O/N) ?";
-    
+
                             if (Clavier.demanderChoix(questionPotion, "O", "N")) {
                                 System.out.println(personnage.boirePotion());
                             }
                         }
-    
-                        bndCmb.lancerTour();
-    
-                        while (bndCmb.checkVanic() == false && bndCmb.choixCombatreFuir()) {
-                            bndCmb.lancerTour();
+
+                        bdyCombat.lancerTour();
+
+                        while (bdyCombat.checkVanic() == false && bdyCombat.choixCombatreFuir()) {
+                            bdyCombat.lancerTour();
                         }
                     }
+                } else {
+                    bdyCombat.pieceVide();
                 }
-                else {
-                    bndCmb.pieceVide();
-                }
-                
-                
-            } 
-            else {
+            } else if (bdyDeplacement.faireBoutique()) {
                 BoundaryBoutique.entrerCentreCommercial();
             }
 
