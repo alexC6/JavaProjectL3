@@ -324,8 +324,8 @@ public class Personnage extends EtreVivant {
 
         if (tPiece instanceof PieceCombat) {
             PieceCombat piece = (PieceCombat) tPiece;
-            texte += piece.getCombat().rejointCombat(this);
-            texte += this.rejointCombat(piece.getCombat());
+            piece.getCombat().rejointCombat(this);
+            this.rejointCombat(piece.getCombat());
         }
 
         texte += "Vous changez de pièce, vous êtes désormais en position (" + ligne + " ; " + colonne + ").\n";
