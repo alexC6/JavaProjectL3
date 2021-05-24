@@ -15,8 +15,7 @@ public class ControleurBoutique {
     public static String choixBoutiqueArmure(int tChoix){
         String texte = "";
 
-        //choix 1=reparer et choix 2 = achat
-        if (tChoix != 1) {
+        if (tChoix == 1) {
             BoundaryBoutique.choixArticle();
         } else {
             texte += mBoutique.reparerArmure();
