@@ -1,46 +1,69 @@
 package vue;
 
+import java.util.List;
+
 import controleur.ControleurDeplacer;
+import environnement.Piece;
+import environnement.Porte;
 
 public class BoundaryDeplacer {
 
-    ControleurDeplacer mControleur;
+    private ControleurDeplacer mControleur;
 
     public BoundaryDeplacer(ControleurDeplacer tControleur) {
+
         this.mControleur = tControleur;
+
     }
-        
-    public void deplacer(){
+
+    public void deplacer() {
 
         String choixPorte;
-        String listePortesDisponibles;
+        int nbPortes = this.mControleur.getNbPortes();
+        List<Porte> listePortesDispo = this.mControleur.getPortes();
 
-        listePortesDisponibles = this.mControleur.afficherPortes();
+        this.afficherPortes();
 
+        System.out.println("Vous avez maintenant le choix entre " + nbPortes + " portes. Le choix est rude."
+                + " Quelle porte décidez-vous de pousser ? Derrière elles, le mystère reste entier ...");
 
-        do{
+        do {
+            String question = "\nTapez ";
 
-            System.out.println("Quelle porte choisissez vous de pousser ?");
-            System.out.println("N - Porte Nord");
-                    System.out.println("S - Porte Sud");
-                    System.out.println("E - Porte Est");
-            System.out.println("O - Porte Ouest");
+            for (int i = 0; i < nbPortes; i++) {
+                question += listePortesDispo.get(i).toSelect();
 
+                if (i < nbPortes - 2) {
+                    question += ", ";
+                } else if (i == nbPortes - 2) {
+                    question += " ou ";
+                }
+            }
 
-            choixPorte = Clavier.entrerClavierString();
+            choixPorte = Clavier.entrerClavierString(question).toUpperCase();
 
+        } while (((!choixPorte.equals("N")) && (!choixPorte.equals("E")) && (!choixPorte.equals("S"))
+                && (!choixPorte.equals("O"))) || (!this.mControleur.getPortesChaines().contains(choixPorte)));
 
-        }while(((!choixPorte.equals("N"))  &&  (!choixPorte.equals("E")) &&  (!choixPorte.equals("S")) &&  (!choixPorte.equals("O"))) || (!listePortesDisponibles.contains(choixPorte)));
+        System.out.println(this.mControleur.deplacerVers(choixPorte));
 
-        switch (choixPorte){
+    }
 
-        
-    }// Fin switch
+    public void afficherPortes() {
 
+        int nbPortes = this.mControleur.getNbPortes();
+        Piece piece = this.mControleur.getPieceActuelle();
 
-}
-    
+        System.out.print("\nCher combattant, ");
+        System.out.print(nbPortes);
+        System.out.println(" portes s'offrent à vous. Voici : ");
+        // Faire une boucle qui récupère tous les éléments de la liste et qui les affiche
+        // getPortes() retournant une liste des orientations de portes disponibles
 
+        for (int i = 0; i < nbPortes; i++) {
+            System.out.println(piece.getPortes().get(i));
+        }
 
-
+        System.out.println();
+    }
 }
