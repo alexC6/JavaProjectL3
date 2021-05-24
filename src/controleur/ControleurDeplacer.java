@@ -36,6 +36,24 @@ public class ControleurDeplacer {
         return this.mLabyrinthe.getPersonnage().getPiece();
     }
 
+    public String getPosition() {
+        int ligne = this.getPieceActuelle().getLigne();
+        int colonne = this.getPieceActuelle().getColonne();
+        String position;
+        
+        if (ligne == 0 && colonne == 0) {
+            position = "dans l'entrée, avec le centre commercial à côté";
+        } else {
+            position = "en position (" + ligne + " ; " + colonne + ")";
+        }
+
+        return position;
+    }
+
+    public boolean isEntree() {
+        return this.mLabyrinthe.isEntree(this.getPieceActuelle());
+    }
+
     /**
      * 
      * @param tPiece
