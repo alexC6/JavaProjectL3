@@ -28,4 +28,19 @@ public class Porte implements Serializable {
         txt += this.mOrientationP;
         return txt;
     }
+
+    public String toSelect() {
+        switch (this.mOrientationP) {
+            case NORD:
+                return "N pour Nord";
+            case SUD:
+                return "S pour Sud";
+            case OUEST:
+                return "O pour Ouest";
+            case EST:
+                return "E pour Est";
+            default:
+                return "orientation inconnue";
+        }
+    }
 }
