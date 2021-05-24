@@ -13,6 +13,7 @@ import equipement.Arme;
 import equipement.Armure;
 import equipement.Potion;
 import vue.Clavier;
+import vue.ConsoleColors;
 
 /**
  * <p>File : Personnage.java
@@ -135,18 +136,18 @@ public class Personnage extends EtreVivant {
 
         switch (type) {
             case ARME:
-                texte += this.prendreArme((Arme) tTresor.getContenu());
+                texte += ConsoleColors.YELLOW_BOLD_BRIGHT + this.prendreArme((Arme) tTresor.getContenu()) + ConsoleColors.RESET;
                 break;
             case ARMURE:
-                texte += this.equiperArmure((Armure) tTresor.getContenu());
+                texte +=  ConsoleColors.YELLOW_BOLD_BRIGHT + this.equiperArmure((Armure) tTresor.getContenu()) + ConsoleColors.RESET;
                 break;
             case PIECE_OR:
                 int piecesOr = (int) tTresor.getContenu();
-                texte += "Vous avez obtenu " + piecesOr + " pièce(s) d'or !\n";
+                texte += "Vous avez obtenu " + ConsoleColors.YELLOW_BOLD_BRIGHT + piecesOr + " pièce(s) d'or !\n" + ConsoleColors.RESET;
                 this.mBourse += piecesOr;
                 break;
             case POTION:
-                texte += this.stockerPotion((Potion) tTresor.getContenu());
+                texte += ConsoleColors.YELLOW_BOLD_BRIGHT + this.stockerPotion((Potion) tTresor.getContenu()) + ConsoleColors.RESET;
 
         }
 

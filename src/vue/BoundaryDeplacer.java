@@ -61,7 +61,7 @@ public class BoundaryDeplacer {
         // getPortes() retournant une liste des orientations de portes disponibles
 
         for (int i = 0; i < nbPortes; i++) {
-            System.out.println(piece.getPortes().get(i));
+            System.out.println("\t"+ConsoleColors.BLUE_BOLD +piece.getPortes().get(i)+ConsoleColors.RESET);
         }
 
         System.out.println();
