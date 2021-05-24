@@ -17,17 +17,15 @@ public class Jeu {
         Personnage personnage = labyrinthe.getPersonnage();
 
         ControleurDeplacer ctrlDeplacement = new ControleurDeplacer(labyrinthe);
-        ControleurCombat ctrlCombat = new ControleurCombat(personnage);
-
         BoundaryDeplacer bdyDeplacement = new BoundaryDeplacer(ctrlDeplacement);
-        BoundaryCombat bdycombat = new BoundaryCombat(ctrlCombat);
-
         BoundaryBoutique.setEntree((Entree) labyrinthe.getPiece(0, 0));
-
+        
         while (!(quitter)) {
             bdyDeplacement.deplacer();
-
+            
             if (!labyrinthe.isEntree(personnage.getPiece())) {
+                ControleurCombat ctrlCombat = new ControleurCombat(personnage);
+                BoundaryCombat bdycombat = new BoundaryCombat(ctrlCombat);
                 // Appels boundary combat
             } else {
                 BoundaryBoutique.entrerCentreCommercial();

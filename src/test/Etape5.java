@@ -2,34 +2,38 @@ package test;
 
 import controleur.Combat;
 import controleur.ControleurCombat;
-import controleur.Deplacement;
-import environnement.Boutique;
+import controleur.ControleurDeplacer;
 import environnement.Entree;
 import environnement.Labyrinthe;
 import environnement.PieceCombat;
 import protagonistes.Personnage;
+import vue.BoundaryBoutique;
 import vue.BoundaryCombat;
+import vue.BoundaryDeplacer;
 import vue.BoundaryLancement;
 import vue.Clavier;
 
-public class Etape5  {
+public class Etape5 {
     public static void main(String args[]) {
         Labyrinthe labyrinthe = BoundaryLancement.lancerPartie();
         Personnage personnage = labyrinthe.getPersonnage();
+        BoundaryBoutique.setEntree((Entree) labyrinthe.getPiece(0, 0));
+        ControleurDeplacer controleurDeplacement = new ControleurDeplacer(labyrinthe);
+        BoundaryDeplacer deplacement = new BoundaryDeplacer(controleurDeplacement);
+        boolean quitter = false;
 
-        for (int i = 0 ; i < 5 && personnage.isVivant(); i++){
-            System.out.println(Deplacement.deplacerVers(personnage, labyrinthe));
+        while (!quitter) {
+            deplacement.deplacer();
 
             if (!labyrinthe.isEntree(personnage.getPiece())) {
                 String question = "Combattre ou fuir ? (C/F)";
-                PieceCombat piecette = (PieceCombat) personnage.getPiece();
-
-                // Le contrôleur des combats doit être capable de récupérer le combat où se trouve le personnage par lui même
-                // On ne doit pas non plus avoir d'interaction avec le contrôleur, seul le boundary interagit avec lui
-                Combat combat = piecette.getCombat();
-
+                PieceCombat piece = (PieceCombat) personnage.getPiece();
                 ControleurCombat crtlCmb = new ControleurCombat(personnage);
                 BoundaryCombat bndCmb = new BoundaryCombat(crtlCmb);
+
+                // Le contrôleur des combats doit être capable de récupérer le combat où se
+                // trouve le personnage par lui même
+                Combat combat = piece.getCombat();
 
                 bndCmb.scenar();
 
@@ -52,20 +56,10 @@ public class Etape5  {
                     }
                 }
             } else {
-                int choixBoutique;
-
-                do {
-                    choixBoutique = Clavier.entrerClavierInt("Choisir une boutique (entier entre 1 et 3)");
-                } while (choixBoutique < 1 || choixBoutique > 3);
-
-                Entree entree = (Entree) labyrinthe.getPiece(0, 0);
-                Boutique<?> boutique = entree.getBoutique(choixBoutique);
-
-                boutique.visiter(personnage);
-                System.out.println(boutique.acheterArticle(boutique.choisirArticle()));
+                BoundaryBoutique.entrerCentreCommercial();
             }
         }
 
-        BoundaryLancement.sauvegarderPartie(labyrinthe);
+        quitter = BoundaryLancement.sauvegarderPartie(labyrinthe);
     }
 }
