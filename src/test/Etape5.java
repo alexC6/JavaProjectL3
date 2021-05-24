@@ -28,34 +28,37 @@ public class Etape5 {
             if (!labyrinthe.isEntree(personnage.getPiece())) {
                 String question = "Combattre ou fuir ? (C/F)";
                 PieceCombat piece = (PieceCombat) personnage.getPiece();
+
                 ControleurCombat crtlCmb = new ControleurCombat(personnage);
                 BoundaryCombat bndCmb = new BoundaryCombat(crtlCmb);
 
-                // Le contrôleur des combats doit être capable de récupérer le combat où se
-                // trouve le personnage par lui même
-                Combat combat = piece.getCombat();
+                if(bndCmb.checkVanic() == false) {
+                    bndCmb.scenar();
+                    if (bndCmb.choixCombatreFuir()) {
+                        bndCmb.demarrerCombat();
 
-                bndCmb.scenar();
-
-                if (Clavier.demanderChoix(question, "C", "F")) {
-                    System.out.println("Vous avez décidé de combattre !");
-
-                    if (personnage.possedePotions()) {
-                        String questionPotion = "Mais avant, voulez-vous boire une potion (O/N) ?";
-
-                        if (Clavier.demanderChoix(questionPotion, "O", "N")) {
-                            System.out.println(personnage.boirePotion());
+                        if (personnage.possedePotions()) {
+                            String questionPotion = "Mais avant, voulez-vous boire une potion (O/N) ?";
+    
+                            if (Clavier.demanderChoix(questionPotion, "O", "N")) {
+                                System.out.println(personnage.boirePotion());
+                            }
+                        }
+    
+                        bndCmb.lancerTour();
+    
+                        while (bndCmb.checkVanic() == false && bndCmb.choixCombatreFuir()) {
+                            bndCmb.lancerTour();
                         }
                     }
-
-                    System.out.println(combat.itererTour());
-
-                    while (combat.vainqueur() == null && Clavier.demanderChoix(question, "C", "F")) {
-                        bndCmb.donnerSante();
-                        System.out.println(combat.itererTour());
-                    }
                 }
-            } else {
+                else {
+                    bndCmb.pieceVide();
+                }
+                
+                
+            } 
+            else {
                 BoundaryBoutique.entrerCentreCommercial();
             }
 

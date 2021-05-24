@@ -36,10 +36,4 @@ public class ControleurCombat {
         String texte = this.mCombat.itererTour();
         return texte;
     }
-
-    // A finir
-    public String demarrerCombat() {
-        if(this.mCombat.vainqueur() == null) {}
-        return null;
-    }
 }
