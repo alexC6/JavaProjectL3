@@ -69,13 +69,35 @@ public class BoundaryLancement {
         return ControleurLancement.nouvellePartie(nom);
     }
 
-    public static void sauvegarderPartie(Labyrinthe tLabyrinthe) {
+    /**
+     * Demande au joueur s'il veut sauvegarder sa partie
+     * <br>Dans ce cas là, on demande aussi s'il veut quitter la partie
+     * 
+     * @param tLabyrinthe Le labyrinthe du jeu à sauvegarder
+     * @return Vrai si le joueur veut quitter la partie après sa sauvegarde, faux sinon
+     */
+    public static boolean sauvegarderPartie(Labyrinthe tLabyrinthe) {
         String question = "Voulez-vous sauvegarder votre partie (O/N) ?";
 
         if (Clavier.demanderChoix(question, "O", "N")) {
             if (!(SystemeSauvegarde.sauvegarderPartie(tLabyrinthe))) {
                 System.err.println("Oups ! Une erreur s'est produite pendant la sauvegarde ...");
             }
+
+            return demanderQuitter();
         }
+
+        return false;
+    }
+
+    /**
+     * Demander au joueur s'il veut quitter le jeu ou pas après une sauvegarde
+     * 
+     * @return Vrai si le joueur veut quitter, faux sinon
+     */
+    public static boolean demanderQuitter() {
+        String question = "Voulez-vous quitter la partie ?";
+
+        return Clavier.demanderChoix(question, "O", "N");
     }
 }
