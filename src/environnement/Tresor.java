@@ -13,12 +13,10 @@ import java.io.Serializable;
 public class Tresor<T> implements Serializable {
     private T mContenu;
     private TypeTresor mType;
-    private Piece mPiece;
 
     public Tresor(T tContenu, TypeTresor tType, Piece tPiece) {
         this.mContenu = tContenu;
         this.mType = tType;
-        this.mPiece = tPiece;
     }
 
     public T getContenu() {

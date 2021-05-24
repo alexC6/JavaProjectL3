@@ -32,7 +32,7 @@ public class ControleurLancement {
     public static Labyrinthe nouvellePartie(String tNom) {
         // Création des objets nécessaires
         Labyrinthe labyrinthe = new Labyrinthe();
-        Personnage personnage = new Personnage(tNom, labyrinthe);
+        Personnage personnage = new Personnage(tNom);
 
         // Ajout du personnage au labyrinthe
         labyrinthe.ajouterPersonnage(personnage);

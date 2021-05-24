@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import environnement.Labyrinthe;
 import environnement.Piece;
 import environnement.PieceCombat;
 import environnement.Tresor;
@@ -65,28 +64,21 @@ public class Personnage extends EtreVivant {
     private List<Potion> mPotions = new ArrayList<Potion>();
 
     /**
-     * La labyrinthe dans lequel se déplace le personnage
-     */
-    private Labyrinthe mLabyrinthe;
-
-    /**
      * La pièce actuelle où se trouve le personnage
+     * 
+     * @see Personnage#getPiece()
      */
     private Piece mPiece;
 
     /**
-     * <p>
      * Constructeur de la classe Personnage
-     * </p>
-     * 
      * @author Alexandre Coulais
      *
      * @param tNom Le nom du personnage
      */
-    public Personnage(String tNom, Labyrinthe tLabyrinthe) {
+    public Personnage(String tNom) {
         super(10);
         this.mNom = tNom;
-        this.mLabyrinthe = tLabyrinthe;
         this.mBourse = 0;
     }
 

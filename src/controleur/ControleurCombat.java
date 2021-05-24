@@ -1,13 +1,10 @@
 package controleur;
 
 import protagonistes.Personnage;
-import protagonistes.Monstre;
-import environnement.Piece;
 import environnement.PieceCombat;
 
 public class ControleurCombat {
     private Personnage mBilly;
-    private Monstre mMonstre;
     private Combat mCombat;
     
     public ControleurCombat(Personnage tBilly) {
@@ -15,8 +12,6 @@ public class ControleurCombat {
 
         PieceCombat piecette = (PieceCombat) mBilly.getPiece();
         this.mCombat = piecette.getCombat();
-
-        this.mMonstre = this.mCombat.getMonstre();
     }
 
     public boolean checkVainc() {
