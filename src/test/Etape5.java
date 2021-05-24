@@ -58,8 +58,8 @@ public class Etape5 {
             } else {
                 BoundaryBoutique.entrerCentreCommercial();
             }
-        }
 
-        quitter = BoundaryLancement.sauvegarderPartie(labyrinthe);
+            quitter = BoundaryLancement.sauvegarderPartie(labyrinthe);
+        }
     }
 }
