@@ -1,45 +1,39 @@
 package controleur;
+
 import environnement.Boutique;
 import environnement.Entree;
 import vue.BoundaryBoutique;
 
 public class ControleurBoutique {
-  
-    
-    public static void choixDeLaBoutique(int choix){
+    private static Boutique<?> mBoutique;
 
-        
-        Entree entree = (Entree) labyrinthe.getPiece(0, 0);
-        Boutique<?> boutique = entree.getBoutique(choix);
-        boutique.visiter(personnage);
-
-        if(choix!=1){
-
-            BoundaryBoutique.choixArticle();
-
-        }else{
-
-            ControleurBoutique.choixBoutiqueArmure();
-        }
-
-       
-        
+    public static void setBoutique(int tChoix, Entree tEntree){
+        mBoutique = tEntree.getBoutique(tChoix);
+        mBoutique.visiter(tEntree.getLabyrinthe().getPersonnage());
     }
 
+    public static String choixBoutiqueArmure(int tChoix){
+        String texte = "";
 
-    public static void choixBoutiqueArmure(int choix2){
         //choix 1=reparer et choix 2 = achat
-        if(choix2!=1){
-
+        if (tChoix != 1) {
             BoundaryBoutique.choixArticle();
-
-
-        }else{
-            
-            boutique.reparerArmure();
-
+        } else {
+            texte += mBoutique.reparerArmure();
         }
 
+        return texte;
     }
 
+    public static int getNbArticles() {
+        return mBoutique.getNbArticles();
+    }
+
+    public static String afficherArticles() {
+        return mBoutique.afficherArticles();
+    }
+
+    public static String acheterArticle(int tChoix) {
+        return mBoutique.acheterArticle(tChoix);
+    }
 }

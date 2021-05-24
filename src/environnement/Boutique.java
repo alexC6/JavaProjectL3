@@ -20,7 +20,7 @@ public class Boutique<T> implements Serializable {
     /**
      * Constructeur de Boutique
      */
-    private int mNbObjets;
+    private int mNbArticles;
     private TypeObjetVendu mType;
     private Personnage mVisiteur;
     private List<T> mArticles = new ArrayList<T>();
@@ -40,11 +40,25 @@ public class Boutique<T> implements Serializable {
         mPrix.add(5000);
     }
 
-    public void ajouterArticle(List<T> tArticles){
-       this.mArticles = tArticles;
-       this.mNbObjets = tArticles.size();
+    public int getNbArticles() {
+        return this.mNbArticles;
     }
 
+   
+    /**
+     * Fonction servant à ajouter les articles dans la boutique selon la boutique(générécité)
+     * @param tArticles
+     */
+    public void ajouterArticle(List<T> tArticles){
+       this.mArticles = tArticles;
+       this.mNbArticles = tArticles.size();
+    }
+   
+    /**
+     * Fonction permettant d'avoir le personnage dans la boutique
+     *
+     * @param tPersonnage Le personnage qui visite
+     */
     public void visiter(Personnage tPersonnage) {
         this.mVisiteur = tPersonnage;
     }
@@ -57,6 +71,7 @@ public class Boutique<T> implements Serializable {
      */
     public String acheterArticle(int tArticle) {
         String texte = "";
+
         if (this.mVisiteur.acheter(this.mPrix.get(tArticle-1))) {
             switch (this.mType) {
                 case ARME:
@@ -75,8 +90,12 @@ public class Boutique<T> implements Serializable {
         return texte;
     }
 
+    /**
+     * Fonction de réparation, vérifie la réponse (O ou N) (la verification de la bourse se fait dans personnage)
+     * @return Le texte à afficher
+     */
     public String reparerArmure(){
-       String question="Voulez-vous réparer votre armure? (O pour réparer et N si vous êtes trop radin";
+       String question="Voulez-vous réparer votre armure? (O pour réparer et N si vous êtes trop radin)";
        String txt ="";
     
         // Si le perso choisit de réparer 
@@ -90,19 +109,20 @@ public class Boutique<T> implements Serializable {
         }
         return txt;
     }
-
-    public int choisirArticle() {
-        int i = 0, choix = 0;
+    
+    /**
+     * 
+     * @return Le texte à afficher
+     */
+    public String afficherArticles() {
+        int i = 0;
+        String texte = "";
 
         for (T article : this.mArticles) {
             i++;
-            System.out.println(i + ") " + article + "\n");
+            texte += i + ") " + article + "\n";
         }
 
-        do {
-            choix = Clavier.entrerClavierInt("Choisir l'article (entier entre 1 et " + this.mNbObjets + ")");
-        } while (choix < 1 || choix > this.mNbObjets);
-
-        return choix;
+        return texte;
     }
 }
