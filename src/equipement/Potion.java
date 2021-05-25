@@ -2,6 +2,10 @@ package equipement;
 
 import java.io.Serializable;
 
+/**
+ * @author Noëmie Suere
+ * @version 2021-5-25
+ */
 public class Potion implements Serializable {
 
     private int mRecuperation;

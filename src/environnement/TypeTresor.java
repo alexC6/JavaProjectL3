@@ -1,5 +1,9 @@
 package environnement;
-
+/**
+ * 
+ * @author Noëmie Suere
+ * @version 2021-05-25
+ */
 public enum TypeTresor {
     ARME("une arme"),
     ARMURE("une armure"),

@@ -163,6 +163,11 @@ public class Personnage extends EtreVivant {
         return texte;
     }
 
+    /**
+     * 
+     * @param tPrix
+     * @return un boolean
+     */
     public boolean acheter(int tPrix) {
         boolean achat = this.mBourse >= tPrix;
 
@@ -254,10 +259,11 @@ public class Personnage extends EtreVivant {
 
     /**
      * 
-     * @author
-     * 
+     * @author Noëmie Suere
+     * Fonction qui équipe une armure, vérfie si il y a deja une armure,
+     * demande si le joueur veut la remplacer ou non.
      * @param tArmure
-     * @return
+     * @return le texte 
      */
     public String equiperArmure(Armure tArmure) {
         String texte = "";
@@ -295,8 +301,9 @@ public class Personnage extends EtreVivant {
     }
 
     /**
-     * 
-     * @author
+     * Fonction qui retire l'armure
+     * @author Noëmie Suere
+     * @return Le texte
      */
     public String perdreArmure() {
         if (this.mArmure != null) {
@@ -307,14 +314,15 @@ public class Personnage extends EtreVivant {
     }
 
     /**
-     * 
-     * @return
+     * Fonction qui vérifie la bourse et qui appèle la fontion réparation si tout est bon (argent + existance de l'armure)
+     * @author Noëmie Suere
+     * @return Le texte à afficher
      */
     public String reparerArmure() {
         String texte = "";
 
         if (this.mBourse < 250) {
-            texte = " Votre personnage n'as pas assez d'argent pour faire cela.";
+            texte = " Vous n'avez pas assez d'argent pour faire cela.";
             return texte;
         } else {
             if (mArmure != null) {

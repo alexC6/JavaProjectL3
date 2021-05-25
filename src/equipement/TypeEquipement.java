@@ -1,5 +1,9 @@
 package equipement;
 
+/**
+ * @author Noëmie Suere
+ * @version 2021-5-24
+ */
 public enum TypeEquipement {
 
     ARME ("ARME"),
