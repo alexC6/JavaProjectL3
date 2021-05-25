@@ -71,7 +71,7 @@ public class BoundaryCombat {
         }
     }
 
-    public boolean checkVanic() {
+    public boolean checkVainc() {
         return this.mCrtl.checkVainc();
     }
 
