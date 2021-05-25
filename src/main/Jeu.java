@@ -52,9 +52,6 @@ public class Jeu {
                     if (bdyCombat.choixCombatreFuir()) {
                         // Si le joueur choisit de combattre, on lance le combat
                         bdyCombat.demarrerCombat();
-
-                        // If de la potion, doit être gérée par les combats
-
                         bdyCombat.lancerTour();
 
                         while (bdyCombat.checkVainc() == false && bdyCombat.choixCombatreFuir()) {

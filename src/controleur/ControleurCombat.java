@@ -6,7 +6,7 @@ import environnement.PieceCombat;
 public class ControleurCombat {
     private Personnage mBilly;
     private Combat mCombat;
-    
+
     public ControleurCombat(Personnage tBilly) {
         this.mBilly = tBilly;
 
@@ -15,20 +15,27 @@ public class ControleurCombat {
     }
 
     public boolean checkVainc() {
-        if(this.mCombat.vainqueur() == null) {
+        if (this.mCombat.vainqueur() == null) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
 
-    public int donnerPVperso () {
+    public int donnerPVperso() {
         return this.mBilly.getPointDeVie();
     }
 
     public String lancerTour() {
         String texte = this.mCombat.itererTour();
         return texte;
+    }
+
+    public boolean possedePotions() {
+        return this.mBilly.possedePotions();
+    }
+
+    public void boirePotion() {
+        this.mBilly.boirePotion();
     }
 }

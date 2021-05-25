@@ -5,26 +5,25 @@ import controleur.ControleurCombat;
 import java.util.Random;
 
 /**
- * File : BoundaryCombat.java
- * Code source de entrées sorties du Combat
+ * File : BoundaryCombat.java Code source de entrées sorties du Combat
  * 
  * @author Thomas Chabert, Alexandre Coulais, Noëmie Suere, Perrine Mortier
  * @version 2021-5-7
  */
 
 public class BoundaryCombat {
-    
+
     /**
      * Le controleur qui manipule et accède à l'objet Combat
      *
      * @see ControleurCombat
      */
     private ControleurCombat mCrtl;
-    
+
     /**
      * Constructeur de boundary
      * 
-     * @param tCtrl   Le controleur de combat
+     * @param tCtrl Le controleur de combat
      */
     public BoundaryCombat(ControleurCombat tCtrl) {
         this.mCrtl = tCtrl;
@@ -33,32 +32,34 @@ public class BoundaryCombat {
     /**
      * Méthode qui introduit un combat
      */
-    public void scenar() { 
+    public void scenar() {
         Random rand = new Random();
-        int randNumber = rand.nextInt(1);
+        int randNumber = rand.nextInt(2);
 
         switch (randNumber) {
-            case 0 : System.out.println("Vous vous sentez observé dans cette pièce étroite quand, soudain : ");
-            System.out.println(ConsoleColors.YELLOW_BOLD + "Un monstre surgit des ténèbres !" + ConsoleColors.RESET);
+            case 0:
+                System.out.println("Vous vous sentez observé dans cette pièce étroite quand, soudain : ");
+                System.out
+                        .println(ConsoleColors.YELLOW_BOLD + "Un monstre surgit des ténèbres !" + ConsoleColors.RESET);
 
-            break;
-            case 1 : System.out.println("Votre torche éclaire une créature diforme et affamée");
-            System.out.println("Le monstre veut votre peau !");
-            break;      
-        } 
+                break;
+            case 1:
+                System.out.println("Votre torche éclaire une créature diforme et affamée");
+                System.out.println("Le monstre veut votre peau !");
+                break;
+        }
     }
 
     /**
      * Méthode qui propose de combattre ou de fuir
      * 
      */
-    public boolean choixCombatreFuir () {
+    public boolean choixCombatreFuir() {
         boolean r = Clavier.demanderChoix("Combattre ou fuir ? (C/F)", "C", "F");
-        if(r == false) {
+        if (r == false) {
             System.out.println("Vous avez choisi de fuir");
             return r;
-        }
-        else {
+        } else {
             return r;
         }
     }
@@ -66,8 +67,9 @@ public class BoundaryCombat {
     public void donnerSante() {
         int pv = this.mCrtl.donnerPVperso();
 
-        if(pv <= 2) {
-            System.out.println(ConsoleColors.RED + "Vous êtes dans un état critique et votre jambe vous fais souffrir." + ConsoleColors.RESET);
+        if (pv <= 2) {
+            System.out.println(ConsoleColors.RED + "Vous êtes dans un état critique et votre jambe vous fais souffrir."
+                    + ConsoleColors.RESET);
         }
     }
 
@@ -76,7 +78,7 @@ public class BoundaryCombat {
     }
 
     public void pieceVide() {
-        System.out.println("La pièce est vide. Il n'y seul le corps sans vie du monstre et le coffre vide.");
+        System.out.println("La pièce est vide. Il n'y a que le corps sans vie du monstre et le coffre vide.");
     }
 
     // A finir
@@ -89,5 +91,16 @@ public class BoundaryCombat {
         System.out.println(this.mCrtl.lancerTour());
     }
 
+    public void demanderPotion() {
+        if (this.mCrtl.possedePotions()) {
+            String question = "Avant de combattre, voulez-vous boire une potion (O/N) ?";
+
+            if (Clavier.demanderChoix(question, "O", "N")) {
+                this.mCrtl.boirePotion();
+            } else {
+                System.out.println("Vous décidez de combattre sans vous restaurer !");
+            }
+        }
+    }
 
 }
