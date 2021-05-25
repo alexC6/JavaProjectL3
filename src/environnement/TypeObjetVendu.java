@@ -1,5 +1,10 @@
 package environnement;
 
+/**
+ * 
+ * @author Noëmie Suere
+ * @version 2021-05-25
+ */
 public enum TypeObjetVendu {
     POTION("potion"),
     ARME("arme"),
