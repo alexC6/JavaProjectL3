@@ -20,8 +20,8 @@ import vue.ConsoleColors;
  * Code source de la classe Personnage
  * </p>
  *
- * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier
- * @version 2021-5-24
+ * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier, Thomas Chabert
+ * @version 2021-5-25
  */
 
 public class Personnage extends EtreVivant {
@@ -72,6 +72,7 @@ public class Personnage extends EtreVivant {
 
     /**
      * Constructeur de la classe Personnage
+     * 
      * @author Alexandre Coulais
      *
      * @param tNom Le nom du personnage
@@ -83,9 +84,7 @@ public class Personnage extends EtreVivant {
     }
 
     /**
-     * <p>
      * Getter du nom du personnage
-     * </p>
      * 
      * @author Alexandre Coulais
      *
@@ -120,19 +119,11 @@ public class Personnage extends EtreVivant {
     }
 
     /**
-     * <p>
      * Fonction permettant au personnage de récupérer le contenu d'un coffre
-     * </p>
      * 
      * @author Alexandre Coulais
      *
-     * @param tTresor
-     *                <p>
-     *                Le trésor dont on va récupérer le contenu. <br>
-     *                Ici, le paramètre de généricité est laissé vide, cela ne
-     *                présentant pas pas de problème apparent, l'action effectuée
-     *                par la suite dépendant d'un autre paramètre
-     *                </p>
+     * @param tTresor Le trésor dont on va récupérer le contenu
      *
      * @return String Le texte à afficher
      */
@@ -140,6 +131,12 @@ public class Personnage extends EtreVivant {
         String texte = "";
         TypeTresor type = tTresor.getType();
 
+        /**
+         * Actions effectuées en fonction du type récupéré précédemment On construit le
+         * texte à afficher à l'aide du retour des fonctions appelées On utilise les
+         * fonctions déjà construites de récupération d'objets par le personnage pour
+         * récupérer le contenu des trésors
+         */
         switch (type) {
             case ARME:
                 texte += ConsoleColors.YELLOW_BOLD_BRIGHT + this.prendreArme((Arme) tTresor.getContenu())
@@ -192,11 +189,14 @@ public class Personnage extends EtreVivant {
         Potion potionChoisie;
         String texte = "";
 
+        // Affichage de la liste des potions pour savoir laquelle boire
         for (Potion potion : this.mPotions) {
             i++;
             System.out.println(i + ") " + potion + "\n");
         }
 
+        // Utilisation de la fonction de demande à l'utilisateur
+        // puis de récupération de points de vie des être vivants
         potionChoisie = this.mPotions.get(Clavier.entrerClavierInt("Quelle potion souhaitez-vous boire ?") - 1);
         pointsRecup = potionChoisie.getRecuperation();
         texte += this.recupererVie(pointsRecup);
@@ -215,6 +215,7 @@ public class Personnage extends EtreVivant {
     public String stockerPotion(Potion tPotion) {
         String texte = "";
 
+        // Ajout de la potion passée en paramètre et construction du texte à afficher
         if (tPotion != null) {
             this.mPotions.add(tPotion);
             texte += "Vous avez récupéré une potion de force " + tPotion.getRecuperation() + " !\n";
@@ -340,12 +341,15 @@ public class Personnage extends EtreVivant {
         int ligne = tPiece.getLigne();
         int colonne = tPiece.getColonne();
 
+        // Si la pièce est une pièce de combat, on récupère cette salle, son combat, et
+        // on le rejoint
         if (tPiece instanceof PieceCombat) {
             PieceCombat piece = (PieceCombat) tPiece;
             piece.getCombat().rejointCombat(this);
             this.rejointCombat(piece.getCombat());
         }
 
+        // Construction du texte à afficher et affectation de la nouvelle pièce
         texte += "Vous changez de pièce, vous êtes désormais en position (" + ligne + " ; " + colonne + ").\n";
 
         this.mPiece = tPiece;
@@ -427,6 +431,8 @@ public class Personnage extends EtreVivant {
         String texte = "";
 
         if (this.mArmure != null) {
+            // Si le personnage possède une armure, on lui fait subir des degats
+            // puis on fait subir au personnage ce que l'armure n'a pas pu encaisser
             int pointsArmure = this.mArmure.getPointsProtection();
             int degatsRestants = tDegats - pointsArmure;
 
@@ -436,6 +442,7 @@ public class Personnage extends EtreVivant {
                 texte += super.subirAttaque(degatsRestants);
             }
         } else {
+            // Sinon, le personnage subit tous les degats
             texte += super.subirAttaque(tDegats);
         }
 

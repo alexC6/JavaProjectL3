@@ -13,7 +13,7 @@ import environnement.Labyrinthe;
  * </p>
  *
  * @author Alexandre Coulais
- * @version 2021-5-21
+ * @version 2021-5-25
  */
 
 public class BoundaryLancement {
@@ -75,19 +75,22 @@ public class BoundaryLancement {
      * Dans ce cas là, on demande aussi s'il veut quitter la partie
      * 
      * @param tLabyrinthe Le labyrinthe du jeu à sauvegarder
-     * @return Vrai si le joueur veut quitter la partie après sa sauvegarde, faux
-     *         sinon
+     * @return Vrai si le joueur veut quitter la partie après sa sauvegarde, faux sinon
      */
     public static boolean sauvegarderPartie(Labyrinthe tLabyrinthe) {
         String question = "Voulez-vous sauvegarder votre partie (O/N) ?";
 
         if (ControleurLancement.partieExistante()) {
+            // S'il existe une partie, on en informe l'utilisateur
             question += ConsoleColors.RED_BOLD + "\nAttention ! Cette action effacera la sauvegarde précédente ..."
                     + ConsoleColors.RESET;
         }
 
         if (Clavier.demanderChoix(question, "O", "N")) {
+            // Si l'utilisateur veut sauvegarder sa partie, on la sauvegarde,
+            // puis on lui demande s'il souhaite quitter la partie
             if (!(SystemeSauvegarde.sauvegarderPartie(tLabyrinthe))) {
+                // Si une erreur se produit pendant la sauvegarde, on informe le joueur
                 System.err.println("Oups ! Une erreur s'est produite pendant la sauvegarde ...");
             }
 
@@ -98,7 +101,7 @@ public class BoundaryLancement {
     }
 
     /**
-     * Demander au joueur s'il veut quitter le jeu ou pas après une sauvegarde
+     * Demander au joueur s'il veut quitter le jeu après une sauvegarde
      * 
      * @return Vrai si le joueur veut quitter, faux sinon
      */
