@@ -27,12 +27,13 @@ public class Etape5 {
                 ControleurCombat ctrlCombat = new ControleurCombat(personnage);
                 BoundaryCombat bdyCombat = new BoundaryCombat(ctrlCombat);
 
-                if (bdyCombat.checkVanic() == false) {
+                if (bdyCombat.checkVainc() == false) {
                     bdyCombat.scenar();
 
                     if (bdyCombat.choixCombatreFuir()) {
                         bdyCombat.demarrerCombat();
 
+                        // Gestion des potions par le boundary/controleur de combat
                         if (personnage.possedePotions()) {
                             String questionPotion = "Mais avant, voulez-vous boire une potion (O/N) ?";
 
@@ -43,7 +44,7 @@ public class Etape5 {
 
                         bdyCombat.lancerTour();
 
-                        while (bdyCombat.checkVanic() == false && bdyCombat.choixCombatreFuir()) {
+                        while (bdyCombat.checkVainc() == false && bdyCombat.choixCombatreFuir()) {
                             bdyCombat.lancerTour();
                         }
                     }
