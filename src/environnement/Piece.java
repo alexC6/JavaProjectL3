@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p> File : Piece.java
- * <br>Code source de la classe Piece </p>
+ * <p>
+ * File : Piece.java <br>
+ * Code source de la classe Piece
+ * </p>
  * 
  * @author Alexandre Coulais
- * @version 2021-5-14
+ * @version 2021-5-25
  */
 
 public abstract class Piece implements Serializable {
@@ -43,16 +45,18 @@ public abstract class Piece implements Serializable {
     protected Labyrinthe mLabyrinthe;
 
     /**
-     * <p>Constructeur d'une pièce
-     * <br>La génération de la liste des portes est laissée à la classe labyrinthe,
-     * puisqu'elle peut plus facilement contrôler les portes alentours</p>
+     * <p>
+     * Constructeur d'une pièce <br>
+     * La génération de la liste des portes est laissée à la classe labyrinthe,
+     * puisqu'elle peut plus facilement contrôler les portes alentours
+     * </p>
      * 
-     * @see Labyrinthe#genererPiece()
+     * @see Labyrinthe#genererPieces()
      * 
-     * @param tPortes       La liste des portes possibles
-     * @param tLigne        Le numéro de la ligne de la pièce générée
-     * @param tColonne      Le numéro de la colonne de la pièce générée
-     * @param tLabyrinthe   Le labyrinthe qui contient la pièce
+     * @param tPortes     La liste des portes possibles
+     * @param tLigne      Le numéro de la ligne de la pièce générée
+     * @param tColonne    Le numéro de la colonne de la pièce générée
+     * @param tLabyrinthe Le labyrinthe qui contient la pièce
      */
     public Piece(List<Porte> tPortes, int tLigne, int tColonne, Labyrinthe tLabyrinthe) {
         this.mNbPortes = tPortes.size();
@@ -65,7 +69,7 @@ public abstract class Piece implements Serializable {
     /**
      * Getter du nombre de portes
      * 
-     * @return int  Nombre de portes de la pièce
+     * @return int Nombre de portes de la pièce
      */
     public int getNbPortes() {
         return this.mNbPortes;
@@ -74,20 +78,22 @@ public abstract class Piece implements Serializable {
     /**
      * Getter sur la liste des portes disponibles
      * 
-     * @return List<Porte>  Liste des portes disponibles
+     * @return List<Porte> Liste des portes disponibles
      */
     public List<Porte> getPortes() {
         return this.mPortes;
     }
 
     /**
-     * Getter des orientations de portes disponibles sous forme de lettres
+     * Getter des orientations de portes disponibles sous forme de lettres (N, S, E,
+     * O)
      * 
      * @return Liste de caractères des orientations
      */
     public List<String> getOrientation() {
         List<String> listOrientation = new ArrayList<String>();
 
+        // Construction de la liste de lettres en fonction des portes disponibles
         for (Porte porte : mPortes) {
             switch (porte.getOrientationPorte()) {
                 case NORD:
@@ -111,7 +117,7 @@ public abstract class Piece implements Serializable {
     /**
      * Getter du numéro de ligne de la pièce
      * 
-     * @return int  Numéro de ligne
+     * @return int Numéro de ligne
      */
     public int getLigne() {
         return this.mLigne;
@@ -120,7 +126,7 @@ public abstract class Piece implements Serializable {
     /**
      * Getter du numéro de colonne de la pièce
      * 
-     * @return int  Numéro de colonne
+     * @return int Numéro de colonne
      */
     public int getColonne() {
         return this.mColonne;
@@ -129,7 +135,7 @@ public abstract class Piece implements Serializable {
     /**
      * Getter du labyrinthe de la pièce
      * 
-     * @return Labyrinthe   Le labyrinthe de la pièce
+     * @return Labyrinthe Le labyrinthe de la pièce
      */
     public Labyrinthe getLabyrinthe() {
         return this.mLabyrinthe;

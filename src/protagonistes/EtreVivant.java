@@ -5,25 +5,38 @@ import java.io.Serializable;
 import controleur.Combat;
 
 /**
- * <p>File : EtreVivant.java
- * <br>Code source de la classe EtreVivant
- * <br>La classe EtreVivant n'ayant pas à être instanciée, nous avons décidé de la qualifier abstraite
- * <br>Cela nous permet de plus de pouvoir mettre la méthode mourir() en abstraite</p>
+ * <p>
+ * File : EtreVivant.java <br>
+ * Code source de la classe EtreVivant <br>
+ * La classe EtreVivant n'ayant pas à être instanciée, nous avons décidé de la
+ * qualifier abstraite <br>
+ * Cela nous permet de plus de pouvoir mettre la méthode mourir() en abstraite
+ * </p>
  *
  * @author Alexandre Coulais
- * @version 2021-5-18
+ * @version 2021-5-25
  */
 
 public abstract class EtreVivant implements Serializable {
+    /**
+     * Les points de vie restant à l'être vivant
+     */
     private int mPointsDeVie;
+
+    /**
+     * Le type de l'être vivant (Personnage, Monstre)
+     */
     private TypeEtreVivant mType;
 
+    /**
+     * Le combat auquel appartient (temporairement ou non) l'être vivant
+     */
     protected Combat mCombat;
 
     /**
      * Constructeur de la classe EtreVivant
      *
-     * @param tPointsDeVie  Le nombre de points de vie de l'EtreVivant
+     * @param tPointsDeVie Le nombre de points de vie de l'EtreVivant
      */
     protected EtreVivant(int tPointsDeVie) {
         this.mPointsDeVie = tPointsDeVie;
@@ -39,7 +52,7 @@ public abstract class EtreVivant implements Serializable {
     /**
      * Getter du nombre de points de vie d'un EtreVivant
      *
-     * @return int  Le nombre de points de vie restants à l'EtreVivant
+     * @return int Le nombre de points de vie restants à l'EtreVivant
      */
     public int getPointDeVie() {
         return this.mPointsDeVie;
@@ -48,7 +61,7 @@ public abstract class EtreVivant implements Serializable {
     /**
      * Getter du type d'EtreVivant
      *
-     * @return TypeEtreVivant   Le type de l'EtreVivant
+     * @return TypeEtreVivant Le type de l'EtreVivant
      */
     public TypeEtreVivant getType() {
         return this.mType;
@@ -57,7 +70,7 @@ public abstract class EtreVivant implements Serializable {
     /**
      * Permet de savoir si un EtreVivant est en vie ou non
      *
-     * @return boolean  Vrai si l'EtreVivant a encore des points de vie, faux sinon
+     * @return boolean Vrai si l'EtreVivant a encore des points de vie, faux sinon
      */
     public boolean isVivant() {
         return this.mPointsDeVie > 0;
@@ -72,8 +85,10 @@ public abstract class EtreVivant implements Serializable {
     public abstract String mourir();
 
     /**
-     * <p>Permet à un EtreVivant de subir une attaque
-     * <br>Le nombre de dégâts est passé en paramètre</p>
+     * <p>
+     * Permet à un EtreVivant de subir une attaque <br>
+     * Le nombre de dégâts est passé en paramètre
+     * </p>
      *
      * @see Personnage#subirAttaque(int)
      *
@@ -83,17 +98,22 @@ public abstract class EtreVivant implements Serializable {
      */
     public String subirAttaque(int tDegats) {
         String texte = "";
+
         texte += "Le " + this.mType + " subit une violente attaque, ";
-        if (tDegats >= 0) {
+
+        // Retrait des dégâts si supérieurs à 0
+        if (tDegats > 0) {
             this.mPointsDeVie -= tDegats;
         }
 
+        // Construction du texte en fonction de l'état de l'être vivant
         if (this.mPointsDeVie > 0) {
             texte += "mais parvient à se relever.\n";
-        } else {
+        } else { // Appel de mourir si plus de vie
             texte += "il n'y survit pas.\n";
             texte += this.mourir();
         }
+
         return texte;
     }
 
@@ -106,10 +126,14 @@ public abstract class EtreVivant implements Serializable {
      */
     public String recupererVie(int tPointsDeVie) {
         String texte = "";
+
+        // Si le nombre de points de vie est supérieur à 0, on rajoute de la vie à
+        // l'être vivant
         if (tPointsDeVie > 0) {
-            this.mPointsDeVie = tPointsDeVie;
+            this.mPointsDeVie += tPointsDeVie;
             texte += "Le " + this.mType + " récupère " + tPointsDeVie + " points de vie.\n";
         }
+
         return texte;
     }
 
