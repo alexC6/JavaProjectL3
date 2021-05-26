@@ -80,15 +80,14 @@ public class Armure implements Serializable {
 
         String texte = "";
         
-
-        if (tDegat < this.mProtection) {
+        if (tDegat <= this.mProtection) {
             this.mProtection = this.mProtection - tDegat;
             texte = "Votre armure est cassé";
         } else if (tDegat > this.mProtection) {
-
             this.casser();
             texte = "Votre armure a subit " + tDegat;
         }
+
         return texte;
     }
 
