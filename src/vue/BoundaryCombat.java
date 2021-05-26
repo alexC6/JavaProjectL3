@@ -70,6 +70,7 @@ public class BoundaryCombat {
         if (pv <= 2) {
             System.out.println(ConsoleColors.RED + "Vous êtes dans un état critique et votre jambe vous fais souffrir."
                     + ConsoleColors.RESET);
+            System.out.println("Il vous reste " + pv + " points de vie.");
         }
     }
 
@@ -84,6 +85,7 @@ public class BoundaryCombat {
     // A finir
     public void demarrerCombat() {
         System.out.println("Vous avez décidé de combattre !");
+        this.demanderPotion();
     }
 
     public void lancerTour() {
@@ -92,6 +94,8 @@ public class BoundaryCombat {
     }
 
     public void demanderPotion() {
+        System.out.println("Vous possédez " + this.mCrtl.donnerPVperso() + " points de vie.");
+
         if (this.mCrtl.possedePotions()) {
             String question = "Avant de combattre, voulez-vous boire une potion (O/N) ?";
 
