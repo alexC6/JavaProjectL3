@@ -294,9 +294,10 @@ public class Personnage extends EtreVivant {
 
     /**
      * 
-     * @author
+     * @author Noëmie Suere
      * 
-     * @return
+     * Fonction qui fait lacher l'arme a son propriétaire
+     * @return texte 
      */
     public String lacherArme() {
         if (this.mArme != null) {
@@ -370,6 +371,11 @@ public class Personnage extends EtreVivant {
         return texte;
     }
 
+    /**
+     * @author Perrine Mortier
+     * Fontion qui permet d'infliger des dégats avec un Random 
+     * @return Un texte parmis ceux proposé
+     */
     public String attaquer() {
         String txt = "";
         int healthDamage = 1;

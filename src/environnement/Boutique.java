@@ -121,7 +121,7 @@ public class Boutique<T> implements Serializable {
     }
 
     /**
-     *
+     *Fonction qui permet d'afficher les articles
      * @return Le texte à afficher
      */
     public String afficherArticles() {
