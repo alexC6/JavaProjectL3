@@ -9,10 +9,11 @@ Les conventions adoptées sont les suivantes :
 
 ## Structure hiérarchique
 
-Le dossier de travail contient deux dossiers :
+Le dossier de travail contient trois dossiers :
 
-- `src` : contient l'ensemble des sources du projet
+- `doc` : dossier où est générée la documentation
 - `lib` : où sont stockées les .class
+- `src` : contient l'ensemble des sources du projet
 
 Les sources sont répartis de la façon suivante :
 
