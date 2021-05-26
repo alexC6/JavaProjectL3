@@ -109,6 +109,7 @@ public abstract class EtreVivant implements Serializable {
         // Construction du texte en fonction de l'état de l'être vivant
         if (this.mPointsDeVie > 0) {
             texte += "mais parvient à se relever.\n";
+            texte += "Il possède encore " + this.mPointsDeVie + " points de vie.\n";
         } else { // Appel de mourir si plus de vie
             texte += "il n'y survit pas.\n";
             texte += this.mourir();
