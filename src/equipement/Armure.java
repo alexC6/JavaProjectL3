@@ -62,8 +62,8 @@ public class Armure implements Serializable {
     }
 
     /**
-    *
-    *
+    *Fonction set qui vérifie si il y a deja un propriétaire ou non, si non : donner a l'armure un proprietaire
+    * @param tProprietaire  
     */
     public void setProprietaire(Personnage tProprietaire) {
         if (this.mProprietaire == null) {
@@ -71,26 +71,38 @@ public class Armure implements Serializable {
         }
     }
 
+    /**
+     * 
+     * @param tDegat
+     * @return
+     */
     public String encaisserDegat(int tDegat) {
 
-        String texte1 = "Votre armure est cassé";
-        String texte2 = "Votre armure a subit" + tDegat;
+        String texte = "";
+        
 
         if (tDegat < this.mProtection) {
             this.mProtection = this.mProtection - tDegat;
-            return texte2;
+            texte = "Votre armure est cassé";
         } else if (tDegat > this.mProtection) {
 
             this.casser();
-            return texte1;
+            texte = "Votre armure a subit " + tDegat;
         }
-        return null;
+        return texte;
     }
 
+    /**
+     * Fonction qui met la protection de l'armure a 0 si elle est cassé (donc si elle ne fait plus d'effet)
+     */
     public void casser() {
         this.mProtection = 0;
     }
 
+    /**
+     * Fonction de reparation de l'armure qui la remet a sont etat initial (selon les points de l'armure de base)
+     * @return
+     */
     public String reparer() {
         String texte = "";
 
@@ -103,6 +115,11 @@ public class Armure implements Serializable {
         return texte;
     }
 
+    /**
+     * Fonction d'affichage de la protection de l'armure
+     *
+     * @return renvoie du texte avec les point de protection de l'armure
+     */
     public String toString() {
         return "armure de protection " + this.mProtection;
     }
