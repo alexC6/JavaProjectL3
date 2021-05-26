@@ -438,7 +438,7 @@ public class Personnage extends EtreVivant {
     public String subirAttaque(int tDegats) {
         String texte = "";
 
-        if (this.mArmure != null) {
+        if (this.mArmure != null && !(this.mArmure.estCassee())) {
             // Si le personnage possède une armure, on lui fait subir des degats
             // puis on fait subir au personnage ce que l'armure n'a pas pu encaisser
             int pointsArmure = this.mArmure.getPointsProtection();
