@@ -240,10 +240,13 @@ public class Personnage extends EtreVivant {
         String texte = "";
 
         if (this.mArme == null) {
+            this.mArme = tArme;
             texte += "Vous avez obtenu et équipé une arme de " + tArme.getDommageArme() + " points de dommage !\n";
             tArme.setProprietaire(this);
         } else {
-            String question = "Vous possédez déjà une arme, souhaitez-vous la garder (G) ou la remplacer (R) ?";
+            String question = "Vous possédez déjà une arme de force " + this.mArme.getDommageArme()
+            + ", souhaitez-vous la garder (G) ou la remplacer (R) par une arme de force "
+            + tArme.getDommageArme() + " ?";
             if (Clavier.demanderChoix(question, "G", "R")) {
                 texte += "Vous conservez votre arme actuelle.\n";
             } else {
@@ -271,9 +274,11 @@ public class Personnage extends EtreVivant {
         if (this.mArmure == null) {
             this.mArmure = tArmure;
             tArmure.setProprietaire(this);
-            texte = "Vous équipez votre armure.\n";
+            texte = "Vous équipez votre armure (protection " + tArmure.getPointsProtection() + ").\n";
         } else {
-            String question = "Vous possédez déjà une armure, souhaitez-vous la garder (G) ou la remplacer (R) ?";
+            String question = "Vous possédez déjà une armure de protection " + this.mArmure.getPointsProtection()
+                    + ", souhaitez-vous la garder (G) ou la remplacer (R) par une armure de protection "
+                    + tArmure.getPointsProtection() + " ?";
             if (Clavier.demanderChoix(question, "G", "R")) {
                 texte += "Vous conservez votre armure actuelle.\n";
             } else {
