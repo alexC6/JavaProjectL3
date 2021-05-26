@@ -4,23 +4,24 @@ import controleur.ControleurBoutique;
 import environnement.Entree;
 
 public class BoundaryBoutique {
-    private static Entree mEntree;
-
     public static void setEntree(Entree tEntree) {
-        mEntree = tEntree;
+        ControleurBoutique.setEntree(tEntree);
     }
 
     public static void entrerCentreCommercial() { 
         int choix;
+        int piecesOrPerso = ControleurBoutique.getPiecesOr();
+
+        System.out.println("Bienvenue au centre commercial. Vous possédez actuellement " + piecesOrPerso + " pièces d'Or.");
+        System.out.println("Vous avez le choix parmi trois boutiques :");
+        System.out.println("1) Boutique d'armes\n2) Boutique d'armures\n3) Boutique de potions\n");
 
         do {
-            System.out.println("Bienvenue au centre commercial. Vous avez le choix parmi trois boutiques :");
-            System.out.println("1) Boutique d'armes\n2) Boutique d'armures\n3) Boutique de potions\n");
             choix = Clavier.entrerClavierInt("Choisissez une boutique (entier entre 1 et 3, 4 pour quitter)");
         } while (choix < 1 || choix > 4);
 
         if (choix != 4) {
-            ControleurBoutique.setBoutique(choix, mEntree);
+            ControleurBoutique.setBoutique(choix);
         }
 
         switch (choix) {

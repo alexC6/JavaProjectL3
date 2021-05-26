@@ -13,12 +13,12 @@ import vue.BoundaryLancement;
 /**
  * <p>
  * File : Jeu.java
- * Code source de la classe principale du jeu
+ * <br>Code source de la classe principale du jeu
  * </p>
  * 
  * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier, thomas Chabert
  * 
- * @version 2021-5-21
+ * @version 2021-5-25
  */
 
 public class Jeu {

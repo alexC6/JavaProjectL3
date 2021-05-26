@@ -48,6 +48,10 @@ public class Boutique<T> implements Serializable {
         return this.mPrix.get(tIndex);
     }
 
+    public Personnage getVisiteur() {
+        return this.mVisiteur;
+    }
+
     /**
      * Fonction servant à ajouter les articles dans la boutique selon la
      * boutique(générécité)

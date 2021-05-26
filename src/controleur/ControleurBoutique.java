@@ -6,10 +6,15 @@ import vue.BoundaryBoutique;
 
 public class ControleurBoutique {
     private static Boutique<?> mBoutique;
+    private static Entree mEntree;
 
-    public static void setBoutique(int tChoix, Entree tEntree){
-        mBoutique = tEntree.getBoutique(tChoix);
-        mBoutique.visiter(tEntree.getLabyrinthe().getPersonnage());
+    public static void setEntree(Entree tEntree) {
+        mEntree = tEntree;
+    }
+
+    public static void setBoutique(int tChoix){
+        mBoutique = mEntree.getBoutique(tChoix);
+        mBoutique.visiter(mEntree.getLabyrinthe().getPersonnage());
     }
 
     public static String choixBoutiqueArmure(int tChoix){
@@ -34,5 +39,9 @@ public class ControleurBoutique {
 
     public static String acheterArticle(int tChoix) {
         return mBoutique.acheterArticle(tChoix);
+    }
+
+    public static int getPiecesOr() {
+        return mEntree.getLabyrinthe().getPersonnage().getPiecesOr();
     }
 }
