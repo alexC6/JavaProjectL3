@@ -167,10 +167,12 @@ public class Combat implements Serializable {
             // s'y trouve
             PieceCombat piece = (PieceCombat) this.mPersonnage.getPiece();
             System.out.println(piece.recupererTresor());
+            System.out.println(this.mPersonnage.recupererVie(10 - this.mPersonnage.getPointDeVie()));
             this.mMonstre = null;
         } else if (!(mPersonnage.isVivant()) && mMonstre.isVivant()) {
             // Si le personnage est mort mais que le monstre est vivant
             vainqueur = this.mMonstre;
+            System.out.println(this.mMonstre.recupererVie(5 - this.mMonstre.getPointDeVie()));
             this.mPersonnage = null;
         }
 
