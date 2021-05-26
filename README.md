@@ -7,44 +7,30 @@ Les conventions adoptées sont les suivantes :
 - noms des variables membre : `mVariable`
 - noms des paramètres de fonction : `tParameter`
 
-## Commentaires Javadoc
-
-### Début de fichier
-
-Les débuts de fichiers commencent par un commentaire indiquant le nom du fichier, un rapide résumé de son contenu, 
-suivi du ou des auteurs, puis fini par la version du fichier qui correspond à la date de sa dernière édition.
-
-### Commentaires de méthodes
-
-Les méthodes autres que les constructeurs, getters et setters non complexes, doivent être précédées d'un commentaire explicatif.
-Ce commentaire doit contenir un résumé rapide du fonctionnement de la méthode, ainsi que le nom des paramètres, leur type, 
-et ce à quoi ils correspondent. Dans le cas où le fichier est édité par plusieurs auteurs, les commentaires de chaque méthode
-doivent contenir l'auteur de la méthode en question.
-
-À l'intérieur même des méthodes, les commentaires doivent expliquer concrètement ce qui est fait dans les cas suivants :
-
-- instruction complexe ou sujet à interprétation
-- appel successif à plusieurs méthodes. Exemple : `variable.getter().action()`
-- boucles et structure conditionnelles
-
 ## Structure hiérarchique
 
 Le dossier de travail contient deux dossiers :
 
-- `src`: contient l'ensemble des sources du projet
-- `lib`: où sont stockées les .class
+- `src` : contient l'ensemble des sources du projet
+- `lib` : où sont stockées les .class
 
-## Fichiers ignorés
+Les sources sont répartis de la façon suivante :
 
-Les fichiers ignorées par Git sont les suivants :
+- `src.controleur` : toutes les classes contenant des contrôleurs, ainsi que la classe des méthodes liées à l'orientation dans le labyrinthe, ainsi que le système de sauvegarde
+- `src.environnement` : toutes les classes liées à l'environnement et à ses objets, dans lequel évolue le personnage
+- `src.equipement` : toutes les classes liées aux équipements que peut utiliser le personnage
+- `src.main` : exécutable principal du programme
+- `src.protagonistes` : toutes les classes liées aux êtres vivants évoluant dans le labyrinthe
+- `src.vue` : ensemble des boundaries et des classes entrant en interaction avec l'utilisateur.
 
-- `*.class`
-- `*.jar`
-- `*.war`
-- `*.nar`
-- `*.ear`
-- `*.zip`
-- `*.tar.gz`
-- `*.rar`
-- `*.log`
-- `*.ctxt`
+## Commandes pour l'utilisation
+
+Dans un environnement Unix, la compilation du projet, depuis le dossier `lib`, se fait à l'aide de la commande `javac ../src/*/*.java -d ./`.
+
+Pour lancer le projet depuis le dossier `lib` : `java main.Jeu`.
+
+Afin de générer la documentation Java associée au projet, utilisez, depuis le dossier racine du projet : `javadoc src/*/*.java -d doc`
+
+## License
+
+Copyright © 2021, Chabert Thomas, Coulais Alexandre, Mortier Perrine, Suere Noëmie.
