@@ -13,7 +13,7 @@ import vue.Clavier;
 /**
  *
  * @author Noëmie Suere
- * @version 2021-5-21
+ * @version 2021-5-26
  */
 
 public class Boutique<T> implements Serializable {
@@ -31,29 +31,34 @@ public class Boutique<T> implements Serializable {
      * @param tArticle
      * @param tType
      */
-    public Boutique(TypeObjetVendu tType){
-        this.mType= tType;
+    public Boutique(TypeObjetVendu tType) {
+        this.mType = tType;
+        mPrix.add(100);
         mPrix.add(250);
         mPrix.add(500);
         mPrix.add(1000);
         mPrix.add(2000);
-        mPrix.add(5000);
     }
 
     public int getNbArticles() {
         return this.mNbArticles;
     }
 
-   
+    public int getPrix(int tIndex) {
+        return this.mPrix.get(tIndex);
+    }
+
     /**
-     * Fonction servant à ajouter les articles dans la boutique selon la boutique(générécité)
+     * Fonction servant à ajouter les articles dans la boutique selon la
+     * boutique(générécité)
+     * 
      * @param tArticles
      */
-    public void ajouterArticle(List<T> tArticles){
-       this.mArticles = tArticles;
-       this.mNbArticles = tArticles.size();
+    public void ajouterArticle(List<T> tArticles) {
+        this.mArticles = tArticles;
+        this.mNbArticles = tArticles.size();
     }
-   
+
     /**
      * Fonction permettant d'avoir le personnage dans la boutique
      *
@@ -72,16 +77,16 @@ public class Boutique<T> implements Serializable {
     public String acheterArticle(int tArticle) {
         String texte = "";
 
-        if (this.mVisiteur.acheter(this.mPrix.get(tArticle-1))) {
+        if (this.mVisiteur.acheter(this.mPrix.get(tArticle - 1))) {
             switch (this.mType) {
                 case ARME:
-                    texte += this.mVisiteur.prendreArme((Arme) this.mArticles.get(tArticle-1));
+                    texte += this.mVisiteur.prendreArme((Arme) this.mArticles.get(tArticle - 1));
                     break;
                 case ARMURE:
-                    texte += this.mVisiteur.equiperArmure((Armure) this.mArticles.get(tArticle-1));
+                    texte += this.mVisiteur.equiperArmure((Armure) this.mArticles.get(tArticle - 1));
                     break;
                 case POTION:
-                    texte += this.mVisiteur.stockerPotion((Potion) this.mArticles.get(tArticle-1));
+                    texte += this.mVisiteur.stockerPotion((Potion) this.mArticles.get(tArticle - 1));
             }
         } else {
             texte += "Vous n'avez pas assez d'argent pour cet article !";
@@ -91,27 +96,28 @@ public class Boutique<T> implements Serializable {
     }
 
     /**
-     * Fonction de réparation, vérifie la réponse (O ou N) (la verification de la bourse se fait dans personnage)
+     * Fonction de réparation, vérifie la réponse (O ou N) (la verification de la
+     * bourse se fait dans personnage)
+     * 
      * @return Le texte à afficher
      */
-    public String reparerArmure(){
-       String question="Voulez-vous réparer votre armure? (O pour réparer et N si vous êtes trop radin)";
-       String txt ="";
-    
-        // Si le perso choisit de réparer 
-        if(Clavier.demanderChoix(question, "O", "N")){
+    public String reparerArmure() {
+        String question = "Voulez-vous réparer votre armure? (O pour réparer et N si vous êtes trop radin)";
+        String txt = "";
+
+        // Si le perso choisit de réparer
+        if (Clavier.demanderChoix(question, "O", "N")) {
             this.mVisiteur.reparerArmure();
-            txt+="Votre armure est réparée. Retournez au combat valeureux guerrier!";
-        }
-        else{
-          
-            txt+="Merci d'être passé, revenez nous voir quand vous aurez de l'argent à dépenser ! On ne fait pas crédit Combattant !";
+            txt += "Votre armure est réparée. Retournez au combat valeureux guerrier!";
+        } else {
+
+            txt += "Merci d'être passé, revenez nous voir quand vous aurez de l'argent à dépenser ! On ne fait pas crédit Combattant !";
         }
         return txt;
     }
-    
+
     /**
-     * 
+     *
      * @return Le texte à afficher
      */
     public String afficherArticles() {
@@ -120,7 +126,7 @@ public class Boutique<T> implements Serializable {
 
         for (T article : this.mArticles) {
             i++;
-            texte += i + ") " + article + "\n";
+            texte += i + ") " + article + "\t" + getPrix(i - 1) + " pièces d'Or\n";
         }
 
         return texte;
