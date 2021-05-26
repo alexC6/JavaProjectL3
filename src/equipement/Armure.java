@@ -72,9 +72,9 @@ public class Armure implements Serializable {
     }
 
     /**
-     * 
+     * Fonction qui verifie l'integrité de l'armure pour savoir si elle encaisse les dégat ou non
      * @param tDegat
-     * @return
+     * @return du texte selon si le personnage prend un coup et perd sont armure ou subit et encaisse l'attaque
      */
     public String encaisserDegat(int tDegat) {
 
@@ -101,7 +101,7 @@ public class Armure implements Serializable {
 
     /**
      * Fonction de reparation de l'armure qui la remet a sont etat initial (selon les points de l'armure de base)
-     * @return
+     * @return du texte 
      */
     public String reparer() {
         String texte = "";
@@ -122,5 +122,15 @@ public class Armure implements Serializable {
      */
     public String toString() {
         return "armure de protection " + this.mProtection;
+    }
+
+    /**
+     * 
+     * @return un boolean vrai si la protection est a 0
+     */
+    public boolean estCassee(){
+        
+      return this.mProtection == 0;
+    
     }
 }

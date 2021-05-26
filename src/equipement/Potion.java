@@ -12,6 +12,10 @@ public class Potion implements Serializable {
     private int FORCE_POTION_MIN = 1;
     private int FORCE_POTION_MAX = 10;
 
+    /**
+     * 
+     * @param args (permet de donnée l'argument que l'ont veux, sinon aléatoire)
+     */
     public Potion(final int... args) {
         if (args.length > 0) {
             mRecuperation = args[0];
@@ -25,6 +29,10 @@ public class Potion implements Serializable {
         return mRecuperation;
     }
 
+    /**
+     * Fonction qui permet d'afficher les point de vie recuperer apres avoir bu une potion
+     * @return du texte
+     */
     public String afficherRecuperation() {
         return "Vous avez récupéré " + this.mRecuperation + " point(s) de vie.\n";
     }

@@ -51,8 +51,8 @@ public class Arme implements Serializable {
     }
 
     /**
-    *
-    *
+    *Fonction qui attribut le propriétaire de l'arme
+    * @param tProprietaire
     */
     public void setProprietaire(Personnage tProprietaire) {
         this.mProprietaire = tProprietaire;
