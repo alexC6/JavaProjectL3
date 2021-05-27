@@ -15,7 +15,7 @@ Le dossier de travail contient trois dossiers :
 - `lib` : où sont stockées les .class
 - `src` : contient l'ensemble des sources du projet
 
-Les sources sont répartis de la façon suivante :
+Les sources sont réparties de la façon suivante :
 
 - `src.controleur` : toutes les classes contenant des contrôleurs, ainsi que la classe des méthodes liées à l'orientation dans le labyrinthe, ainsi que le système de sauvegarde
 - `src.environnement` : toutes les classes liées à l'environnement et à ses objets, dans lequel évolue le personnage
