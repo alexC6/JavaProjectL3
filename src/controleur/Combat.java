@@ -173,7 +173,7 @@ public class Combat implements Serializable {
             // Si le personnage est mort mais que le monstre est vivant
             vainqueur = this.mMonstre;
             System.out.println(this.mMonstre.recupererVie(5 - this.mMonstre.getPointDeVie()));
-            this.mPersonnage = null;
+            // this.mPersonnage = null;
         }
 
         return vainqueur;
