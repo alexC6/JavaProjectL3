@@ -58,6 +58,30 @@ public class BoundaryLancement {
     }
 
     /**
+     * Pour récupérer les données de la dernière sauvegarde
+     * @return labyrinthe Labyrinthe soit une carte vide soit remplie de la dernière sauvegarde
+     */
+    public static Labyrinthe retourDerniereSauv () {
+        Labyrinthe labyrinthe = null;
+        if (ControleurLancement.lancerPartieExistante() == null) {
+            /**
+             * Si une erreur se produit, on le signale et on demande à l'utilisateur ce
+             * qu'il souhaite faire
+             */
+            System.err.println("Une erreur semble s'être produite ...");
+            String questionPartie = "Souhaitez-vous lancer une nouvelle partie (N) ou réessayer"
+                    + " de lancer la partie existante (R) ?";
+            boolean choix = Clavier.demanderChoix(questionPartie, "R", "N");
+        }
+        else {
+            labyrinthe = ControleurLancement.lancerPartieExistante();
+        }
+        return labyrinthe;
+    }
+
+
+
+    /**
      * Création d'une nouvelle partie
      * 
      * @return La référence du labyrinthe pour le jeu

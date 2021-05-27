@@ -28,7 +28,6 @@ public class Jeu {
         // Récupération des objets nécessaires à l'utilisation des boundaries
         Labyrinthe labyrinthe = BoundaryLancement.lancerPartie();
         Personnage personnage = labyrinthe.getPersonnage();
-
         // Création des boundaries de déplacement
         ControleurDeplacer ctrlDeplacement = new ControleurDeplacer(labyrinthe);
         BoundaryDeplacer bdyDeplacement = new BoundaryDeplacer(ctrlDeplacement);
@@ -58,6 +57,11 @@ public class Jeu {
                             // Tant qu'il n'y a pas de mort et que le joueur veut continuer
                             // On continue d'effectuer des tours de combat
                             bdyCombat.lancerTour();
+
+                            // Si le joueur mort décide de recharger la dernière sauvegarde
+                            if(bdyCombat.getNeedSv() == true) {
+                                labyrinthe = BoundaryLancement.retourDerniereSauv();
+                            }
                         }
                     }
                 } else {

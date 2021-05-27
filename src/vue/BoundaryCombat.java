@@ -22,6 +22,12 @@ public class BoundaryCombat {
     private ControleurCombat mCtrl;
 
     /**
+     * Si le joueur meurt, indique une volonté de reprendre la dernière sauvegarde (true)
+     * @see mort()
+     */
+    private boolean needSauvegarde;
+
+    /**
      * Constructeur de boundary
      * 
      * @param tCtrl Le controleur de combat
@@ -31,7 +37,7 @@ public class BoundaryCombat {
     }
 
     /**
-     * Méthode qui introduit un combat
+     * Méthode qui introduit un combat et utilise l'objet Random
      */
     public void scenar() {
         Random rand = new Random();
@@ -53,7 +59,7 @@ public class BoundaryCombat {
 
     /**
      * Méthode qui propose de combattre ou de fuir
-     * 
+     * @return boolean faux si il décide de fuir true si c'est uv vrai guerrier
      */
     public boolean choixCombatreFuir() {
         boolean r = Clavier.demanderChoix("Combattre ou fuir ? (C/F)", "C", "F");
@@ -65,6 +71,9 @@ public class BoundaryCombat {
         }
     }
 
+    /**
+     * Méthode qui affiche un avertissement en rouge quand les Points de Vie sont bas
+     */
     public void donnerSante() {
         int pv = this.mCtrl.donnerPVperso();
 
@@ -75,6 +84,10 @@ public class BoundaryCombat {
         }
     }
 
+    /**
+     * Méthode qui affiche un avertissement en rouge quand les Points de Vie sont bas
+     * @return boolean true si les pv sont à 0
+     */
     public boolean checkVainc() {
         boolean isDead = this.mCtrl.checkVainc();
 
@@ -85,21 +98,32 @@ public class BoundaryCombat {
         return isDead;
     }
 
+    /**
+     * Méthode qui affiche une phrase quand la pièce est vide
+     */
     public void pieceVide() {
         System.out.println("La pièce est vide. Il n'y a que le corps sans vie du monstre et le coffre vide.");
     }
 
-    // A finir
+    /**
+     * Méthode qui indique qu'un combat est engagé et propose de boire une potion
+     */
     public void demarrerCombat() {
         System.out.println("Vous avez décidé de combattre !");
         this.demanderPotion();
     }
 
+    /**
+     * Méthode qui afiche le déroulement d'un tour : compteur tour, instance qui attaque, points de vie
+     */
     public void lancerTour() {
         this.donnerSante();
         System.out.println(this.mCtrl.lancerTour());
     }
 
+    /**
+     * Méthode qui propose de boire une potion au joueur si il en poscède une
+     */
     public void demanderPotion() {
         System.out.println("Vous possédez " + this.mCtrl.donnerPVperso() + " points de vie.");
 
@@ -114,10 +138,27 @@ public class BoundaryCombat {
         }
     }
 
+    /**
+     * Méthode qui récupère les dernières volontés du joueur : dernière sauvegarde ou nouvelle partie
+     */
     private void mort() {
         System.out.println(ConsoleColors.RED_BOLD + "GAME OVER" + ConsoleColors.RESET);
-        System.out.println("En relançant le jeu, vous pourrez reprendre à votre dernière sauvegarde"
-                + " ou commencer une nouvelle partie");
+        System.out.println(ConsoleColors.GREEN + "En relançant le jeu, vous pourrez reprendre à votre dernière sauvegarde"
+                + " ou commencer une nouvelle partie (R/N)" + ConsoleColors.RESET);
+        boolean r = Clavier.demanderChoix("", "R", "N");
+        if (r == false) {
+            this.needSauvegarde = false;
+        } else {
+            this.needSauvegarde = true;
+        }
         System.exit(0);
     }
+
+    /**
+     * @return boolean need attribut getteur sur needSauvegarde
+     */
+    public boolean getNeedSv () {
+        return this.needSauvegarde;
+    }
+
 }
