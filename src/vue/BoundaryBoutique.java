@@ -8,6 +8,9 @@ public class BoundaryBoutique {
         ControleurBoutique.setEntree(tEntree);
     }
 
+    /**
+     * Entrée dans la boutique
+     */
     public static void entrerCentreCommercial() { 
         int choix;
         int piecesOrPerso = ControleurBoutique.getPiecesOr();
@@ -34,6 +37,9 @@ public class BoundaryBoutique {
         }
     }
 
+    /**
+     * La boutique d'armure possède 2 choix et cela nous permet de damnder au joueur si il veux reparer ou acheter des armures
+     */
     public static void choixPrecis(){
         int choix;
 
@@ -44,6 +50,9 @@ public class BoundaryBoutique {
         ControleurBoutique.choixBoutiqueArmure(choix);
     }
 
+    /**
+     * Choix des articles disponible dans la boutique
+     */
     public static void choixArticle(){
         int choix = 0, nbArticles = ControleurBoutique.getNbArticles();
 

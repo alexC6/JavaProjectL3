@@ -231,10 +231,10 @@ public class Personnage extends EtreVivant {
 
     /**
      * 
-     * @author
-     * 
+     * @author Perrine Mortier
+     * Fonction qui permet d'équiper une arme et vérifie si il y en a deja une d'équipé en demandant si le joueur veux la changer
      * @param tArme
-     * @return
+     * @return du texte
      */
     public String prendreArme(Arme tArme) {
         String texte = "";
