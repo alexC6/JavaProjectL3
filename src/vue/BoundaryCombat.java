@@ -1,14 +1,15 @@
 package vue;
 
-import controleur.ControleurCombat;
-
 import java.util.Random;
+
+import controleur.ControleurCombat;
+import protagonistes.Monstre;
 
 /**
  * File : BoundaryCombat.java Code source de entrées sorties du Combat
  * 
  * @author Thomas Chabert, Alexandre Coulais, Noëmie Suere, Perrine Mortier
- * @version 2021-5-7
+ * @version 2021-5-27
  */
 
 public class BoundaryCombat {
@@ -18,7 +19,7 @@ public class BoundaryCombat {
      *
      * @see ControleurCombat
      */
-    private ControleurCombat mCrtl;
+    private ControleurCombat mCtrl;
 
     /**
      * Constructeur de boundary
@@ -26,7 +27,7 @@ public class BoundaryCombat {
      * @param tCtrl Le controleur de combat
      */
     public BoundaryCombat(ControleurCombat tCtrl) {
-        this.mCrtl = tCtrl;
+        this.mCtrl = tCtrl;
     }
 
     /**
@@ -65,7 +66,7 @@ public class BoundaryCombat {
     }
 
     public void donnerSante() {
-        int pv = this.mCrtl.donnerPVperso();
+        int pv = this.mCtrl.donnerPVperso();
 
         if (pv <= 2) {
             System.out.println(ConsoleColors.RED + "Vous êtes dans un état critique et votre jambe vous fais souffrir."
@@ -75,7 +76,13 @@ public class BoundaryCombat {
     }
 
     public boolean checkVainc() {
-        return this.mCrtl.checkVainc();
+        boolean isDead = this.mCtrl.checkVainc();
+
+        if (isDead && this.mCtrl.getVainqueur() instanceof Monstre) {
+            this.mort();
+        }
+
+        return isDead;
     }
 
     public void pieceVide() {
@@ -90,21 +97,27 @@ public class BoundaryCombat {
 
     public void lancerTour() {
         this.donnerSante();
-        System.out.println(this.mCrtl.lancerTour());
+        System.out.println(this.mCtrl.lancerTour());
     }
 
     public void demanderPotion() {
-        System.out.println("Vous possédez " + this.mCrtl.donnerPVperso() + " points de vie.");
+        System.out.println("Vous possédez " + this.mCtrl.donnerPVperso() + " points de vie.");
 
-        if (this.mCrtl.possedePotions()) {
+        if (this.mCtrl.possedePotions()) {
             String question = "Avant de combattre, voulez-vous boire une potion (O/N) ?";
 
             if (Clavier.demanderChoix(question, "O", "N")) {
-                this.mCrtl.boirePotion();
+                this.mCtrl.boirePotion();
             } else {
                 System.out.println("Vous décidez de combattre sans vous restaurer !");
             }
         }
     }
 
+    private void mort() {
+        System.out.println(ConsoleColors.RED_BOLD + "GAME OVER" + ConsoleColors.RESET);
+        System.out.println("En relançant le jeu, vous pourrez reprendre à votre dernière sauvegarde"
+                + " ou commencer une nouvelle partie");
+        System.exit(0);
+    }
 }
