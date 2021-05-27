@@ -1,7 +1,8 @@
 package controleur;
 
-import protagonistes.Personnage;
 import environnement.PieceCombat;
+import protagonistes.EtreVivant;
+import protagonistes.Personnage;
 
 public class ControleurCombat {
     private Personnage mBilly;
@@ -20,6 +21,10 @@ public class ControleurCombat {
         } else {
             return true;
         }
+    }
+
+    public EtreVivant getVainqueur() {
+        return this.mCombat.vainqueur();
     }
 
     public int donnerPVperso() {
