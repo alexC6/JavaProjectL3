@@ -18,7 +18,7 @@ import vue.BoundaryLancement;
  * 
  * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier, thomas Chabert
  * 
- * @version 2021-5-25
+ * @version 2021-5-28
  */
 
 public class Jeu {
@@ -57,16 +57,24 @@ public class Jeu {
                             // Tant qu'il n'y a pas de mort et que le joueur veut continuer
                             // On continue d'effectuer des tours de combat
                             bdyCombat.lancerTour();
+                        }
 
+                        if (bdyCombat.isMonsterDead()) {
+                            // Si le monstre est mort, on indique au joueur que la pièce est vide
+                            bdyCombat.pieceVide();
+                        } else if (bdyCombat.isPersonnageDead()) {
                             // Si le joueur mort décide de recharger la dernière sauvegarde
-                            if(bdyCombat.getNeedSv() == true) {
+                            if (bdyCombat.getNeedSv() == true) {
                                 labyrinthe = BoundaryLancement.retourDerniereSauv();
+                            } else {
+                                labyrinthe = BoundaryLancement.nouvellePartie();
                             }
+        
+                            personnage = labyrinthe.getPersonnage();
+                            ctrlDeplacement.setLabyrinthe(labyrinthe);
+                            bdyDeplacement = new BoundaryDeplacer(ctrlDeplacement);
                         }
                     }
-                } else {
-                    // Si le monstre est mort, on indique au joueur que la pièce est vide
-                    bdyCombat.pieceVide();
                 }
             } else if (bdyDeplacement.faireBoutique()) {
                 // Si le joueur souhaite faire les boutiques
