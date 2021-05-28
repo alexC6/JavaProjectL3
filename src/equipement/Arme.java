@@ -1,17 +1,18 @@
 package equipement;
 import java.io.Serializable;
+import java.util.Random;
 
 import protagonistes.Monstre;
 import protagonistes.Personnage;
 
 /**
- * 
+ *
  * @author Noëmie Suere
- * @version 2021-5-12
+ * @version 2021-5-28
  */
 
 public class Arme implements Serializable {
-	private int mPointDommage; 
+	private int mPointDommage;
     private int DOMMAGES_MIN =1;
     private int DOMMAGES_MAX =5;
     private Personnage mProprietaire;
@@ -23,12 +24,7 @@ public class Arme implements Serializable {
      */
     public Arme(final int... args) {
         this.mProprietaire = null;
-        // calcul du nombre de point de dommage (entre 1 et 5)
-        if (args.length > 0) {
-            this.mPointDommage = args[0];
-        } else {
-            this.mPointDommage = (int) (Math.random() * (DOMMAGES_MAX - DOMMAGES_MIN));
-        }
+        setDommage(args);
     }
 
     /**
@@ -39,13 +35,19 @@ public class Arme implements Serializable {
     public Arme(Personnage tProprietaire, final int... args) {
         this.mProprietaire = tProprietaire;
         this.mProprietaire.prendreArme(this);
+        setDommage(args);
+    }
+
+    private void setDommage(int args[]) {
+        // calcul du nombre de point de dommage (entre 1 et 5)
         if (args.length > 0) {
             this.mPointDommage = args[0];
         } else {
-            this.mPointDommage = (int) (Math.random() * (DOMMAGES_MAX - DOMMAGES_MIN));
+            Random rand = new Random();
+            this.mPointDommage = rand.nextInt(DOMMAGES_MAX) + DOMMAGES_MIN;
         }
     }
-    
+
     public Personnage getProprietaire() {
         return mProprietaire;
     }
@@ -61,7 +63,7 @@ public class Arme implements Serializable {
 
     /**
      *
-     *Fonction permettant de lâcher l'arme porter par le joueur 
+     *Fonction permettant de lâcher l'arme porter par le joueur
      */
     public void lacher () {
         this.mProprietaire = null;
@@ -77,7 +79,7 @@ public class Arme implements Serializable {
         return tMonstre.subirAttaque(this.mPointDommage);
     }
 
-    
+
     public int getDommageArme() {
         return this.mPointDommage;
     }
