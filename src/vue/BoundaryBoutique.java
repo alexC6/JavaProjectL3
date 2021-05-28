@@ -47,7 +47,7 @@ public class BoundaryBoutique {
             choix = Clavier.entrerClavierInt("Choisir une option pour la boutique d'armure (1 (achat) ou 2 (réparation))");
         } while (choix < 1 || choix > 2);
 
-        ControleurBoutique.choixBoutiqueArmure(choix);
+        System.out.println(ControleurBoutique.choixBoutiqueArmure(choix));
     }
 
     /**
