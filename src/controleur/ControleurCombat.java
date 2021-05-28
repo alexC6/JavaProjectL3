@@ -27,6 +27,24 @@ public class ControleurCombat {
         return this.mCombat.vainqueur();
     }
 
+    /**
+     * Retourne un booléen concernant l'état du monstre
+     * 
+     * @return Vrai si le vainqueur est le Personnage, faux sinon
+     */
+    public boolean isMonsterDead() {
+        return this.mCombat.getMonstre() == null;
+    }
+
+    /**
+     * Retourne un booléen concernant l'état du personnage
+     * 
+     * @return Vrai si le vainqueur est le Monstre, faux sinon
+     */
+    public boolean isPersonnageDead() {
+        return !(this.mCombat.getPersonnage().isVivant());
+    }
+
     public int donnerPVperso() {
         return this.mBilly.getPointDeVie();
     }
