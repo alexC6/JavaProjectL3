@@ -200,14 +200,14 @@ public class Labyrinthe implements Serializable {
         this.mPersonnage = tPersonnage;
 
         // Phrase d'information auprès du user
-        texte += "Vous avez choisi un nom délicieux pour votre avatar. félicitations ! Oubliez votre passé ! Vous êtes maintenant "
+        texte += "Vous avez choisi un nom délicieux pour votre avatar. Félicitations ! Oubliez votre passé ! Vous êtes maintenant "
                 + tPersonnage.getNom() + " le seul et l'unique.\n";
-        texte += "Prenez soin de vous, valeureux guerrier ...Vous disposez de  " + tPersonnage.getPointDeVie()
+        texte += "Prenez soin de vous, valeureux guerrier ... Vous disposez de " + tPersonnage.getPointDeVie()
                 + " points de vie. Tâchez de les preserver ...\n";
-        texte += "Vous pénétrez maintenant LE LABYRINTHE . Je vous souhaite d'en sortir...un jour...peut-être...";
+        texte += "Vous pénétrez maintenant LE LABYRINTHE. Je vous souhaite d'en sortir ... un jour ... peut-être ...";
 
         // Déplacement initiale du personnage dans l'entrée (nouvelle partie)
-        texte += tPersonnage.ouvrirPorte(mEntree);
+        tPersonnage.ouvrirPorte(mEntree);
 
         return texte;
 
