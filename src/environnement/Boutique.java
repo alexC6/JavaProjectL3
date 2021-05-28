@@ -11,9 +11,12 @@ import protagonistes.Personnage;
 import vue.Clavier;
 
 /**
- *
+ * <p>
+ * File : Boutique.java Code source des objets génériques boutiques
+ * </p>
+ * 
  * @author Noëmie Suere
- * @version 2021-5-26
+ * @version 2021-5-28
  */
 
 public class Boutique<T> implements Serializable {
@@ -42,6 +45,7 @@ public class Boutique<T> implements Serializable {
 
     /**
      * Getter du nombre d'article
+     * 
      * @return le nombre d'article
      */
     public int getNbArticles() {
@@ -50,6 +54,7 @@ public class Boutique<T> implements Serializable {
 
     /**
      * Getter des prix
+     * 
      * @param tIndex
      * @return le prix
      */
@@ -59,6 +64,7 @@ public class Boutique<T> implements Serializable {
 
     /**
      * Getter du visiteur
+     * 
      * @return le visiteur
      */
     public Personnage getVisiteur() {
@@ -93,7 +99,8 @@ public class Boutique<T> implements Serializable {
      */
     public String acheterArticle(int tArticle) {
         String texte = "";
-        //si le visiteur achete un equipement et qu'il a l'argent nécessaire
+
+        // si le visiteur achete un equipement et qu'il a l'argent nécessaire
         if (this.mVisiteur.acheter(this.mPrix.get(tArticle - 1))) {
             switch (this.mType) {
                 case ARME:
@@ -105,7 +112,7 @@ public class Boutique<T> implements Serializable {
                 case POTION:
                     texte += this.mVisiteur.stockerPotion((Potion) this.mArticles.get(tArticle - 1));
             }
-            //sinon pas assez d'argent
+            // sinon pas assez d'argent
         } else {
             texte += "Vous n'avez pas assez d'argent pour cet article !";
         }
@@ -135,7 +142,8 @@ public class Boutique<T> implements Serializable {
     }
 
     /**
-     *Fonction qui permet d'afficher les articles
+     * Fonction qui permet d'afficher les articles
+     * 
      * @return Le texte à afficher
      */
     public String afficherArticles() {

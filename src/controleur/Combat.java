@@ -9,7 +9,10 @@ import protagonistes.Monstre;
 import protagonistes.Personnage;
 
 /**
- * File : Combat.java Code source de la classe Combat
+ * <p>
+ * File : Combat.java<br>
+ * Code source de la classe Combat
+ * </p>
  * 
  * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier, Thomas Chabert
  * @version 2021-5-28
@@ -99,6 +102,7 @@ public class Combat implements Serializable {
      */
     public String afficherTour() {
         String texte = "";
+
         switch (this.mNbTours) {
             case 1:
                 texte = "premier tour\n";
@@ -106,6 +110,7 @@ public class Combat implements Serializable {
             default:
                 texte = this.mNbTours + "ème tour\n";
         }
+
         return texte;
     }
 
@@ -116,8 +121,10 @@ public class Combat implements Serializable {
      */
     public String eliminer() {
         String texte = "";
+
         this.mMonstre = null;
         this.mPersonnage = null;
+
         return texte;
     }
 

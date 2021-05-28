@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.Random;
 
 /**
+ * <p>
+ * File : Potion.java
+ * Code source des potions
+ * </p>
+ * 
  * @author Noëmie Suere
  * @version 2021-5-28
  */
@@ -29,6 +34,7 @@ public class Potion implements Serializable {
 
     /**
      * Getter de récuperation
+     * 
      * @return la récupération
      */
     public int getRecuperation() {
@@ -36,7 +42,9 @@ public class Potion implements Serializable {
     }
 
     /**
-     * Fonction qui permet d'afficher les point de vie recuperer apres avoir bu une potion
+     * Fonction qui permet d'afficher les point de vie recuperer apres avoir bu une
+     * potion
+     * 
      * @return du texte
      */
     public String afficherRecuperation() {
@@ -44,7 +52,7 @@ public class Potion implements Serializable {
     }
 
     /**
-     * Fonction d'affichage de la recuperation de vie de la potion 
+     * Fonction d'affichage de la recuperation de vie de la potion
      *
      * @return renvoie du texte avec les point de vie rendu par la potion
      */

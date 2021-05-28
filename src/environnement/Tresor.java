@@ -73,10 +73,6 @@ public class Tresor<T> implements Serializable {
      * @return La chaine indiquant le contenu
      */
     public String afficherContenu() {
-        String texte = "";
-
-        texte += "Ce coffre contient " + this.mType + ".\n";
-
-        return texte;
+        return "Ce coffre contient " + this.mType + ".\n";
     }
 }

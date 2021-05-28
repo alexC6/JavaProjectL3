@@ -7,12 +7,12 @@ import protagonistes.Personnage;
 
 /**
  * <p>
- * File Armure.java
+ * File Armure.java<br>
  * Code source de la classe Armure
  * </p>
  * 
  * @author Noëmie Suere
- * @version 2021-5-24
+ * @version 2021-5-28
  */
 public class Armure implements Serializable {
     private int mProtection;

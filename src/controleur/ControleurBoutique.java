@@ -4,12 +4,23 @@ import environnement.Boutique;
 import environnement.Entree;
 import vue.BoundaryBoutique;
 
+/**
+ * <p>
+ * File : ControleurBoutique.java<br>
+ * Code source de la classe générique des boutiques
+ * </p>
+ * 
+ * @author Noëmie Suere
+ * @version 2021-5-28
+ */
+
 public class ControleurBoutique {
     private static Boutique<?> mBoutique;
     private static Entree mEntree;
 
     /**
      * Setter d'entrée
+     * 
      * @param tEntree
      */
     public static void setEntree(Entree tEntree) {
@@ -18,19 +29,22 @@ public class ControleurBoutique {
 
     /**
      * Setter de boutique
+     * 
      * @param tChoix
      */
-    public static void setBoutique(int tChoix){
+    public static void setBoutique(int tChoix) {
         mBoutique = mEntree.getBoutique(tChoix);
         mBoutique.visiter(mEntree.getLabyrinthe().getPersonnage());
     }
 
     /**
-     * Fonction qui nous envoie sur le choix ( soit reparation soit achat) dans la boutique armure
+     * Fonction qui nous envoie sur le choix ( soit reparation soit achat) dans la
+     * boutique armure
+     * 
      * @param tChoix
      * @return du texte
      */
-    public static String choixBoutiqueArmure(int tChoix){
+    public static String choixBoutiqueArmure(int tChoix) {
         String texte = "";
 
         if (tChoix == 1) {
@@ -44,6 +58,7 @@ public class ControleurBoutique {
 
     /**
      * Permet de recuperer le nombre d'article de la boutique
+     * 
      * @return le nombre d'article de la boutique
      */
     public static int getNbArticles() {
@@ -51,7 +66,8 @@ public class ControleurBoutique {
     }
 
     /**
-     *  Permet d'afficher les articles de la boutique
+     * Permet d'afficher les articles de la boutique
+     * 
      * @return l'affichage des articles
      */
     public static String afficherArticles() {
@@ -60,6 +76,7 @@ public class ControleurBoutique {
 
     /**
      * Achat de l'article choisis
+     * 
      * @param tChoix
      * @return L'achat de l'article choisis
      */
@@ -69,6 +86,7 @@ public class ControleurBoutique {
 
     /**
      * Getter piece d'or
+     * 
      * @return la quantité de pieces d'or du personnage
      */
     public static int getPiecesOr() {

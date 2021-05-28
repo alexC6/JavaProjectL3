@@ -1,4 +1,5 @@
 package equipement;
+
 import java.io.Serializable;
 import java.util.Random;
 
@@ -6,21 +7,23 @@ import protagonistes.Monstre;
 import protagonistes.Personnage;
 
 /**
- *
+ * <p>
+ * File : Arme.java Code source des objets armes
+ * </p>
+ * 
  * @author Noëmie Suere
  * @version 2021-5-28
  */
 
 public class Arme implements Serializable {
-	private int mPointDommage;
-    private int DOMMAGES_MIN =1;
-    private int DOMMAGES_MAX =5;
+    private int mPointDommage;
+    private int DOMMAGES_MIN = 1;
+    private int DOMMAGES_MAX = 5;
     private Personnage mProprietaire;
 
-
     /**
-     *
-     * @param args (permet de donnée l'argument que l'ont veux sinon aléatoire)
+     * Constructeur de l'arme
+     * @param args (permet de donner l'argument que l'on veut sinon aléatoire)
      */
     public Arme(final int... args) {
         this.mProprietaire = null;
@@ -29,7 +32,7 @@ public class Arme implements Serializable {
 
     /**
      *
-     * @param tProprietaire
+     * @param tProprietaire Le propriétaire de l'arme
      * @param args
      */
     public Arme(Personnage tProprietaire, final int... args) {
@@ -40,7 +43,8 @@ public class Arme implements Serializable {
 
     /**
      * Setter des dommages
-     * @param args
+     * 
+     * @param args l'éventuel force de l'arme
      *
      */
     private void setDommage(int args[]) {
@@ -55,6 +59,7 @@ public class Arme implements Serializable {
 
     /**
      * Getter du proprietaire
+     * 
      * @return le proprietaire
      */
     public Personnage getProprietaire() {
@@ -62,9 +67,10 @@ public class Arme implements Serializable {
     }
 
     /**
-    *Fonction qui attribut le propriétaire de l'arme
-    * @param tProprietaire
-    */
+     * Fonction qui attribut le propriétaire de l'arme
+     * 
+     * @param tProprietaire
+     */
     public void setProprietaire(Personnage tProprietaire) {
         this.mProprietaire = tProprietaire;
 
@@ -72,9 +78,9 @@ public class Arme implements Serializable {
 
     /**
      *
-     *Fonction permettant de lâcher l'arme porter par le joueur
+     * Fonction permettant de lâcher l'arme porter par le joueur
      */
-    public void lacher () {
+    public void lacher() {
         this.mProprietaire = null;
     }
 
@@ -90,6 +96,7 @@ public class Arme implements Serializable {
 
     /**
      * Getter des dommage arme
+     * 
      * @return
      */
     public int getDommageArme() {

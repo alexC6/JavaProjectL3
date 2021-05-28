@@ -4,31 +4,47 @@ import java.io.Serializable;
 
 import controleur.Orientation;
 
-public class Porte implements Serializable {
+/**
+ * <p>
+ * File : Porte.java Code source de la classe de gestion des portes des salles
+ * </p>
+ * 
+ * @author Perrine Mortier
+ * @version 2021-5-28
+ */
 
+public class Porte implements Serializable {
+    /**
+     * L'orientation de la porte
+     */
     private Orientation mOrientationP;
 
-    public Porte ( Orientation tOrientationP){
+    /**
+     * Constructeur de la porte
+     * 
+     * @param tOrientationP Son orientation
+     */
+    public Porte(Orientation tOrientationP) {
         this.mOrientationP = tOrientationP;
     }
 
-    //@Role : retourne une chaine de caractères sous la forme " La porte + ORIENTATION"
-    public String afficherPorte(){
-        String texte ="";
-        texte += "La porte " + this.mOrientationP + " " ;
-        return texte;
-    }
-
-    public Orientation getOrientationPorte(){
+    /**
+     * Getter sur l'orientation de la porte
+     * 
+     * @return Son orientation
+     */
+    public Orientation getOrientationPorte() {
         return this.mOrientationP;
     }
 
-    public String toString(){
-        String txt = "";
-        txt += this.mOrientationP;
-        return txt;
-    }
-
+    /**
+     * Retourne une string qui contient la lettre à saisir pour indiquer
+     * l'orientation de porte que l'on souhaite emprunter
+     * 
+     * @see BoundaryDeplacer#deplacer()
+     * 
+     * @return String à afficher
+     */
     public String toSelect() {
         switch (this.mOrientationP) {
             case NORD:
