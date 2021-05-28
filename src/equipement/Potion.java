@@ -1,10 +1,11 @@
 package equipement;
 
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  * @author Noëmie Suere
- * @version 2021-5-25
+ * @version 2021-5-28
  */
 public class Potion implements Serializable {
 
@@ -17,11 +18,12 @@ public class Potion implements Serializable {
      * @param args (permet de donnée l'argument que l'ont veux, sinon aléatoire)
      */
     public Potion(final int... args) {
+        // calcul du nombre de point de dommage (entre 1 et 5)
         if (args.length > 0) {
-            mRecuperation = args[0];
+            this.mRecuperation = args[0];
         } else {
-            // calcul du nombre de point de vie récuperés (entre 1 et 10)
-            this.mRecuperation = (int) (Math.random() * (FORCE_POTION_MAX - FORCE_POTION_MIN));
+            Random rand = new Random();
+            this.mRecuperation = rand.nextInt(FORCE_POTION_MAX) + FORCE_POTION_MIN;
         }
     }
 
