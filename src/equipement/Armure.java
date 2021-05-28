@@ -6,6 +6,10 @@ import java.util.Random;
 import protagonistes.Personnage;
 
 /**
+ * <p>
+ * File Armure.java
+ * Code source de la classe Armure
+ * </p>
  * 
  * @author Noëmie Suere
  * @version 2021-5-24
@@ -39,6 +43,7 @@ public class Armure implements Serializable {
 
     /**
      * Setter de la protection
+     *
      * @param args
      */
     private void setProtection(int args[]) {
@@ -55,6 +60,7 @@ public class Armure implements Serializable {
 
     /**
      * Getter de l'etat initial
+     *
      * @return l'etat initial
      */
     public int getEtatInitial() {
@@ -63,6 +69,7 @@ public class Armure implements Serializable {
 
     /**
      * Getter des points de protections
+     *
      * @return les points de protections
      */
     public int getPointsProtection() {
@@ -71,6 +78,7 @@ public class Armure implements Serializable {
 
     /**
      * Getter du proprietaire
+     *
      * @return le proprietaire
      */
     public Personnage getProprietaire() {
@@ -78,9 +86,11 @@ public class Armure implements Serializable {
     }
 
     /**
-    *Fonction set qui vérifie si il y a deja un propriétaire ou non, si non : donner a l'armure un proprietaire
-    * @param tProprietaire  
-    */
+     * Fonction set qui vérifie si il y a deja un propriétaire ou non, si non :
+     * donner a l'armure un proprietaire
+     *
+     * @param tProprietaire
+     */
     public void setProprietaire(Personnage tProprietaire) {
         if (this.mProprietaire == null) {
             this.mProprietaire = tProprietaire;
@@ -88,18 +98,23 @@ public class Armure implements Serializable {
     }
 
     /**
-     * Fonction qui verifie l'integrité de l'armure pour savoir si elle encaisse les dégat ou non
-     * @param tDegat
-     * @return du texte selon si le personnage prend un coup et perd sont armure ou subit et encaisse l'attaque
+     * Fonction qui vérifie l'intégrité de l'armure pour savoir si elle encaisse les
+     * dégâts ou non
+     *
+     * @param tDegat le nombre de dégâts à encaisser
+     * @return du texte selon si le personnage prend un coup et perd sont armure ou
+     *         subit et encaisse l'attaque
      */
     public String encaisserDegat(int tDegat) {
-
         String texte = "";
-        //si l'armure possède plus de protection que de dégat infligé alors on lui indique combien de dégats l'armure a subit et on lui retire les point de protection
+        // si l'armure possède plus de protection que de dégat infligé alors on lui
+        // indique combien de dégats l'armure a subit et on lui retire les point de
+        // protection
         if (tDegat < this.mProtection) {
             this.mProtection = this.mProtection - tDegat;
             texte = "Votre armure a subit " + tDegat + " dégâts.";
-            //sinon si les degats sotn superieurs ou egals a la protection alors elle se casse
+            // sinon si les degats sotn superieurs ou egals a la protection alors elle se
+            // casse
         } else if (tDegat >= this.mProtection) {
             this.casser();
             texte = "Votre armure s'est cassée !";
@@ -109,26 +124,33 @@ public class Armure implements Serializable {
     }
 
     /**
-     * Fonction qui met la protection de l'armure a 0 si elle est cassé (donc si elle ne fait plus d'effet)
+     * Fonction qui met la protection de l'armure a 0 si elle est cassé (donc si
+     * elle ne fait plus d'effet)
      */
     public void casser() {
         this.mProtection = 0;
     }
 
     /**
-     * Fonction de reparation de l'armure qui la remet a sont etat initial (selon les points de l'armure de base)
-     * @return du texte 
+     * Fonction de reparation de l'armure qui la remet a sont etat initial (selon
+     * les points de l'armure de base)
+     *
+     * @return du texte
      */
     public String reparer() {
         String texte = "";
-        //si la protection de l'armure est inferieure a l'état initial alors on la répare et on la met a sont etat initial
+
+        // si la protection de l'armure est inferieure a l'état initial alors on la
+        // répare et on la met a sont etat initial
         if (this.mProtection < this.mEtatInitial) {
             this.mProtection = this.mEtatInitial;
             texte = " Votre armure est réparée.";
-            //sinon l'armure n'as pas besoin de réparation car elle a la meme protection que l'état initial
+            // sinon l'armure n'as pas besoin de réparation car elle a la meme protection
+            // que l'état initial
         } else if (this.mProtection == this.mEtatInitial) {
             texte = "Vous n'avez besoin de réparer votre armure";
         }
+
         return texte;
     }
 
@@ -142,12 +164,10 @@ public class Armure implements Serializable {
     }
 
     /**
-     * 
+     *
      * @return un boolean vrai si la protection est a 0
      */
-    public boolean estCassee(){
-        
-      return this.mProtection == 0;
-    
+    public boolean estCassee() {
+        return this.mProtection == 0;
     }
 }
