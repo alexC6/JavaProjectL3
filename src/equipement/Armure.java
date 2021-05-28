@@ -1,6 +1,7 @@
 package equipement;
 
 import java.io.Serializable;
+import java.util.Random;
 
 import protagonistes.Personnage;
 
@@ -21,14 +22,8 @@ public class Armure implements Serializable {
      * @param args (permet de donnée l'argument que l'ont veux sinon aléatoire)
      */
     public Armure(final int... args) {
-        if (args.length > 0) {
-            mProtection = args[0];
-            this.mEtatInitial = mProtection;
-        } else {
-            // calcul du nombre de point d'armure (entre 1 et 5)
-            this.mProtection = (int) (Math.random() * (PROTECT_MAX - PROTECT_MIN));
-            this.mEtatInitial = this.mProtection;
-        }
+        this.mProprietaire = null;
+        setDommage(args);
     }
 
     /**
@@ -39,14 +34,19 @@ public class Armure implements Serializable {
     public Armure(Personnage tProprietaire, final int... args) {
         this.mProprietaire = tProprietaire;
         this.mProprietaire.equiperArmure(this);
-        if (args.length > 0) {
-            mProtection = args[0];
-            this.mEtatInitial = mProtection;
-        } else {
-            this.mProtection = (int) (Math.random() * (PROTECT_MAX - PROTECT_MIN));
-            this.mEtatInitial = this.mProtection;
+        setDommage(args);
+    }
 
+    private void setDommage(int args[]) {
+        // calcul du nombre de point de dommage (entre 1 et 5)
+        if (args.length > 0) {
+            this.mProtection = args[0];
+        } else {
+            Random rand = new Random();
+            this.mProtection = rand.nextInt(PROTECT_MAX) + PROTECT_MIN;
         }
+
+        this.mEtatInitial = this.mProtection;
     }
 
     public int getEtatInitial() {
