@@ -79,7 +79,7 @@ public class Arme implements Serializable {
     }
 
     /**
-     * Fonction d'attaque du personnage avec une épée
+     * Fonction d'attaque du personnage avec une arme
      *
      * @param tMonstre le monstre de la salle
      * @return Les dégats subit par le monstre apres l'attaque
@@ -88,7 +88,10 @@ public class Arme implements Serializable {
         return tMonstre.subirAttaque(this.mPointDommage);
     }
 
-
+    /**
+     * Getter des dommage arme
+     * @return
+     */
     public int getDommageArme() {
         return this.mPointDommage;
     }

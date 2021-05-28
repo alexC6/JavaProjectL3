@@ -327,7 +327,7 @@ public class Personnage extends EtreVivant {
      */
     public String reparerArmure() {
         String texte = "";
-
+        //si le personnage n'as pas assez d'argent il ne peut pas reparer sinon si il a une armure il peux reparer sinon il ne peut pas
         if (this.mBourse < 250) {
             texte = " Vous n'avez pas assez d'argent pour faire cela.";
             return texte;

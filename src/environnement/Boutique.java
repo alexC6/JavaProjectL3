@@ -40,14 +40,27 @@ public class Boutique<T> implements Serializable {
         mPrix.add(2000);
     }
 
+    /**
+     * Getter du nombre d'article
+     * @return le nombre d'article
+     */
     public int getNbArticles() {
         return this.mNbArticles;
     }
 
+    /**
+     * Getter des prix
+     * @param tIndex
+     * @return le prix
+     */
     public int getPrix(int tIndex) {
         return this.mPrix.get(tIndex);
     }
 
+    /**
+     * Getter du visiteur
+     * @return le visiteur
+     */
     public Personnage getVisiteur() {
         return this.mVisiteur;
     }
@@ -80,7 +93,7 @@ public class Boutique<T> implements Serializable {
      */
     public String acheterArticle(int tArticle) {
         String texte = "";
-
+        //si le visiteur achete un equipement et qu'il a l'argent nécessaire
         if (this.mVisiteur.acheter(this.mPrix.get(tArticle - 1))) {
             switch (this.mType) {
                 case ARME:
@@ -92,6 +105,7 @@ public class Boutique<T> implements Serializable {
                 case POTION:
                     texte += this.mVisiteur.stockerPotion((Potion) this.mArticles.get(tArticle - 1));
             }
+            //sinon pas assez d'argent
         } else {
             texte += "Vous n'avez pas assez d'argent pour cet article !";
         }

@@ -53,14 +53,26 @@ public class Armure implements Serializable {
         this.mEtatInitial = this.mProtection;
     }
 
+    /**
+     * Getter de l'etat initial
+     * @return l'etat initial
+     */
     public int getEtatInitial() {
         return this.mEtatInitial;
     }
 
+    /**
+     * Getter des points de protections
+     * @return les points de protections
+     */
     public int getPointsProtection() {
         return this.mProtection;
     }
 
+    /**
+     * Getter du proprietaire
+     * @return le proprietaire
+     */
     public Personnage getProprietaire() {
         return mProprietaire;
     }

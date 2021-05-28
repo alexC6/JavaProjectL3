@@ -8,18 +8,28 @@ public class ControleurBoutique {
     private static Boutique<?> mBoutique;
     private static Entree mEntree;
 
-
+    /**
+     * Setter d'entrée
+     * @param tEntree
+     */
     public static void setEntree(Entree tEntree) {
         mEntree = tEntree;
     }
 
-
+    /**
+     * Setter de boutique
+     * @param tChoix
+     */
     public static void setBoutique(int tChoix){
         mBoutique = mEntree.getBoutique(tChoix);
         mBoutique.visiter(mEntree.getLabyrinthe().getPersonnage());
     }
 
-    
+    /**
+     * Fonction qui nous envoie sur le choix ( soit reparation soit achat) dans la boutique armure
+     * @param tChoix
+     * @return du texte
+     */
     public static String choixBoutiqueArmure(int tChoix){
         String texte = "";
 
@@ -58,8 +68,8 @@ public class ControleurBoutique {
     }
 
     /**
-     * 
-     * @return
+     * Getter piece d'or
+     * @return la quantité de pieces d'or du personnage
      */
     public static int getPiecesOr() {
         return mEntree.getLabyrinthe().getPersonnage().getPiecesOr();

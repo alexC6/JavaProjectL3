@@ -27,6 +27,10 @@ public class Potion implements Serializable {
         }
     }
 
+    /**
+     * Getter de récuperation
+     * @return la récupération
+     */
     public int getRecuperation() {
         return mRecuperation;
     }
@@ -39,6 +43,11 @@ public class Potion implements Serializable {
         return "Vous avez récupéré " + this.mRecuperation + " point(s) de vie.\n";
     }
 
+    /**
+     * Fonction d'affichage de la recuperation de vie de la potion 
+     *
+     * @return renvoie du texte avec les point de vie rendu par la potion
+     */
     public String toString() {
         return "potion de force " + this.mRecuperation;
     }
