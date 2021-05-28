@@ -35,7 +35,7 @@ public class ControleurLancement {
         Personnage personnage = new Personnage(tNom);
 
         // Ajout du personnage au labyrinthe
-        labyrinthe.ajouterPersonnage(personnage);
+        System.out.println(labyrinthe.ajouterPersonnage(personnage));
 
         return labyrinthe;
     }
