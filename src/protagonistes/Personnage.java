@@ -326,6 +326,9 @@ public class Personnage extends EtreVivant {
         if (mArmure == null) {
             // Si le personnage ne possède pas d'arme
             texte = "Vous n'avez pas d'armure à réparer ...";
+        } else if (!(this.mArmure.estCassee())) {
+            // Si l'armure n'est pas cassée
+            texte = "Vous n'avez besoin de réparer votre armure.";
         } else if (this.mBourse < 250) {
             // Si le personnage ne possède pas assez d'argent pour réparer son armure
             texte = "Vous n'avez pas assez d'argent pour faire cela.";

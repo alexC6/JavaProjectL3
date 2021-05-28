@@ -138,19 +138,9 @@ public class Armure implements Serializable {
      * @return du texte
      */
     public String reparer() {
-        String texte = "";
+        this.mProtection = this.mEtatInitial;
 
-        // si la protection de l'armure est inferieure a l'état initial alors on la
-        // répare et on la met a sont etat initial
-        if (this.mProtection < this.mEtatInitial) {
-            this.mProtection = this.mEtatInitial;
-            // sinon l'armure n'as pas besoin de réparation car elle a la meme protection
-            // que l'état initial
-        } else if (this.mProtection == this.mEtatInitial) {
-            texte = "Vous n'avez besoin de réparer votre armure";
-        }
-
-        return texte;
+        return "Votre armure est réparée. Retournez au combat valeureux guerrier!";
     }
 
     /**
