@@ -38,6 +38,11 @@ public class Arme implements Serializable {
         setDommage(args);
     }
 
+    /**
+     * Setter des dommages
+     * @param args
+     *
+     */
     private void setDommage(int args[]) {
         // calcul du nombre de point de dommage (entre 1 et 5)
         if (args.length > 0) {
@@ -48,6 +53,10 @@ public class Arme implements Serializable {
         }
     }
 
+    /**
+     * Getter du proprietaire
+     * @return le proprietaire
+     */
     public Personnage getProprietaire() {
         return mProprietaire;
     }

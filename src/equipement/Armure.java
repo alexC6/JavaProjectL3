@@ -23,7 +23,7 @@ public class Armure implements Serializable {
      */
     public Armure(final int... args) {
         this.mProprietaire = null;
-        setDommage(args);
+        setProtection(args);
     }
 
     /**
@@ -34,11 +34,15 @@ public class Armure implements Serializable {
     public Armure(Personnage tProprietaire, final int... args) {
         this.mProprietaire = tProprietaire;
         this.mProprietaire.equiperArmure(this);
-        setDommage(args);
+        setProtection(args);
     }
 
-    private void setDommage(int args[]) {
-        // calcul du nombre de point de dommage (entre 1 et 5)
+    /**
+     * Setter de la protection
+     * @param args
+     */
+    private void setProtection(int args[]) {
+        // calcul du nombre de point de protection (entre 1 et 5)
         if (args.length > 0) {
             this.mProtection = args[0];
         } else {
@@ -79,10 +83,11 @@ public class Armure implements Serializable {
     public String encaisserDegat(int tDegat) {
 
         String texte = "";
-        
+        //si l'armure possède plus de protection que de dégat infligé alors on lui indique combien de dégats l'armure a subit et on lui retire les point de protection
         if (tDegat < this.mProtection) {
             this.mProtection = this.mProtection - tDegat;
             texte = "Votre armure a subit " + tDegat + " dégâts.";
+            //sinon si les degats sotn superieurs ou egals a la protection alors elle se casse
         } else if (tDegat >= this.mProtection) {
             this.casser();
             texte = "Votre armure s'est cassée !";
@@ -104,10 +109,11 @@ public class Armure implements Serializable {
      */
     public String reparer() {
         String texte = "";
-
+        //si la protection de l'armure est inferieure a l'état initial alors on la répare et on la met a sont etat initial
         if (this.mProtection < this.mEtatInitial) {
             this.mProtection = this.mEtatInitial;
             texte = " Votre armure est réparée.";
+            //sinon l'armure n'as pas besoin de réparation car elle a la meme protection que l'état initial
         } else if (this.mProtection == this.mEtatInitial) {
             texte = "Vous n'avez besoin de réparer votre armure";
         }

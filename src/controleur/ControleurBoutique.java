@@ -19,7 +19,7 @@ public class ControleurBoutique {
         mBoutique.visiter(mEntree.getLabyrinthe().getPersonnage());
     }
 
-
+    
     public static String choixBoutiqueArmure(int tChoix){
         String texte = "";
 
