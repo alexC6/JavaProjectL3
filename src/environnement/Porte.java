@@ -37,6 +37,10 @@ public class Porte implements Serializable {
         return this.mOrientationP;
     }
 
+    public String toString(){
+        return "" + this.mOrientationP;
+    }
+
     /**
      * Retourne une string qui contient la lettre à saisir pour indiquer
      * l'orientation de porte que l'on souhaite emprunter
