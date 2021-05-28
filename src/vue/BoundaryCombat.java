@@ -4,7 +4,6 @@ import java.util.Random;
 
 import controleur.ControleurCombat;
 import protagonistes.Monstre;
-import protagonistes.Personnage;
 
 /**
  * File : BoundaryCombat.java
@@ -106,7 +105,7 @@ public class BoundaryCombat {
      * @return Vrai si le vainqueur est le Personnage, faux sinon
      */
     public boolean isMonsterDead() {
-        return this.mCtrl.getVainqueur() instanceof Personnage;
+        return this.mCtrl.isMonsterDead();
     }
 
     /**
@@ -115,13 +114,14 @@ public class BoundaryCombat {
      * @return Vrai si le vainqueur est le Monstre, faux sinon
      */
     public boolean isPersonnageDead() {
-        return this.mCtrl.getVainqueur() instanceof Monstre;
+        return this.mCtrl.isPersonnageDead();
     }
 
     /**
      * Méthode qui affiche une phrase quand la pièce est vide
      */
     public void pieceVide() {
+        System.out.println("Vous êtes déjà passé par là, il n'y a plus rien à voir !");
         System.out.println("La pièce est vide. Il n'y a que le corps sans vie du monstre et le coffre vide.");
     }
 
