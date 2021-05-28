@@ -13,7 +13,7 @@ import environnement.Labyrinthe;
  * </p>
  *
  * @author Alexandre Coulais
- * @version 2021-5-25
+ * @version 2021-5-28
  */
 
 public class BoundaryLancement {
@@ -28,21 +28,13 @@ public class BoundaryLancement {
         if (ControleurLancement.partieExistante()) {
             // Si une partie existe, on demande à l'utilisateur ce qu'il souhaite faire
             String questionPartie = "Vous souhaitez lancer une nouvelle partie (N)" + " ou la partie existante (E) ?";
-            boolean choix = Clavier.demanderChoix(questionPartie, "E", "N");
 
             /**
              * S'il souhaite reprendre une partie on récupère le labyrinthe dans le fichier
              * de sauvegarde
              */
-            while (choix && (labyrinthe = ControleurLancement.lancerPartieExistante()) == null) {
-                /**
-                 * Si une erreur se produit, on le signale et on demande à l'utilisateur ce
-                 * qu'il souhaite faire
-                 */
-                System.err.println("Une erreur semble s'être produite ...");
-                questionPartie = "Souhaitez-vous lancer une nouvelle partie (N) ou réessayer"
-                        + " de lancer la partie existante (R) ?";
-                choix = Clavier.demanderChoix(questionPartie, "R", "N");
+            if (Clavier.demanderChoix(questionPartie, "E", "N")) {
+                labyrinthe = retourDerniereSauv();
             }
         }
 
@@ -59,11 +51,14 @@ public class BoundaryLancement {
 
     /**
      * Pour récupérer les données de la dernière sauvegarde
-     * @return labyrinthe Labyrinthe soit une carte vide soit remplie de la dernière sauvegarde
+     * 
+     * @return Une référence sur le labyrinthe qui permettra au joueur de reprendre sa partie
      */
     public static Labyrinthe retourDerniereSauv () {
         Labyrinthe labyrinthe = null;
-        if (ControleurLancement.lancerPartieExistante() == null) {
+        boolean choix = true;
+
+        while (choix && (labyrinthe = ControleurLancement.lancerPartieExistante()) == null) {
             /**
              * Si une erreur se produit, on le signale et on demande à l'utilisateur ce
              * qu'il souhaite faire
@@ -71,22 +66,22 @@ public class BoundaryLancement {
             System.err.println("Une erreur semble s'être produite ...");
             String questionPartie = "Souhaitez-vous lancer une nouvelle partie (N) ou réessayer"
                     + " de lancer la partie existante (R) ?";
-            boolean choix = Clavier.demanderChoix(questionPartie, "R", "N");
+            choix = Clavier.demanderChoix(questionPartie, "R", "N");
         }
-        else {
-            labyrinthe = ControleurLancement.lancerPartieExistante();
+
+        if (labyrinthe == null) {
+            labyrinthe = nouvellePartie();
         }
+
         return labyrinthe;
     }
-
-
 
     /**
      * Création d'une nouvelle partie
      * 
      * @return La référence du labyrinthe pour le jeu
      */
-    private static Labyrinthe nouvellePartie() {
+    public static Labyrinthe nouvellePartie() {
         // Demande du nom du personnage et appel de la création de partie du contrôleur
         String questionNom = "Quel nom souhaitez-vous donner à votre personnage ?";
         String nom = Clavier.entrerClavierString(questionNom);
