@@ -4,12 +4,14 @@ import java.util.Random;
 
 import controleur.ControleurCombat;
 import protagonistes.Monstre;
+import protagonistes.Personnage;
 
 /**
- * File : BoundaryCombat.java Code source de entrées sorties du Combat
+ * File : BoundaryCombat.java
+ * Code source de entrées sorties du Combat
  * 
- * @author Thomas Chabert, Alexandre Coulais, Noëmie Suere, Perrine Mortier
- * @version 2021-5-27
+ * @author Thomas Chabert
+ * @version 2021-5-28
  */
 
 public class BoundaryCombat {
@@ -99,6 +101,24 @@ public class BoundaryCombat {
     }
 
     /**
+     * Retourne un booléen concernant l'état du monstre
+     * 
+     * @return Vrai si le vainqueur est le Personnage, faux sinon
+     */
+    public boolean isMonsterDead() {
+        return this.mCtrl.getVainqueur() instanceof Personnage;
+    }
+
+    /**
+     * Retourne un booléen concernant l'état du personnage
+     * 
+     * @return Vrai si le vainqueur est le Monstre, faux sinon
+     */
+    public boolean isPersonnageDead() {
+        return this.mCtrl.getVainqueur() instanceof Monstre;
+    }
+
+    /**
      * Méthode qui affiche une phrase quand la pièce est vide
      */
     public void pieceVide() {
@@ -151,7 +171,6 @@ public class BoundaryCombat {
         } else {
             this.needSauvegarde = true;
         }
-        System.exit(0);
     }
 
     /**
