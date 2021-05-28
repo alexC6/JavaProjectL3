@@ -144,7 +144,6 @@ public class Armure implements Serializable {
         // répare et on la met a sont etat initial
         if (this.mProtection < this.mEtatInitial) {
             this.mProtection = this.mEtatInitial;
-            texte = " Votre armure est réparée.";
             // sinon l'armure n'as pas besoin de réparation car elle a la meme protection
             // que l'état initial
         } else if (this.mProtection == this.mEtatInitial) {

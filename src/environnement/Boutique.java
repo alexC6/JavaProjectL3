@@ -132,7 +132,7 @@ public class Boutique<T> implements Serializable {
 
         // Si le perso choisit de réparer
         if (Clavier.demanderChoix(question, "O", "N")) {
-            this.mVisiteur.reparerArmure();
+            txt += this.mVisiteur.reparerArmure();
             txt += "Votre armure est réparée. Retournez au combat valeureux guerrier!";
         } else {
 
