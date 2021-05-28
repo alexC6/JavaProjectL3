@@ -31,9 +31,9 @@ public class ControleurCombat {
      * @param tBilly Le personnage participant
      */
     public ControleurCombat(Personnage tBilly) {
+        this.mBilly = tBilly;
         PieceCombat piecette = (PieceCombat) mBilly.getPiece();
         this.mCombat = piecette.getCombat();
-        this.mBilly = tBilly;
     }
 
     /**
