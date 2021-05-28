@@ -38,6 +38,11 @@ public class Arme implements Serializable {
         setDommage(args);
     }
 
+    /**
+     * Setter des dommages
+     * @param args
+     *
+     */
     private void setDommage(int args[]) {
         // calcul du nombre de point de dommage (entre 1 et 5)
         if (args.length > 0) {
@@ -48,6 +53,10 @@ public class Arme implements Serializable {
         }
     }
 
+    /**
+     * Getter du proprietaire
+     * @return le proprietaire
+     */
     public Personnage getProprietaire() {
         return mProprietaire;
     }
@@ -70,7 +79,7 @@ public class Arme implements Serializable {
     }
 
     /**
-     * Fonction d'attaque du personnage avec une épée
+     * Fonction d'attaque du personnage avec une arme
      *
      * @param tMonstre le monstre de la salle
      * @return Les dégats subit par le monstre apres l'attaque
@@ -79,7 +88,10 @@ public class Arme implements Serializable {
         return tMonstre.subirAttaque(this.mPointDommage);
     }
 
-
+    /**
+     * Getter des dommage arme
+     * @return
+     */
     public int getDommageArme() {
         return this.mPointDommage;
     }

@@ -155,7 +155,8 @@ public class Personnage extends EtreVivant {
     }
 
     /**
-     * 
+     * @author Alexandre Coulais
+     * Fonction qui vérifie la bourse et retire le prix de l'équipement acheté
      * @param tPrix
      * @return un boolean
      */
