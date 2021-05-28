@@ -12,7 +12,7 @@ import protagonistes.Personnage;
  * File : Combat.java Code source de la classe Combat
  * 
  * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier, Thomas Chabert
- * @version 2021-5-25
+ * @version 2021-5-28
  */
 
 public class Combat implements Serializable {
@@ -68,8 +68,6 @@ public class Combat implements Serializable {
     /**
      * Getter du personnage du combat
      * 
-     * @author Alexandre Coulais
-     * 
      * @return Personnage Le personnage combattant
      */
     public Personnage getPersonnage() {
@@ -78,8 +76,6 @@ public class Combat implements Serializable {
 
     /**
      * Getter du monstre du combat
-     * 
-     * @author Alexandre Coulais
      * 
      * @return Monstre Le monstre combattu
      */
@@ -128,8 +124,6 @@ public class Combat implements Serializable {
     /**
      * Permet à un être vivant de rejoindre le combat A voir si vraiment nécessaire
      * 
-     * @author Alexandre Coulais
-     * 
      * @param tEtreVivant L'être vivant rejoignant le combat
      */
     public void rejointCombat(EtreVivant tEtreVivant) {
@@ -147,8 +141,6 @@ public class Combat implements Serializable {
 
     /**
      * Fonction retournant un être vivant si l'un des deux a gagné
-     * 
-     * @author Alexandre Coulais
      * 
      * @return EtreVivant L'être vivant ayant gagné le combat, null si pas de
      *         gagnant
@@ -182,8 +174,6 @@ public class Combat implements Serializable {
      * Fonction d'itération d'un tour du combat <br>
      * La victime (et donc l'attaquant par extension) est tirée au sort à chaque
      * tour
-     * 
-     * @author Alexandre Coulais
      * 
      * @return String Le texte à afficher
      */

@@ -21,7 +21,7 @@ import vue.ConsoleColors;
  * </p>
  *
  * @author Alexandre Coulais, Noëmie Suere, Perrine Mortier, Thomas Chabert
- * @version 2021-5-25
+ * @version 2021-5-28
  */
 
 public class Personnage extends EtreVivant {
@@ -72,8 +72,6 @@ public class Personnage extends EtreVivant {
 
     /**
      * Constructeur de la classe Personnage
-     * 
-     * @author Alexandre Coulais
      *
      * @param tNom Le nom du personnage
      */
@@ -85,8 +83,6 @@ public class Personnage extends EtreVivant {
 
     /**
      * Getter du nom du personnage
-     * 
-     * @author Alexandre Coulais
      *
      * @return String Le nom du personnage
      */
@@ -105,8 +101,6 @@ public class Personnage extends EtreVivant {
 
     /**
      * Getter de la bourse du personnage
-     * 
-     * @author Alexandre Coulais
      *
      * @return int Nombre de pièces d'or possédées par le personnage
      */
@@ -120,11 +114,8 @@ public class Personnage extends EtreVivant {
 
     /**
      * Fonction permettant au personnage de récupérer le contenu d'un coffre
-     * 
-     * @author Alexandre Coulais
      *
      * @param tTresor Le trésor dont on va récupérer le contenu
-     *
      * @return String Le texte à afficher
      */
     public String obtenirTresor(Tresor<?> tTresor) {
@@ -184,8 +175,6 @@ public class Personnage extends EtreVivant {
      * personnage <br>
      * et lui fait récupérer des points de vie
      * </p>
-     * 
-     * @author Alexandre Coulais
      *
      * @return String Le texte à afficher
      */
@@ -211,8 +200,6 @@ public class Personnage extends EtreVivant {
 
     /**
      * Fonction d'ajout d'une potion à la liste de celles que possède le personnage
-     * 
-     * @author Alexandre Coulais
      *
      * @param tPotion La potion à ajouter
      * @return Le texte à afficher
@@ -230,26 +217,31 @@ public class Personnage extends EtreVivant {
     }
 
     /**
+     * Fonction qui permet d'équiper une arme et vérifie si il y en a deja une
+     * d'équipé en demandant si le joueur veux la changer
      * 
-     * @author Perrine Mortier
-     * Fonction qui permet d'équiper une arme et vérifie si il y en a deja une d'équipé en demandant si le joueur veux la changer
-     * @param tArme
-     * @return du texte
+     * @param tArme L'arme a équiper
+     * @return Texte à afficher
      */
     public String prendreArme(Arme tArme) {
         String texte = "";
 
         if (this.mArme == null) {
+            // Si le personnage ne possède pas d'arme, on l'équipe
             this.mArme = tArme;
             texte += "Vous avez obtenu et équipé une arme de " + tArme.getDommageArme() + " points de dommage !\n";
             tArme.setProprietaire(this);
         } else {
+            // Sinon, on demande au joueur ce qu'il souhaite faire
             String question = "Vous possédez déjà une arme de force " + this.mArme.getDommageArme()
-            + ", souhaitez-vous la garder (G) ou la remplacer (R) par une arme de force "
-            + tArme.getDommageArme() + " ?";
+                    + ", souhaitez-vous la garder (G) ou la remplacer (R) par une arme de force "
+                    + tArme.getDommageArme() + " ?";
+
             if (Clavier.demanderChoix(question, "G", "R")) {
+                // S'il souhaite garder son arme actuelle, on ne fait rien
                 texte += "Vous conservez votre arme actuelle.\n";
             } else {
+                // Sinon, on lache l'arme précédente et on récupère la nouvelle
                 texte += this.lacherArme();
                 tArme.setProprietaire(this);
                 texte += "Vous équipez l'arme que vous venez d'obtenir !\n";
@@ -261,27 +253,31 @@ public class Personnage extends EtreVivant {
     }
 
     /**
-     * 
-     * @author Noëmie Suere
      * Fonction qui équipe une armure, vérfie si il y a deja une armure,
      * demande si le joueur veut la remplacer ou non.
-     * @param tArmure
+     * 
+     * @param tArmure L'armure à équiper
      * @return le texte 
      */
     public String equiperArmure(Armure tArmure) {
         String texte = "";
 
         if (this.mArmure == null) {
+            // Si le personnage ne possède pas d'armure, on l'équipe
             this.mArmure = tArmure;
             tArmure.setProprietaire(this);
             texte = "Vous équipez votre armure (protection " + tArmure.getPointsProtection() + ").\n";
         } else {
+            // Sinon, on demande au joueur ce qu'il souhaite faire
             String question = "Vous possédez déjà une armure de protection " + this.mArmure.getPointsProtection()
                     + ", souhaitez-vous la garder (G) ou la remplacer (R) par une armure de protection "
                     + tArmure.getPointsProtection() + " ?";
+
             if (Clavier.demanderChoix(question, "G", "R")) {
+                // S'il souhaite garder son armure actuelle, on ne fait rien
                 texte += "Vous conservez votre armure actuelle.\n";
             } else {
+                // Sinon, on lache l'armure précédente et on récupère la nouvelle
                 texte += this.perdreArmure();
                 tArmure.setProprietaire(this);
                 texte += "Vous équipez l'armure que vous venez d'obtenir !\n";
@@ -293,22 +289,21 @@ public class Personnage extends EtreVivant {
     }
 
     /**
-     * 
-     * @author Noëmie Suere
-     * 
      * Fonction qui fait lacher l'arme a son propriétaire
+     * 
      * @return texte 
      */
     public String lacherArme() {
         if (this.mArme != null) {
             this.mArme = null;
         }
+
         return "Vous avez décidé de lâcher votre arme.\n";
     }
 
     /**
      * Fonction qui retire l'armure
-     * @author Noëmie Suere
+     * 
      * @return Le texte
      */
     public String perdreArmure() {
@@ -321,31 +316,29 @@ public class Personnage extends EtreVivant {
 
     /**
      * Fonction qui vérifie la bourse et qui appèle la fontion réparation si tout est bon (argent + existance de l'armure)
-     * @author Noëmie Suere
+     * 
      * @return Le texte à afficher
      */
     public String reparerArmure() {
-        String texte = "";
+        String texte;
 
-        if (this.mBourse < 250) {
-            texte = " Vous n'avez pas assez d'argent pour faire cela.";
-            return texte;
+        if (mArmure == null) {
+            // Si le personnage ne possède pas d'arme
+            texte = "Vous n'avez pas d'armure à réparer ...";
+        } else if (this.mBourse < 250) {
+            // Si le personnage ne possède pas assez d'argent pour réparer son armure
+            texte = "Vous n'avez pas assez d'argent pour faire cela.";
         } else {
-            if (mArmure != null) {
-                this.mArmure.reparer();
-                this.mBourse -= 250;
-            } else {
-                texte = " Vous ne possédez pas d'armure.";
-            }
-
-            return texte;
+            // Sinon, on répare l'armure et on retire au personnage le cout de la réparation
+            texte = this.mArmure.reparer();
+            this.mBourse -= 250;
         }
+
+        return texte;
     }
 
     /**
      * Fonction de changement de pièce du personnage
-     * 
-     * @author Alexandre Coulais
      *
      * @param tPiece La nouvelle pièce
      * @return Le texte à afficher
@@ -372,8 +365,8 @@ public class Personnage extends EtreVivant {
     }
 
     /**
-     * @author Perrine Mortier
-     * Fontion qui permet d'infliger des dégats avec un Random 
+     * Fontion qui permet d'infliger des dégats avec un Random
+     * 
      * @return Un texte parmis ceux proposé
      */
     public String attaquer() {
@@ -413,8 +406,6 @@ public class Personnage extends EtreVivant {
      * Définition de la fonction mourir d'EtreVivant <br>
      * Fait quitter le combat au personnage
      * </p>
-     * 
-     * @author Alexandre Coulais
      *
      * @see EtreVivant#mourir()
      *
@@ -436,13 +427,10 @@ public class Personnage extends EtreVivant {
      * Calcul les degats réellement subits par le personnage <br>
      * et ceux à soustraire à son armure
      * </p>
-     * 
-     * @author Alexandre Coulais
      *
      * @see EtreVivant#subirAttaque(int)
      *
      * @param tDegats Les degats de l'attaque par le monstre
-     *
      * @return String Le texte à afficher
      */
     @Override

@@ -66,7 +66,8 @@ public class Jeu {
                             } else {
                                 labyrinthe = BoundaryLancement.nouvellePartie();
                             }
-        
+
+                            // On règle les objets pour reprendre une partie
                             personnage = labyrinthe.getPersonnage();
                             ctrlDeplacement.setLabyrinthe(labyrinthe);
                             bdyDeplacement = new BoundaryDeplacer(ctrlDeplacement);

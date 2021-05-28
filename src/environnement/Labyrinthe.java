@@ -12,65 +12,74 @@ import equipement.Potion;
 import protagonistes.Personnage;
 
 /**
- * File :
+ * <p>
+ * File : Labyrinthe.java<br>
+ * Code source du labyrinthe
+ * </p>
  * 
  * @author Perrine Mortier
- * @version 2021/05/13
- *
+ * @version 2021-5-28
  */
 
 public class Labyrinthe implements Serializable {
-    
+    /**
+     * Nombre de pièces de la matrice
+     */
     private int mNbPieces;
-    private Piece mMatricePieces [][] ;
-    private Piece mSortie;
-    private Entree mEntree;
-    private Personnage mPersonnage;
-    private static final int NB_LIGNES_MIN  = 3;
-    private static final int NB_LIGNES_MAX = 6 ;
-
 
     /**
-     * constructeur du Labyrinthe
-     * 
+     * Matrice contenant les salles
+     */
+    private Piece mMatricePieces[][];
+
+    /**
+     * L'entrée du labyrinthe, avec le centre commercial
+     */
+    private Entree mEntree;
+
+    /**
+     * Le personnage qui se déplace dans le labyrinthe
+     */
+    private Personnage mPersonnage;
+
+    /**
+     * Tailles minimum et maximum de la matrice des salles
+     */
+    private static final int NB_LIGNES_MIN = 3;
+    private static final int NB_LIGNES_MAX = 6;
+
+    /**
+     * Constructeur du Labyrinthe
      */
     public Labyrinthe() {
-
         // Etape 1 : Generer nb aleatoire entre 3 et 6 bornes incluses
-
         Random rand = new Random();
-
         int nbAleatoire = rand.nextInt(NB_LIGNES_MAX - NB_LIGNES_MIN + 1) + NB_LIGNES_MIN;
 
-        //Etape 2 : generer un tableau à 2 dimensions  avec comme param le nb aleatoire précédemment généré
-
-        this.mMatricePieces = new Piece [nbAleatoire] [nbAleatoire];
+        // Etape 2 : generer un tableau à 2 dimensions avec comme param le nb aleatoire
+        // précédemment généré
+        this.mMatricePieces = new Piece[nbAleatoire][nbAleatoire];
         this.genererPieces();
 
-        // Etape 3 : paramétrer les coordonnees des pièces particulières : Entrée & Sortie
-
-        this.mEntree = (Entree) this.mMatricePieces[0] [0];
+        // Etape 3 : paramétrer les coordonnees des pièces particulières : Entrée &
+        // Sortie
+        this.mEntree = (Entree) this.mMatricePieces[0][0];
         genererBoutiques();
-        this.mSortie = this.mMatricePieces[nbAleatoire - 1] [nbAleatoire - 1];
 
-        // Etape 5 : config player avatar
-
+        // Etape 4 : config player avatar
         this.mPersonnage = null;
-
     }
 
-    
     /**
-     * @role : génère les pièces en fonction de la taille de la matrice
-     *         En fonction des coordonnées de la pièce, les portes compatibles seront créées 
+     * Génère les pièces en fonction de la taille de la matrice<br>
+     * En fonction des coordonnées de la pièce, les portes compatibles seront créées
      */
-    public void genererPieces(){
-
+    public void genererPieces() {
         // Indices de parcours de la matrice carrée : i pour ligne & j pour colonne
-        int i,j;
+        int i, j;
         int sizeOfTab = this.mMatricePieces.length;
 
-        // Création des portes pour chaque cardinalité
+        // Création des portes pour chaque orientation
         Orientation orientationPN = Orientation.NORD;
         Porte porteN = new Porte(orientationPN);
 
@@ -83,135 +92,121 @@ public class Labyrinthe implements Serializable {
         Orientation orientationPO = Orientation.OUEST;
         Porte porteO = new Porte(orientationPO);
 
-        for ( i = 0; i<sizeOfTab; i++){
-
-            for ( j = 0; j< sizeOfTab; j++){
+        for (i = 0; i < sizeOfTab; i++) {
+            for (j = 0; j < sizeOfTab; j++) {
                 // Initialisation de la liste des portes disponibles
-                List<Porte> portes = new ArrayList <Porte>();
+                List<Porte> portes = new ArrayList<Porte>();
 
-                // List which contains all the doors
+                // Ajout de toutes les portes à la liste
                 portes.add(porteN);
                 portes.add(porteS);
                 portes.add(porteE);
                 portes.add(porteO);
 
-                // Remove the door according to the coord of the room
-
-                if ( i == 0) {
-                    // If first line of Matrix so not North Door
+                /** 
+                 * Suppression des portes en fonction de la position de la salle
+                 * Si la salle est sur la première ou la dernière ligne, on supprime
+                 * respectivement les portes nord ou sud
+                 * Si la salle est sur la première ou la dernière colonne, on supprime
+                 * respectivement les portes ouest ou est
+                 */
+                if (i == 0) {
                     portes.remove(porteN);
-                }
-
-                // If last line of Matrix so not South Door
-                else  if ( i == (sizeOfTab-1)) {
+                } else if (i == (sizeOfTab - 1)) {
                     portes.remove(porteS);
                 }
 
-                // If first column of Matrix so not West Door
-                if ( j == 0 ){
+                if (j == 0) {
                     portes.remove(porteO);
-                }
-
-                // If last Column of Matrix so not East Door
-                else if ( j == (sizeOfTab - 1)){
+                } else if (j == (sizeOfTab - 1)) {
                     portes.remove(porteE);
-
                 }
 
-                // Add to the Lab the room that contains compatible doors
-                if ( i == 0 && j == 0 ){
-
-                    this.mMatricePieces[i][j] = new Entree(portes,this);
+                if (i == 0 && j == 0) {
+                    // Si la salle en cours de création est en position (0;0), on crée l'entrée
+                    this.mMatricePieces[i][j] = new Entree(portes, this);
+                } else {
+                    // Dans tous les autres cas, on crée une salle de combat
+                    this.mMatricePieces[i][j] = new PieceCombat(portes, i, j, this);
                 }
-                else{
-                    this.mMatricePieces[i][j] = new PieceCombat(portes,i,j,this);
-                }
-            }// End of pathway column
-
-        } // End of pathway line
-
-        
+            }
+        }
     }
 
-    /** 
-     * @role : ajoute les 3 types de boutiques possibles à la pièce correspondant à l'entrée du labyrinthe
+    /**
+     * Ajoute les 3 types de boutiques possibles à l'entrée du labyrinthe
      */
-    private void genererBoutiques(){
-
-        // Step 1 : create one Shop by Type
+    private void genererBoutiques() {
+        // Création des types de boutiques
         Boutique<Arme> boutiqueArmes = new Boutique<Arme>(TypeObjetVendu.ARME);
         Boutique<Potion> boutiquePotions = new Boutique<Potion>(TypeObjetVendu.POTION);
-        Boutique<Armure> boutiqueArmures = new Boutique<Armure>(TypeObjetVendu.ARMURE); 
+        Boutique<Armure> boutiqueArmures = new Boutique<Armure>(TypeObjetVendu.ARMURE);
 
-        // Step 2 : Add Shop to entry
-        this.mEntree.ajouterBoutique(boutiqueArmes,TypeObjetVendu.ARME);
-        this.mEntree.ajouterBoutique (boutiquePotions, TypeObjetVendu.POTION);
-        this.mEntree.ajouterBoutique(boutiqueArmures,TypeObjetVendu.ARMURE);
-
-
-
+        // Ajout des boutiques à l'entrée
+        this.mEntree.ajouterBoutique(boutiqueArmes, TypeObjetVendu.ARME);
+        this.mEntree.ajouterBoutique(boutiquePotions, TypeObjetVendu.POTION);
+        this.mEntree.ajouterBoutique(boutiqueArmures, TypeObjetVendu.ARMURE);
     }
 
     /**
+     * Teste si la pièce testée est l'entrée
      * 
-     * @param tPiece
-     * @return teste si la pièce en paramètre correspond à l'entrée du labyrinthe
+     * @param tPiece La pièce à tester
+     * @return Vrai si la pièce est l'entrée, faux sinon
      */
-    public boolean isEntree(Piece tPiece){
-        return( tPiece == this.mEntree);
-    }
-
-    /**
-     * 
-     * @param tPiece
-     * @return teste si la pièce en paramètre correspond à la sortie du labyrinthe
-     */
-    public boolean isSortie(Piece tPiece){
-       return ( tPiece == this.mSortie);
+    public boolean isEntree(Piece tPiece) {
+        return (tPiece == this.mEntree);
     }
 
     /**
      * Getter du nombre de pièces
      * 
-     * @return int  Nombre de pièces du labyrinthe
+     * @return Nombre de pièces du labyrinthe
      */
-    public int getNbPieces(){
+    public int getNbPieces() {
         return this.mNbPieces;
     }
 
     /**
      * Getter du personnage
      * 
-     * @return Personnage personnage relié au Labyrinthe
+     * @return personnage relié au Labyrinthe
      */
-    public Personnage getPersonnage(){
+    public Personnage getPersonnage() {
         return this.mPersonnage;
     }
 
     /**
-     * Retourne la référence de la pièce correspondant aux coordonnées passées en paramètres
+     * Retourne la référence de la pièce correspondant aux coordonnées passées en
+     * paramètres
      * 
-     * @param tLigne    Numero de ligne de la pièce
-     * @param tColonne  Numero de colonne de la pièce
+     * @param tLigne   Numero de ligne de la pièce
+     * @param tColonne Numero de colonne de la pièce
      * @return La référence de la pièce
      */
     public Piece getPiece(int tLigne, int tColonne) {
         return this.mMatricePieces[tLigne][tColonne];
     }
 
-
     /**
-     * @return chaine de caractères 
+     * Permet d'ajouter le personnage qui va évoluer dans le labyrinthe à ce dernier
+     * 
+     * @return Chaine de caractères à afficher
      */
-    public String ajouterPersonnage ( Personnage tPersonnage){
-        String texte ="";
+    public String ajouterPersonnage(Personnage tPersonnage) {
+        String texte = "";
+
         // Ajout du personnage au labyrinthe
         this.mPersonnage = tPersonnage;
+
         // Phrase d'information auprès du user
-        texte += "Vous avez choisi un nom délicieux pour votre avatar. félicitations ! Oubliez votre passé ! Vous êtes maintenant " + tPersonnage.getNom() + " le seul et l'unique.\n";
-        texte += "Prenez soin de vous, valeureux guerrier ...Vous disposez de  " + tPersonnage.getPointDeVie() + " points de vie. Tâchez de les preserver ...\n";
+        texte += "Vous avez choisi un nom délicieux pour votre avatar. félicitations ! Oubliez votre passé ! Vous êtes maintenant "
+                + tPersonnage.getNom() + " le seul et l'unique.\n";
+        texte += "Prenez soin de vous, valeureux guerrier ...Vous disposez de  " + tPersonnage.getPointDeVie()
+                + " points de vie. Tâchez de les preserver ...\n";
         texte += "Vous pénétrez maintenant LE LABYRINTHE . Je vous souhaite d'en sortir...un jour...peut-être...";
 
+        // Déplacement initiale du personnage dans l'entrée (nouvelle partie)
         texte += tPersonnage.ouvrirPorte(mEntree);
 
         return texte;
