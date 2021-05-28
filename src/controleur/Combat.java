@@ -158,7 +158,6 @@ public class Combat implements Serializable {
 
         if (this.mMonstre == null) {
             // Dans le cas où le personnage a déjà tué le monstre de la salle
-            System.out.println("Vous êtes déjà passé par là, il n'y a plus rien à voir !");
             vainqueur = this.mPersonnage;
         } else if (mPersonnage.isVivant() && !(mMonstre.isVivant())) {
             // Si le personnage est vivant mais que le monstre est mort
