@@ -54,6 +54,11 @@ public class ControleurDeplacer {
         return this.mLabyrinthe.isEntree(this.getPieceActuelle());
     }
 
+    public void setLabyrinthe(Labyrinthe tLabyrinthe) {
+        this.mLabyrinthe = tLabyrinthe;
+        this.mPersonnage = tLabyrinthe.getPersonnage();
+    }
+
     /**
      * 
      * @param tPiece
