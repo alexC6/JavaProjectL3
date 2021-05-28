@@ -58,11 +58,8 @@ public class Jeu {
                             // On continue d'effectuer des tours de combat
                             bdyCombat.lancerTour();
                         }
-
-                        if (bdyCombat.isMonsterDead()) {
-                            // Si le monstre est mort, on indique au joueur que la pièce est vide
-                            bdyCombat.pieceVide();
-                        } else if (bdyCombat.isPersonnageDead()) {
+                        
+                        if (bdyCombat.isPersonnageDead()) {
                             // Si le joueur mort décide de recharger la dernière sauvegarde
                             if (bdyCombat.getNeedSv() == true) {
                                 labyrinthe = BoundaryLancement.retourDerniereSauv();
@@ -75,6 +72,9 @@ public class Jeu {
                             bdyDeplacement = new BoundaryDeplacer(ctrlDeplacement);
                         }
                     }
+                } else if (bdyCombat.isMonsterDead()) {
+                    // Si le monstre est mort, on indique au joueur que la pièce est vide
+                    bdyCombat.pieceVide();
                 }
             } else if (bdyDeplacement.faireBoutique()) {
                 // Si le joueur souhaite faire les boutiques
